@@ -19,9 +19,9 @@
   "scripts": {
     "test": [
       "vendor/bin/parallel-lint --exclude vendor .",
-      "vendor/bin/phpcs --standard=PSR2 --ignore=vendor --ignore=.git .",
       "composer cn"
     ],
+    "phpcs": "vendor/bin/phpcs --standard=./phpcs.xml --ignore=vendor --ignore=.git .",
     "cn": "vendor/bin/phpcs --standard=PHPCS --sniffs=Generic.NamingConventions.ConstructorName --extensions=php --ignore=vendor ."
   },
 

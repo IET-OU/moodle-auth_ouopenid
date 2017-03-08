@@ -44,19 +44,14 @@ button { background: #eee; cursor: pointer; }
               <label >Your Open University user-name (OUCU)
               <input
                 type="text" id="oucu" name="oucu"
-                required="required" aria-required=1 pattern="[a-z]\w{2,7}" data-X-pattern="[a-z]{2,4}[0-9]{1,4}" />
+                required="required" aria-required=1 pattern="[a-z]\w{2,7}" />
             </p>
 
-            <input
-              type="url" id="openid_url" name="openid_url" value=""
-              data-X-required="required"
-              data-X-style="background-image:url(http://moodle.ouuk.tesla-project.eu/auth/openid/icon.gif); background-repeat:no-repeat; background-position: 0 50%; padding:3px; padding-left:18px;" />
+            <input type="url" id="openid_url" name="openid_url" value="" />
 
-              <p><button type="submit">Login</button><!--<input type="submit" value="Login" />--></p>
+              <p><button type="submit">Login</button></p>
 
               <p><a href="http://openid.net/"><small>What's this?</small></a>
-              <!--<a href="http://moodle.ouuk.tesla-project.eu/auth/openid/fallback.php"><small>Help, my provider is offline!</small></a>
-              -->
 
               <p>Note, we won't ask you for your Open University password on this site.</p>
           </div>
@@ -64,7 +59,7 @@ button { background: #eee; cursor: pointer; }
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" data-X-src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
 window.jQuery(function ($) {
 

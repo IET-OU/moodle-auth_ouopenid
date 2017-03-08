@@ -1,6 +1,7 @@
 
 #composer.json
 .travis.yml
+phpcs.xml
 
 composer.lock
 vendor
