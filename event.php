@@ -18,27 +18,13 @@ require_once __DIR__ . '/auth.php';
 function on_openid_login(&$resp, &$user, $mainid = true) {
     auth_plugin_ouopenid::debug([ __FUNCTION__, $resp->identity_url, $resp->message->args->values, $user ]);
 
-    $oucu = null;
-    $identity_url = $resp->identity_url;
-    if ($identity_url &&
-        preg_match('@^http:\/\/openid\.open\.ac\.uk\/oucu\/(?P<oucu>\w+)$@', $identity_url, $matches)) {
-        $oucu = $matches[ 'oucu' ];
-    }
-
-    if ($oucu && $user->auth == 'openid' && ( ! $user->firstname || $user->firstname === 'test' )) {
-        $user->firstname = $oucu;
-    }
-
-    if ($oucu && $user->auth == 'openid' && ! $user->email) {
-        $user->email = $oucu . '@openmail.open.ac.uk';
-    }
-
-    auth_plugin_ouopenid::debug([
-      __FUNCTION__, $identity_url, $oucu, $user->email, $user->username, $user->auth, 'userid=', $user->id ]);
+    auth_plugin_ouopenid::set_user($resp, $user);
 }
 
 function on_openid_create_account(&$resp, &$user) {
-    auth_plugin_ouopenid::debug([ __FUNCTION__, $resp, $user ]);
+    auth_plugin_ouopenid::debug([ __FUNCTION__, $resp->identity_url, $resp->message->args->values, $user ]);
+
+    auth_plugin_ouopenid::set_user($resp, $user);
 }
 
 //End.

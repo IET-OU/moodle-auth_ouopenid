@@ -8,6 +8,14 @@
 
 // TODO: check if plugin is enabled or not !!
 
+class Ou_Open_Id_Form {
+
+    const ACTION = '/login/index.php';
+    const OUCU_REGEX  = '[a-z]\w{2,7}';
+    const OPEN_ID_URL = 'http://openid.open.ac.uk/oucu/';
+    const JQUERY_URL  = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js';
+}
+
 
 ?>
 <!doctype html><html lang="en"><meta charset="utf-8" />
@@ -30,7 +38,7 @@ button { background: #eee; cursor: pointer; }
 
 
 <form
-  action="http://moodle.ouuk.tesla-project.eu/login/index.php"
+  action="<?php echo Ou_Open_Id_Form::ACTION ?>"
   method="post"
   id="openidlogin"
   name="openidlogin"
@@ -59,7 +67,7 @@ button { background: #eee; cursor: pointer; }
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="<?php echo Ou_Open_Id_Form::JQUERY_URL ?>"></script>
 <script>
 window.jQuery(function ($) {
 
@@ -68,7 +76,7 @@ window.jQuery(function ($) {
 
         window.console.debug('Submit, OUCU: ', oucu);
 
-        $('#openid_url').val('http://openid.open.ac.uk/oucu/' + oucu);
+        $('#openid_url').val('<?php echo Ou_Open_Id_Form::OPEN_ID_URL ?>' + oucu);
     });
 
 });
