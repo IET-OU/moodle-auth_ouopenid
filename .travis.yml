@@ -1,0 +1,17 @@
+language: php
+php:
+  - 7
+
+git:
+  depth: 8
+
+install:
+  - composer install
+  - composer npm-install
+  - composer eslint-config
+
+script:
+  - composer test
+  - composer eslint
+
+#End.

@@ -17,11 +17,21 @@
     "squizlabs/php_codesniffer": "2.5.1"
   },
   "scripts": {
+    "npm-install": "npm install eslint",
+    "eslint-config": [
+      "echo '---\n  extends: eslint:recommended\n  globals:\n    window: false\n' > .eslintrc.yaml",
+      "echo '{\n  \"extends\": \"eslint:recommended\",\n  \"globals\": { \"window\": false }\n}' > .eslintrc-XX.json"
+    ],
+    "eslint-echo": "node_modules/.bin/eslint --print-config .eslintrc.yaml",
+    "eslint": [
+      "node_modules/.bin/eslint js/*.js && echo eslint OK!",
+      "## node_modules/.bin/eslint --no-eslintrc --rule no-undef:2, eqeqeq:2, curly:2, semi:2, no-unreachable:2 --global window js/*"
+    ],
     "test": [
       "vendor/bin/parallel-lint --exclude vendor .",
       "composer cn"
     ],
-    "phpcs": "vendor/bin/phpcs --standard=./phpcs.xml --ignore=vendor --ignore=.git .",
+    "phpcs": "vendor/bin/phpcs --standard=./phpcs.xml --ignore=vendor --ignore=.git --extensions=php .",
     "cn": "vendor/bin/phpcs --standard=PHPCS --sniffs=Generic.NamingConventions.ConstructorName --extensions=php --ignore=vendor ."
   },
 

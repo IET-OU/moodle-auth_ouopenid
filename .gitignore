@@ -1,10 +1,19 @@
 
-#composer.json
-.travis.yml
+*.css
+*.csv
+
+/bin
+/user
+/js
+
+#.travis.yml
 phpcs.xml
 
 composer.lock
 vendor
 *BAK*
+
+node_modules
+.eslintrc*
 
 #End.
