@@ -4,12 +4,13 @@
  *
  * @author NDF, 09-March-2017.
  */
+define( 'CLI_SCRIPT', true );
 
 define( 'FLAG_BIG', '--big' );
 define( 'CSV_HEADINGS', 'oucu,course_present,tesla_instrument,notes,is_team,firstname,lastname,email' );
 define( 'CSV_BIG_TIMES', 100 );  // 4000 x 5 = 20,000.
-define( 'CSV_FILENAME', './example.csv' );
-define( 'CSV_BIG_FILENAME', './example-big.csv' );
+define( 'CSV_FILENAME', __DIR__ . '/../example.csv' );
+define( 'CSV_BIG_FILENAME', __DIR__ . '/../example-big.csv' );
 
     $csv_examples = <<<CSV
 jb123,K101-J,kd,(Joe Bloggs)
