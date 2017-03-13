@@ -102,7 +102,8 @@ class User
         return $count;
     }
 
-    protected static row($row, $offset) {
+    protected static function row($row, $offset)
+    {
         return isset($row[ $offset ]) ? $row[ $offset ] : null;
     }
 }
