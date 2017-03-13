@@ -2,11 +2,8 @@
 *.css
 *.csv
 
-/bin
-/user
-/js
+#/bin
 
-#.travis.yml
 phpcs.xml
 
 composer.lock

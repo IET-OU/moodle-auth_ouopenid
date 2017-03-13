@@ -6,7 +6,7 @@
  */
 
 define( 'FLAG_BIG', '--big' );
-define( 'CSV_HEADINGS', 'oucu,course_present,tesla_instrument,notes' );
+define( 'CSV_HEADINGS', 'oucu,course_present,tesla_instrument,notes,is_team,firstname,lastname,email' );
 define( 'CSV_BIG_TIMES', 100 );  // 4000 x 5 = 20,000.
 define( 'CSV_FILENAME', './example.csv' );
 define( 'CSV_BIG_FILENAME', './example-big.csv' );
