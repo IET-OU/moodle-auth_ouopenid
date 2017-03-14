@@ -26,6 +26,8 @@ class User
     const CSV_OUCU = 0;  // CSV file column offsets.
     const CSV_TEAM = 4;
 
+    const PREFIX = 'ouop_';
+
     public static function getUser($oucu)
     {
         global $DB;
@@ -82,8 +84,8 @@ class User
             $user_record = (object) [
                 'oucu' => $row[ self::CSV_OUCU ],  # 0,
                 'course_presentation' => $row[ self::CSV_OUCU + 1 ], # 1,
-                'teslainstrument' => $row[ self::CSV_OUCU + 2 ],
-                //'notes' => $row[ self::CSV_OUCU + 3 ],    # 3,
+                'teslainstrument' => self::row($row, self::CSV_OUCU + 2),
+                'notes'     => self::row($row, self::CSV_OUCU + 3),  # 3,
                 'is_team'   => self::row($row, self::CSV_TEAM),      # 4,
                 'firstname' => self::row($row, self::CSV_TEAM + 1),  # 5,
                 'lastname'  => self::row($row, self::CSV_TEAM + 2),  # 6,
@@ -100,6 +102,39 @@ class User
         $lexer->parse($filename, $interpreter);
 
         return $count;
+    }
+
+    public static function setMoodleUser($oucu, &$m_user)
+    {
+        $ou_user = self::getUser($oucu);
+
+        if ($ou_user->is_team) {
+            $m_user->firstname = $ou_user->firstname;
+            $m_user->lastname  = $ou_user->lastname;
+            $m_user->email = $ou_user->email;
+        }
+
+        $m_user->profile[ self::PREFIX . 'id' ] = $ou_user->id;
+        $m_user->profile[ self::PREFIX . 'oucu' ] = $ou_user->oucu;
+        $m_user->profile[ self::PREFIX . 'course_presentation' ] = $ou_user->course_presentation;
+        $m_user->profile[ self::PREFIX . 'teslainstrument' ] = $ou_user->teslainstrument;
+        $m_user->profile[ self::PREFIX . 'is_team' ] = $ou_user->is_team;
+        $m_user->profile[ self::PREFIX . 'notes' ] = $ou_user->notes;
+    }
+
+    public static function getMoodleProfile($mdl_user)
+    {
+        $profile = [];
+        foreach ($mdl_user->profile as $key => $value) {
+            if (0 === strpos($key, self::PREFIX)) {
+                $profile[ $key ] = $value;
+            }
+        }
+
+        return (object) [
+            'profile' => (object) $profile,
+            'body_class' => implode(' ', $profile),
+        ];
     }
 
     protected static function row($row, $offset)

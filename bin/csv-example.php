@@ -8,9 +8,11 @@ define( 'CLI_SCRIPT', true );
 
 define( 'FLAG_BIG', '--big' );
 define( 'CSV_HEADINGS', 'oucu,course_present,tesla_instrument,notes,is_team,firstname,lastname,email' );
-define( 'CSV_BIG_TIMES', 100 );  // 4000 x 5 = 20,000.
+define( 'CSV_BIG_MULTIPLE', 100 );  // 4000 x 5 = 20,000.
+define( 'CSV_TEAM_FILE', __DIR__ . '/../team.csv' );
 define( 'CSV_FILENAME', __DIR__ . '/../example.csv' );
-define( 'CSV_BIG_FILENAME', __DIR__ . '/../example-big.csv' );
+define( 'CSV_BIG_FILENAME', CSV_FILENAME );
+#Was: define( 'CSV_BIG_FILENAME', __DIR__ . '/../example-big.csv' );
 
     $csv_examples = <<<CSV
 jb123,K101-J,kd,(Joe Bloggs)
@@ -27,20 +29,14 @@ CSV;
     $filename = CSV_FILENAME;
 
     if ($argc > 1 && $argv[ $argc - 1 ] === FLAG_BIG) {
-        $limit = CSV_BIG_TIMES;
+        $limit = CSV_BIG_MULTIPLE;
         $filename = CSV_BIG_FILENAME;
+    }
 
-        /*for ( $idx = 0; $idx < CSV_BIG_TIMES; $idx++ ) {
-            $bytes += file_put_contents( CSV_BIG_FILENAME, $csv_examples, FILE_APPEND );
-        }
-        echo 'Outputting big CSV file! ' . CSV_BIG_FILENAME;*/
+    $team = file_get_contents( CSV_TEAM_FILE );
+    $bytes += file_put_contents( $filename, $team . "\n" );
 
-    } /*else {
-        $bytes = file_put_contents( CSV_FILENAME, $csv_examples );
-        echo 'Outputting CSV file! ' . CSV_FILENAME;
-    }*/
-
-    $bytes += file_put_contents( $filename, CSV_HEADINGS . "\n" );
+    //$bytes += file_put_contents( $filename, CSV_HEADINGS . "\n" );
 
     for ( $idx = 0; $idx < $limit; $idx++ ) {
         $bytes += file_put_contents( $filename, $csv_examples, FILE_APPEND );

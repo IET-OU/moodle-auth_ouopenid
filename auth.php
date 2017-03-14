@@ -9,7 +9,9 @@
  */
 
 require_once $CFG->libdir . '/authlib.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
+use IET_OU\Moodle\Auth\Ouopenid\Db\User as OuUser;
 
 class auth_plugin_ouopenid extends auth_plugin_base {
 
@@ -39,14 +41,14 @@ class auth_plugin_ouopenid extends auth_plugin_base {
             $user->firstname = $oucu;
         }
 
-        if ($oucu && $user->auth == 'openid' && ! $user->email) {
+        /*if ($oucu && $user->auth == 'openid' && ! $user->email) {
             $user->email = $oucu . '@openmail.open.ac.uk';
-        }
+        }*/
 
-        $user->profile[ 'ouopenid_custom' ] = [ 'a' => 1 ];
+        OuUser::setMoodleUser($oucu, $user);
 
         self::debug([
-          __FUNCTION__, $identity_url, $oucu, $user->email, $user->username, 'userid=', $user->id ]);
+          __FUNCTION__, $identity_url, $oucu, $user->email, $user->username, 'userid=', $user->id, $user->profile ]);
     }
 
     public static function debug($obj) {

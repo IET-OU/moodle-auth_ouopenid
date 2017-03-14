@@ -18,18 +18,19 @@ use IET_OU\Moodle\Auth\Ouopenid\Db\User as OuUser;
 
 $csv_file = CSV_FILENAME;
 
-echo "OU-OpenID importer. Filename:  $csv_file\n";
+cli_heading('OU-OpenID CSV importer');
+cli_writeln("Filename:  $csv_file");
 
 if ($argc > 1 && $argv[ $argc - 1 ] === '--delete') {
     OuUser::delete();
-    echo "User table emptied.\n";
+    cli_writeln('User table emptied.');
 }
 
 $count = OuUser::insertFromCsv($csv_file, CSV_HEADING, CSV_UNSTRICT, function ($idx, $user_id) {
-    echo '.';
+    cli_write('.');
 });
 
-echo "\nUsers inserted:  $count\n";
+cli_writeln("\nUsers inserted:  $count");
 
 
 //End.
