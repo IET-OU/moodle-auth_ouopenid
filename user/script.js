@@ -20,19 +20,26 @@
     var require = W.require;
 
     require([ 'jquery' ], function ($) {
+      var $body = $('body');
 
       C.debug('ouopenid $:', $.fn.jquery);
 
       $.getJSON(user_json).done(function (data, textStat, jqXHR) {
 
+        if (! data.profile.length) {
+          C.error('ouopenid error: missing profile.');
+
+          $body.addClass('ouop-ouopenid-error-profile');
+        }
+
         C.debug('ouopenid JSON: ', data, jqXHR);
 
-        $('body').addClass(data.body_class);
+        $body.addClass(data.body_class);
 
       }).fail(function (jqXHR, textStat, ex) {
         C.error('ouopenid error: ', textStat, jqXHR, ex);
 
-        $('body').addClass('ouop-ouopenid-error');
+        $body.addClass('ouop-ouopenid-error-' + jqXHR.status);
       });
 
     }); //End require.

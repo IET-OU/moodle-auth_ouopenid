@@ -18,13 +18,13 @@ require_once __DIR__ . '/auth.php';
 function on_openid_login(&$resp, &$user, $mainid = true) {
     auth_plugin_ouopenid::debug([ __FUNCTION__, $resp->identity_url, $resp->message->args->values, $user ]);
 
-    auth_plugin_ouopenid::set_user($resp, $user);
+    auth_plugin_ouopenid::set_user($resp, $user, __FUNCTION__);
 }
 
 function on_openid_create_account(&$resp, &$user) {
     auth_plugin_ouopenid::debug([ __FUNCTION__, $resp->identity_url, $resp->message->args->values, $user ]);
 
-    auth_plugin_ouopenid::set_user($resp, $user);
+    auth_plugin_ouopenid::set_user($resp, $user, __FUNCTION__);
 }
 
 //End.

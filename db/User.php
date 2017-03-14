@@ -107,7 +107,7 @@ class User
         return $count;
     }
 
-    public static function setMoodleUser($oucu, &$m_user)
+    public static function setMoodleUser($oucu, &$m_user, $fn = null)
     {
         $ou_user = self::getUser($oucu);
 
@@ -123,6 +123,7 @@ class User
         $m_user->profile[ self::PREFIX . 'teslainstrument' ] = $ou_user->teslainstrument;
         $m_user->profile[ self::PREFIX . 'is_team' ] = (boolean) $ou_user->is_team;
         $m_user->profile[ self::PREFIX . 'notes' ] = $ou_user->notes;
+        $m_user->profile[ self::PREFIX . 'fn' ] = $fn;
     }
 
     public static function getMoodleProfile($mdl_user)

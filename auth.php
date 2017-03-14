@@ -30,7 +30,7 @@ class auth_plugin_ouopenid extends auth_plugin_base {
         $this->config       = get_config($this->pluginconfig);
     }
 
-    public static function set_user(&$resp, &$user) {
+    public static function set_user(&$resp, &$user, $fn = null) {
         $oucu = null;
         $identity_url = $resp->identity_url;
         if ($identity_url && preg_match(OuUser::OPENID_URL_REGEX, $identity_url, $matches)) {
@@ -45,7 +45,7 @@ class auth_plugin_ouopenid extends auth_plugin_base {
             $user->email = $oucu . '@openmail.open.ac.uk';
         }*/
 
-        OuUser::setMoodleUser($oucu, $user);
+        OuUser::setMoodleUser($oucu, $user, $fn);
 
         self::debug([
           __FUNCTION__, $identity_url, $oucu, $user->email, $user->username, 'userid=', $user->id, $user->profile ]);
