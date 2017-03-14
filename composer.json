@@ -28,7 +28,7 @@
     ],
     "npm-install": "npm install eslint",
     "eslint-config": [
-      "echo '---\n  extends: eslint:recommended\n  globals:\n    window: false\n' > .eslintrc.yaml",
+      "echo '---\n  extends: eslint:recommended\n  globals:\n    window: false\n    root: true\n' > .eslintrc.yaml",
       "echo '{\n  \"extends\": \"eslint:recommended\",\n  \"globals\": { \"window\": false }\n}' > .eslintrc-XX.json"
     ],
     "eslint-echo": "node_modules/.bin/eslint --print-config .eslintrc.yaml",

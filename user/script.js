@@ -4,7 +4,8 @@
 
 (function (W) {
 
-  var user_json = '/auth/ouopenid/user/ajax.php?r=' + rand()
+  var user_json_url = '/auth/ouopenid/user/ajax.php?r=' + rand()
+    , form_warning = "Please don't edit your user profile!"
     , C = W.console
     , L = W.location;
 
@@ -24,9 +25,9 @@
 
       C.debug('ouopenid $:', $.fn.jquery);
 
-      $.getJSON(user_json).done(function (data, textStat, jqXHR) {
+      $.getJSON(user_json_url).done(function (data, textStat, jqXHR) {
 
-        if (! data.profile.length) {
+        if (! data.profile.ouop_oucu) {
           C.error('ouopenid error: missing profile.');
 
           $body.addClass('ouop-ouopenid-error-profile');
@@ -34,7 +35,13 @@
 
         C.debug('ouopenid JSON: ', data, jqXHR);
 
-        $body.addClass(data.body_class);
+        $body.addClass(data.body_class)
+          .addClass(data.profile.is_team ? 'ouop-is-team' : 'ouop-not-team');
+
+        //if ( L.pathname.match(/^\/user\/edit/) )
+        if (! data.profile.is_team) {
+          disable_moodle_user_profile_form($);
+        }
 
       }).fail(function (jqXHR, textStat, ex) {
         C.error('ouopenid error: ', textStat, jqXHR, ex);
@@ -46,6 +53,17 @@
 
   });
 
+
+  /* ------------------------------------------- */
+
+  function disable_moodle_user_profile_form($) {
+    $('form[ action *= "/user/edit" ]')
+      .attr('title', form_warning)
+      .before('<p class="ouop-form-disable alert alert-warning">%s</p>'.replace(/%s/, form_warning))
+      .find('input, select').each(function () {
+      $(this).attr('disabled', 'disabled');
+    });
+  }
 
   function rand() {
     var min = 11, max = 999;
@@ -59,8 +77,7 @@
         W.clearInterval(int_id);
         callback_FN();
       }
-    }, interval || 200); // Milliseconds.
+    }, interval || 300); // Milliseconds.
   }
-
 
 }(window));
