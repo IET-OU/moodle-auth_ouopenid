@@ -2,9 +2,9 @@
 /**
  * Implement event hooks for the OpenID authentication plugin.
  *
- * NOTE: this file needs to be sym-linked, eg.
+ * NOTE: this file needs linked to via a symbolic link, eg.
  *
- *     cd ../moodle-auth_openid && ln -s ../moodle-auth_ouopenid/event.php
+ *     cd ../moodle-auth-openid && ln -s ../moodle-auth-ouopenid/event.php
  *
  * @author Nick Freear, 07-March-2017.
  * @copyright (c) 2017 The Open University.

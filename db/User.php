@@ -28,6 +28,9 @@ class User
 
     const PREFIX = 'ouop_';
 
+    const OPENID_URL_REGEX = '@^http:\/\/openid\.open\.ac\.uk\/oucu\/(?P<oucu>\w+)$@';
+    const USERNAME_REGEX = '@^httpopenidopenacukoucu(?P<oucu>\w+)$@';
+
     public static function getUser($oucu)
     {
         global $DB;
@@ -118,7 +121,7 @@ class User
         $m_user->profile[ self::PREFIX . 'oucu' ] = $ou_user->oucu;
         $m_user->profile[ self::PREFIX . 'course_presentation' ] = $ou_user->course_presentation;
         $m_user->profile[ self::PREFIX . 'teslainstrument' ] = $ou_user->teslainstrument;
-        $m_user->profile[ self::PREFIX . 'is_team' ] = $ou_user->is_team;
+        $m_user->profile[ self::PREFIX . 'is_team' ] = (boolean) $ou_user->is_team;
         $m_user->profile[ self::PREFIX . 'notes' ] = $ou_user->notes;
     }
 
@@ -133,13 +136,29 @@ class User
 
         return (object) [
             'profile' => (object) $profile,
-            'body_class' => implode(' ', $profile),
+            'body_class' => self::bodyClasses($profile),
         ];
+    }
+
+    public static function debug($obj)
+    {
+        static $count = 0;
+        header(sprintf('X-auth-ou-openid-%02d: %s', $count, json_encode($obj)));
+        $count++;
     }
 
     protected static function row($row, $offset)
     {
         return isset($row[ $offset ]) ? $row[ $offset ] : null;
+    }
+
+    protected static function bodyClasses($fields)
+    {
+        $body_classes = [];
+        foreach ($fields as $key => $value) {
+            $body_classes[] = str_replace([ ' ', '_' ], '-', ($key . '-' . htmlentities($value, ENT_QUOTES)));
+        }
+        return implode(' ', $body_classes);
     }
 }
 

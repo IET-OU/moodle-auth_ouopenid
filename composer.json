@@ -23,6 +23,9 @@
     "squizlabs/php_codesniffer": "2.8.1"
   },
   "scripts": {
+    "sym-links": [
+      "cd ../moodle-auth-openid && ln -s ../moodle-auth-ouopenid/event.php"
+    ],
     "npm-install": "npm install eslint",
     "eslint-config": [
       "echo '---\n  extends: eslint:recommended\n  globals:\n    window: false\n' > .eslintrc.yaml",
@@ -30,13 +33,13 @@
     ],
     "eslint-echo": "node_modules/.bin/eslint --print-config .eslintrc.yaml",
     "eslint": [
-      "node_modules/.bin/eslint js/*.js && echo eslint OK!",
-      "## node_modules/.bin/eslint --no-eslintrc --rule no-undef:2, eqeqeq:2, curly:2, semi:2, no-unreachable:2 --global window js/*"
+      "node_modules/.bin/eslint js/*.js && echo eslint OK!"
     ],
     "test": [
       "vendor/bin/parallel-lint --exclude vendor .",
       "vendor/bin/phpcs --standard=PSR2 -n db/*.php",
       "composer cn",
+      "composer eslint",
       "php -r 'simplexml_load_file(\"db/install.xml\");' && echo install.xml OK!"
     ],
     "phpcs": "vendor/bin/phpcs --standard=./phpcs.xml --ignore=vendor --ignore=.git --extensions=php .",

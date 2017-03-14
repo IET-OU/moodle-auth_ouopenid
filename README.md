@@ -6,6 +6,10 @@
 
 This plugin is a wrapper around the [OpenID authentication plugin][openid] for [Moodle][].
 
+Available via IET-OU Satis:
+
+* <https://embed.open.ac.uk/iet-satis/#!/moo>
+
 
 ## Install
 
@@ -20,6 +24,7 @@ This plugin is a wrapper around the [OpenID authentication plugin][openid] for [
 
 ```sh
 composer install
+composer sym-links
 composer npm-install
 composer eslint-config
 ```
@@ -28,6 +33,7 @@ composer eslint-config
 
 ```sh
 composer test
+composer eslint
 ```
 
 

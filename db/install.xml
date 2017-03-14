@@ -38,6 +38,6 @@
 
     SHOW CREATE TABLE mdl_auth_ouopenid_users;
 
-    ALTER TABLE mdl_auth_ouopenid_users MODIFY teslainstrument VARCHAR( 16 ) DEFAUL NULL;
+    ALTER TABLE mdl_auth_ouopenid_users MODIFY teslainstrument VARCHAR( 16 ) DEFAULT NULL;
     -->
 </XMLDB>

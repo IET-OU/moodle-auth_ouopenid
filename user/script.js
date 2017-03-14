@@ -6,7 +6,7 @@
 
 window.setTimeout(function () {
 
-  var user_json = '/auth/ouopenid/user/ajax.php'
+  var user_json = '/auth/ouopenid/user/ajax.php?r=' + rand()
     , require = window.require
     , C = window.console
     , L = window.location;
@@ -20,14 +20,26 @@ window.setTimeout(function () {
 
     C.debug('ouopenid $:', $.fn.jquery);
 
-    $.getJSON(user_json).done(function (data) {
+    $.getJSON(user_json).done(function (data, textStat, jqXHR) {
 
       C.debug('ouopenid JSON: ', data);
 
-    }).fail(function (p1) {
-      C.error('ouopenid error: ', p1);
+      $('body').addClass(data.body_class);
+      //document.body.className += ' ' + data.body_class;
+
+    }).fail(function (jqXHR, textStat, ex) {
+      C.error('ouopenid error: ', textStat, jqXHR, ex);
+
+      $('body').addClass('ouop-ouopenid-error');
     });
 
   });
 
-}, 300);
+
+  function rand() {
+    var min = 11, max = 999;
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+
+}, 3000);

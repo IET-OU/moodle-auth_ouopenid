@@ -13,18 +13,21 @@ class Ou_Open_Id_Form {
     const ACTION = '/login/index.php';
     const OUCU_REGEX  = '[a-z]\w{2,7}';
     const OPEN_ID_URL = 'http://openid.open.ac.uk/oucu/';
-    const JQUERY_URL  = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js';
+    const JQUERY_URL  = 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js';
 }
 
 
 ?>
 <!doctype html><html lang="en"><meta charset="utf-8" />
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+
 <title>Log in &mdash; The Open University</title>
 
 <style>
 body{
-  font: 1.2em sans-serif; background: #fefefe; color: #333; margin: 2em auto; max-width: 36em;
+  font: 1.2em sans-serif; background: #fefefe; color: #333; margin: 1em auto; max-width: 36em;
 }
 form { }
 input, button {
@@ -36,6 +39,8 @@ button { background: #eee; cursor: pointer; }
 </style>
 
 
+<h1> TeSLA Pilot 2 </h1>
+<h2> Log in &mdash; The Open University </h2>
 
 <form
   action="<?php echo Ou_Open_Id_Form::ACTION ?>"
@@ -65,6 +70,9 @@ button { background: #eee; cursor: pointer; }
           </div>
 </form>
 
+<p class="footer"><small>
+    <a href="https://www.open.ac.uk">&copy; 2017 The Open University</a>.
+</small></p>
 
 
 <script src="<?php echo Ou_Open_Id_Form::JQUERY_URL ?>"></script>

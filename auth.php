@@ -33,7 +33,7 @@ class auth_plugin_ouopenid extends auth_plugin_base {
     public static function set_user(&$resp, &$user) {
         $oucu = null;
         $identity_url = $resp->identity_url;
-        if ($identity_url && preg_match(self::OPENID_URL_REGEX, $identity_url, $matches)) {
+        if ($identity_url && preg_match(OuUser::OPENID_URL_REGEX, $identity_url, $matches)) {
             $oucu = $matches[ 'oucu' ];
         }
 
@@ -52,9 +52,7 @@ class auth_plugin_ouopenid extends auth_plugin_base {
     }
 
     public static function debug($obj) {
-        static $count = 0;
-        header(sprintf('X-auth-ou-openid-%02d: %s', $count, json_encode($obj)));
-        $count++;
+        return OuUser::debug($obj);
     }
 }
 

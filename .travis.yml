@@ -9,6 +9,7 @@ git:
 
 before_install:
   - nvm install v4.4
+  - npm --version
 
 install:
   - composer install
@@ -17,6 +18,6 @@ install:
 
 script:
   - composer test
-  - composer eslint
+  - composer validate
 
 #End.
