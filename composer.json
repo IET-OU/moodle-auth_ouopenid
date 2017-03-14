@@ -33,7 +33,7 @@
     ],
     "eslint-echo": "node_modules/.bin/eslint --print-config .eslintrc.yaml",
     "eslint": [
-      "node_modules/.bin/eslint js/*.js && echo eslint OK!"
+      "node_modules/.bin/eslint js/ user/*.js && echo eslint OK!"
     ],
     "test": [
       "vendor/bin/parallel-lint --exclude vendor .",
