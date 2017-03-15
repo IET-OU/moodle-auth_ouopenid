@@ -27,13 +27,27 @@ class Ou_Open_Id_Form {
 
 <style>
 body{
-  font: 1.2em sans-serif; background: #fefefe; color: #333; margin: 1em auto; max-width: 36em;
+  font: 1em sans-serif;
+  background: #fefefe;
+  color: #333;
+  margin: 1em auto;
+  max-width: 40em;
 }
+h1, h2 { color: #555; }
 form { }
 input, button {
-  font-size: 1.1em; padding: 3px 16px; text-align: center; border-radius: 4px;
+  font-size: 1em;
+  padding: .5rem 1rem;
+  text-align: center;
+  border-radius: .25rem;
+  color: #373a3c;
+  background-color: #fff;
+  border: 1px solid #ccc;
 }
 button { background: #eee; cursor: pointer; }
+input:focus { background: #ffffe0; }
+input:focus, button:focus,
+input:hover, button:hover { border-color: #999; }
 #XX-oucu { padding: 2px 10px; }
 #openid_url { color: #666; display: none; }
 </style>
@@ -51,18 +65,18 @@ button { background: #eee; cursor: pointer; }
           <div class="desc">
           <!--You can login or signup here with your Google Email or OpenID url.-->
           </div>
-          <div style="padding: 1em;">
+          <div>
 
             <p>
               <label >Your Open University user-name (OUCU)
               <input
-                type="text" id="oucu" name="oucu"
-                required="required" aria-required=1 pattern="[a-z]\w{2,7}" />
+                id="oucu" name="oucu"
+                required="required" aria-required="1" pattern="[a-z]\w{2,7}" /></label>
+
+              <input type="url" id="openid_url" name="openid_url" value="" />
+
+              <button type="submit">Login</button>
             </p>
-
-            <input type="url" id="openid_url" name="openid_url" value="" />
-
-              <p><button type="submit">Login</button></p>
 
               <p><a href="http://openid.net/"><small>What's this?</small></a>
 

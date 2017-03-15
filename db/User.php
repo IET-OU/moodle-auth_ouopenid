@@ -129,7 +129,7 @@ class User
     public static function getMoodleProfile($mdl_user)
     {
         $profile = [];
-        $mdl_profile = isset($mdl_user->profile) ? $mdl_user_profile : [];
+        $mdl_profile = isset($mdl_user->profile) ? $mdl_user->profile : [];
 
         foreach ($mdl_profile as $key => $value) {
             if (0 === strpos($key, self::PREFIX)) {
