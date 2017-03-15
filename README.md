@@ -37,10 +37,13 @@ composer eslint
 ```
 
 
+Developed for the [TeSLA project][].
+
 ---
 © 2017 [The Open University][ou]. ([Institute of Educational Technology][iet])
 
 
+[TeSLA project]: http://tesla-project.eu/
 [Moodle]: https://moodle.org/
 [openid]: https://github.com/remotelearner/moodle-auth_openid
 [ouopenid]: https://github.com/IET-OU/moodle-auth_ouopenid

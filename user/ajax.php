@@ -21,22 +21,26 @@ use IET_OU\Moodle\Auth\Ouopenid\Db\User as OuUser;
 
 global $USER;
 
-$fields = [ 'auth', 'email', 'firstname', 'id', 'lastip', 'lastname', /*'profile',*/ 'username', 'currentcourseaccess' ];
+$fields = [ 'auth', 'email', 'firstname', 'id', 'lastip', 'lastname', 'username', 'currentcourseaccess' ];
+
+$prof = OuUser::getMoodleProfile($USER);
 
 $user = new StdClass();
-$profile = OuUser::getMoodleProfile($USER);
-
 foreach ($fields as $field) {
     $user->{ $field } = isset($USER->{ $field }) ? $USER->{ $field } : null;
 }
 
 $oucu = preg_match(OuUser::USERNAME_REGEX, $user->username, $matches) ? $matches[ 1 ] : $user->username;
+$stat = $oucu ? 'ok' : 'warn';
+$msg = (0 === $USER->id) ? 'Not logged in.' : '';
 
 if (DEBUG) {
     OuUser::debug($USER);
 }
 
-echo json_encode([ 'stat' => 'ok', 'user' => $user, 'oucu' => $oucu, 'profile' => $profile->profile, 'body_class' => $profile->body_class ]);
+header('Content-Type: application/json; charset=utf-8');
+echo json_encode([
+    'stat' => $stat, 'msg' => $msg, 'user' => $user, 'profile' => $prof->profile, 'body_class' => $prof->body_class
+]);
 
-
-#End.
+//End.
