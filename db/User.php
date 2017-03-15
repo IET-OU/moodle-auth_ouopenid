@@ -131,7 +131,7 @@ class User
         $profile = [];
         $mdl_profile = isset($mdl_user->profile) ? $mdl_user_profile : [];
 
-        foreach ($mdl_user->profile as $key => $value) {
+        foreach ($mdl_profile as $key => $value) {
             if (0 === strpos($key, self::PREFIX)) {
                 $profile[ $key ] = $value;
             }
