@@ -12,7 +12,7 @@
 class Ou_Open_Id_Form {
 
     const ACTION = '/login/index.php';
-    const OUCU_REGEX  = '[a-z]\w{2,7}';
+    const OUCU_REGEX  = '[a-z]{2,4}\d{1,7}';
     const OPEN_ID_URL = 'http://openid.open.ac.uk/oucu/';
     const JQUERY_URL  = 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js';
 }
@@ -34,7 +34,7 @@ body{
   margin: 1em auto;
   max-width: 38em;
 }
-abbr { border-bottom: 1px solid #aaa; cursor: help; }
+abbr { border-bottom: 1px dotted #aaa; cursor: help; }
 h1, h2 { color: #444; }
 body > div { background-color: #fff; padding: .25em .5em; }
 input, button {
@@ -50,7 +50,6 @@ button { background: #eee; cursor: pointer; }
 input:focus { background: #ffffe0; }
 input:focus, button:focus,
 input:hover, button:hover { border-color: #999; }
-#XX-oucu { padding: 2px 10px; }
 .XX[ name = openid_url ] { color: #666; display: none; }
 </style>
 
@@ -58,7 +57,7 @@ input:hover, button:hover { border-color: #999; }
 <div>
 
 <h1> TeSLA Pilot </h1>
-<h2> Sign in to the pilot website </h2>
+<h2> Sign in to the Pilot website </h2>
 
 <form
   action="<?php echo Ou_Open_Id_Form::ACTION ?>"
@@ -86,7 +85,7 @@ input:hover, button:hover { border-color: #999; }
 
               <!--<p><a href="http://openid.net/"><small>What's this?</small></a>-->
 
-              <p>Note, we won't ask you for your Open University password on this site.</p>
+              <p>We won't ask you for your Open University password on this site.</p>
           </div>
 </form>
 
