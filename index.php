@@ -24,7 +24,7 @@ class Ou_Open_Id_Form {
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Log in &mdash; TeSLA Pilot 2 (The Open University)</title>
+<title>Sign in &mdash; TeSLA Pilot 2 (The Open University)</title>
 
 <style>
 body{
@@ -34,6 +34,7 @@ body{
   margin: 1em auto;
   max-width: 38em;
 }
+abbr { border-bottom: 1px solid #aaa; cursor: help; }
 h1, h2 { color: #444; }
 body > div { background-color: #fff; padding: .25em .5em; }
 input, button {
@@ -57,7 +58,7 @@ input:hover, button:hover { border-color: #999; }
 <div>
 
 <h1> TeSLA Pilot </h1>
-<h2> Log in </h2>
+<h2> Sign in to the pilot website </h2>
 
 <form
   action="<?php echo Ou_Open_Id_Form::ACTION ?>"
@@ -71,14 +72,16 @@ input:hover, button:hover { border-color: #999; }
           <div>
 
             <p>
-              <label >Your Open University user-name (OUCU)
+              <label >Your Open University username
+                (<abbr title="Open University computer username">OUCU</abbr>)
               <input
                 id="oucu" name="oucu"
-                required="required" aria-required="1" pattern="[a-z]\w{2,7}" /></label>
+                required="required" aria-required="1" pattern="[a-z]{2,4}\d{1,7}"
+                title="Your OUCU &mdash; 2 to 4 letters, followed by 1 to 7 numbers." /></label>
 
               <input type="hidden" name="openid_url" />
 
-              <button type="submit">Login</button>
+              <button type="submit" >Sign in</button>
             </p>
 
               <!--<p><a href="http://openid.net/"><small>What's this?</small></a>-->
