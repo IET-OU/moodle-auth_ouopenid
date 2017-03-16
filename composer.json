@@ -42,6 +42,7 @@
       "composer eslint",
       "php -r 'simplexml_load_file(\"db/install.xml\");' && echo install.xml OK!"
     ],
+    "mcs": "vendor/bin/phpcs --standard=./moodle-core.xml --ignore=vendor --ignore=.git --extensions=php .",
     "phpcs": "vendor/bin/phpcs --standard=./phpcs.xml --ignore=vendor --ignore=.git --extensions=php .",
     "cn": "vendor/bin/phpcs --standard=PHPCS --sniffs=Generic.NamingConventions.ConstructorName --extensions=php --ignore=vendor ."
   },

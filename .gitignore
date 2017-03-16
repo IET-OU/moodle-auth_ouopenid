@@ -5,6 +5,7 @@
 #/bin
 
 phpcs.xml
+/*.xml
 
 composer.lock
 vendor

@@ -1,5 +1,6 @@
 <?php
 /**
+ * OU-OpenID login form.
  * Open University wrapper around 3rd-party OpenID authentication plugin.
  *
  * @author  Nick Freear, 06-March-2017, 23:20.
@@ -23,18 +24,18 @@ class Ou_Open_Id_Form {
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Log in &mdash; The Open University</title>
+<title>Log in &mdash; TeSLA Pilot 2 (The Open University)</title>
 
 <style>
 body{
   font: 1em sans-serif;
-  background: #fefefe;
-  color: #333;
+  background-color: #f4f4f4;
+  color: #222;
   margin: 1em auto;
-  max-width: 40em;
+  max-width: 38em;
 }
-h1, h2 { color: #555; }
-form { }
+h1, h2 { color: #444; }
+body > div { background-color: #fff; padding: .25em .5em; }
 input, button {
   font-size: 1em;
   padding: .5rem 1rem;
@@ -49,12 +50,14 @@ input:focus { background: #ffffe0; }
 input:focus, button:focus,
 input:hover, button:hover { border-color: #999; }
 #XX-oucu { padding: 2px 10px; }
-#openid_url { color: #666; display: none; }
+.XX[ name = openid_url ] { color: #666; display: none; }
 </style>
 
 
-<h1> TeSLA Pilot 2 </h1>
-<h2> Log in &mdash; The Open University </h2>
+<div>
+
+<h1> TeSLA Pilot </h1>
+<h2> Log in </h2>
 
 <form
   action="<?php echo Ou_Open_Id_Form::ACTION ?>"
@@ -73,12 +76,12 @@ input:hover, button:hover { border-color: #999; }
                 id="oucu" name="oucu"
                 required="required" aria-required="1" pattern="[a-z]\w{2,7}" /></label>
 
-              <input type="url" id="openid_url" name="openid_url" value="" />
+              <input type="hidden" name="openid_url" />
 
               <button type="submit">Login</button>
             </p>
 
-              <p><a href="http://openid.net/"><small>What's this?</small></a>
+              <!--<p><a href="http://openid.net/"><small>What's this?</small></a>-->
 
               <p>Note, we won't ask you for your Open University password on this site.</p>
           </div>
@@ -88,17 +91,19 @@ input:hover, button:hover { border-color: #999; }
     <a href="https://www.open.ac.uk">&copy; 2017 The Open University</a>.
 </small></p>
 
+</div>
+
 
 <script src="<?php echo Ou_Open_Id_Form::JQUERY_URL ?>"></script>
 <script>
 window.jQuery(function ($) {
 
-    $('#openidlogin').on('submit', function () {
+    $('form#openidlogin').on('submit', function () {
         var oucu = $('#oucu').val();
 
         window.console.debug('Submit, OUCU: ', oucu);
 
-        $('#openid_url').val('<?php echo Ou_Open_Id_Form::OPEN_ID_URL ?>' + oucu);
+        $('[ name = openid_url ]').val('<?php echo Ou_Open_Id_Form::OPEN_ID_URL ?>' + oucu);
     });
 
 });
