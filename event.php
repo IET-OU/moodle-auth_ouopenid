@@ -19,12 +19,24 @@ function on_openid_login(&$resp, &$user, $mainid = true) {
     auth_plugin_ouopenid::debug([ __FUNCTION__, $resp->identity_url, $resp->message->args->values, $user ]);
 
     auth_plugin_ouopenid::set_user($resp, $user, __FUNCTION__);
+
+    \auth_ouopenid\event\user_loggedin::create([
+        'userid'  => $user->id,
+        'objectid'=> $user->id,
+        'other'   => [ 'username' => $user->username ],
+    ])->trigger();
 }
 
 function on_openid_create_account(&$resp, &$user) {
     auth_plugin_ouopenid::debug([ __FUNCTION__, $resp->identity_url, $resp->message->args->values, $user ]);
 
     auth_plugin_ouopenid::set_user($resp, $user, __FUNCTION__);
+
+    \auth_ouopenid\event\user_created::create([
+        'userid'  => $user->id,
+        'objectid'=> $user->id,
+        'other'   => [ 'username' => $user->username ],
+    ])->trigger();
 }
 
 //End.
