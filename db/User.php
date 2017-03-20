@@ -162,6 +162,26 @@ class User
         $count++;
     }
 
+    /** https://github.com/moodle/moodle/blob/master/lib/setuplib.php#L30-L40
+    */
+    public static function debugLevel()
+    {
+        global $CFG;
+        switch ($CFG->debug) {
+            case DEBUG_NONE:
+                $level = 'debug-none':
+                break;
+            case DEBUG_ALL:
+            case DEBUG_DEVELOPER:  // Fall-through.
+                $level = 'debug-dev';
+                break;
+            default:
+                $level = 'debug-other';
+                break;
+        }
+        return $level;
+    }
+
     protected static function row($row, $offset)
     {
         return isset($row[ $offset ]) ? $row[ $offset ] : null;
@@ -171,7 +191,7 @@ class User
     {
         $body_classes = [];
         foreach ($fields as $key => $value) {
-            $body_classes[] = str_replace([ ' ', '_' ], '-', ($key . '-' . htmlentities($value, ENT_QUOTES)));
+            $body_classes[] = preg_replace('/[^a-z\d_\-]+/i', '', "$key-$value");
         }
         return implode(' ', $body_classes);
     }

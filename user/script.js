@@ -23,6 +23,8 @@
     require([ 'jquery' ], function ($) {
       var $body = $('body');
 
+      $body.addClass(L.href.match(/debug=1/) ? 'debug-param' : '');
+
       C.debug('ouopenid $:', $.fn.jquery);
 
       $.getJSON(user_json_url).done(function (data, textStat, jqXHR) {
@@ -37,6 +39,8 @@
 
         $body.addClass(data.body_class)
           .addClass(data.profile.is_team ? 'ouop-is-team' : 'ouop-not-team');
+
+        $body.addClass(data.debug);
 
         //if ( L.pathname.match(/^\/user\/edit/) )
         if (! data.profile.is_team) {

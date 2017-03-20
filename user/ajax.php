@@ -19,7 +19,7 @@ if (DEBUG) {
 
 use IET_OU\Moodle\Auth\Ouopenid\Db\User as OuUser;
 
-global $USER;
+global $USER;  // Moodle global.
 
 $fields = [ 'auth', 'email', 'firstname', 'id', 'lastip', 'lastname', 'username', 'currentcourseaccess' ];
 
@@ -40,7 +40,7 @@ if (DEBUG) {
 
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode([
-    'stat' => $stat, 'msg' => $msg, 'user' => $user, 'profile' => $prof->profile, 'body_class' => $prof->body_class
+    'stat' => $stat, 'msg' => $msg, 'debug' => OuUser::debugLevel(), 'user' => $user, 'profile' => $prof->profile, 'body_class' => $prof->body_class
 ]);
 
 //End.
