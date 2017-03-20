@@ -61,20 +61,6 @@ class user_created extends \core\event\base {
     }
 
     /**
-     * Custom validation.
-     *
-     * @throws \coding_exception when validation does not pass.
-     * @return void
-     */
-    protected function validate_data() {
-        parent::validate_data();
-
-        if (!isset($this->other['username'])) {
-            throw new \coding_exception('The \'username\' value must be set in other.');
-        }
-    }
-
-    /**
      * Return name of the legacy event, which is replaced by this event.
      * @return string legacy event name
      */
@@ -101,15 +87,14 @@ class user_created extends \core\event\base {
     /**
      * Custom validation.
      *
-     * @throws \coding_exception
+     * @throws \coding_exception when validation does not pass.
      * @return void
      */
     protected function validate_data() {
         parent::validate_data();
 
-        if (!isset($this->relateduserid)) {
-            debugging('The \'relateduserid\' value must be specified in the event.', DEBUG_DEVELOPER);
-            $this->relateduserid = $this->objectid;
+        if (!isset($this->other['username'])) {
+            throw new \coding_exception('The \'username\' value must be set in other.');
         }
     }
 
@@ -121,7 +106,7 @@ class user_created extends \core\event\base {
      * @param int $userid id of user
      * @return user_created
      */
-    public static function create_from_userid($userid) {
+    public static function X_create_from_userid($userid) {
         $data = array(
             'objectid' => $userid,
             'relateduserid' => $userid,
