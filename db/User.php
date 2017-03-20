@@ -169,7 +169,7 @@ class User
         global $CFG;
         switch ($CFG->debug) {
             case DEBUG_NONE:
-                $level = 'debug-none':
+                $level = 'debug-none';
                 break;
             case DEBUG_ALL:
             case DEBUG_DEVELOPER:  // Fall-through.
