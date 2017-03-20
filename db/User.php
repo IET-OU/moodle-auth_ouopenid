@@ -30,10 +30,14 @@ class User
 
     const OPENID_URL_REGEX = '@^http:\/\/openid\.open\.ac\.uk\/oucu\/(?P<oucu>\w+)$@';
     const USERNAME_REGEX = '@^httpopenidopenacukoucu(?P<oucu>\w+)$@';
+    const USERNAME_REPLACE = '@^(httpopenidopenacukoucu)?@';
 
-    public static function getUser($oucu)
+    public static function getUser($username)
     {
+        // Moodle global.
         global $DB;
+
+        $oucu = preg_replace(self::USERNAME_REPLACE, '', $username);
 
         $user = $DB->get_record(self::USER_TABLE, [ 'oucu' => $oucu ], $fields = '*', $strictness = IGNORE_MISSING);
         return $user;
@@ -131,11 +135,19 @@ class User
         $profile = [];
         $mdl_profile = isset($mdl_user->profile) ? $mdl_user->profile : [];
 
+        if (isset($mdl_user->username)) {
+            $mdl_profile = self::getUser($mdl_user->username);
+        }
+
         foreach ($mdl_profile as $key => $value) {
+            $profile[ self::PREFIX . $key ] = $value;
+        }
+
+        /*foreach ($mdl_profile as $key => $value) {
             if (0 === strpos($key, self::PREFIX)) {
                 $profile[ $key ] = $value;
             }
-        }
+        }*/
 
         return (object) [
             'profile' => (object) $profile,

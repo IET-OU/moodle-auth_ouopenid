@@ -1,5 +1,5 @@
 /*!
-  OU-OpenID. Nick Freear / © The Open University.
+  OU-OpenID. © Nick Freear. © The Open University.
 */
 
 (function (W) {
@@ -43,6 +43,8 @@
           disable_moodle_user_profile_form($);
         }
 
+        ouop_course_welcome_alert($);
+
       }).fail(function (jqXHR, textStat, ex) {
         C.error('ouopenid error: ', textStat, jqXHR, ex);
 
@@ -55,6 +57,27 @@
 
 
   /* ------------------------------------------- */
+
+  function ouop_course_welcome_alert($) {
+    var match = L.href.match(/[\?&]ouop_action=(return|newenrol)/)
+      , ouop_action = match ? match[ 1 ] : null
+      , course_title = $('#page-header h1:first').text()
+      , msg;
+
+    if ('return' === ouop_action) {
+      msg = "Welcome back to the %s!";
+    }
+    else if ('newenroll' === ouop_action) {
+      msg = "You've been enrolled in the %s course. Welcome!";
+    }
+
+    if (msg) {
+      msg = msg.replace(/%s/, course_title);
+
+      $('#page-header').after('<p class="oup-action-alert alert alert-success">%s</p>'.replace(/%s/, msg));
+      //$('#page').prepend(..);
+    }
+  }
 
   function disable_moodle_user_profile_form($) {
     $('form[ action *= "/user/edit" ]')
