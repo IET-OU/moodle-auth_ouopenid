@@ -67,7 +67,7 @@
     if ('return' === ouop_action) {
       msg = "Welcome back to the %s!";
     }
-    else if ('newenroll' === ouop_action) {
+    else if ('newenrol' === ouop_action) {
       msg = "You've been enrolled in the %s course. Welcome!";
     }
 
