@@ -55,6 +55,9 @@
         $body.addClass('ouop-ouopenid-error-' + jqXHR.status);
       });
 
+
+      W.OUOP.local_fixes($);
+
     }); //End require.
 
   });

@@ -18,7 +18,7 @@ Available via IET-OU Satis:
     PATHTOMOODLE/auth/ouopenid
     ```
 
-    Then, enable the plugin in the Moodle admin interface.
+    Then, enable the plugin in the [authentication plugins section of your Moodle's site administration][auth].
 
 2. To test the plugin in standalone mode, install via [Composer][]:
 
@@ -36,12 +36,34 @@ composer test
 composer eslint
 ```
 
+## Site-wide Javascript and styles
+### Admin / Additional HTML
+
+To embed the plugin's Javascript and stylesheet on every page:
+
+1. Visit the [Additional HTML section of your Moodle's site administration][addhtml];
+2. Copy and paste the HTML snippet below;
+3. Press the "Save changes" button.
+
+
+```html
+<link href="/auth/ouopenid/user/ouop-styles.css" rel="stylesheet" />
+
+<script src="/auth/ouopenid/user/ouop-local-fixes.js"></script>
+<script src="/auth/ouopenid/user/script.js"></script>
+```
+
 
 Developed for the [TeSLA project][].
 
 ---
 © 2017 [The Open University][ou]. ([Institute of Educational Technology][iet])
 
+
+[auth]: http://your-moodle.example.com/admin/settings.php?section=manageauths
+    "Your Moodle > Site administration > Plugins > Authentication > Manage Authentication"
+[addhtml]: http://your-moodle.example.com/admin/settings.php?section=additionalhtml#admin-additionalhtmlfooter
+    "Your Moodle > Site administration > Appearance > Additional HTML"
 
 [TeSLA project]: http://tesla-project.eu/
 [Moodle]: https://moodle.org/
