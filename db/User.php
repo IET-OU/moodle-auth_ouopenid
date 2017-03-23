@@ -189,7 +189,10 @@ class User
 
     protected static function bodyClasses($fields)
     {
-        $body_classes = [];
+        global $CFG; // Moodle global.
+
+        $body_classes = [ isset($CFG->auth_ouopenid_body_class) ? $CFG->auth_ouopenid_body_class : '' ];
+
         foreach ($fields as $key => $value) {
             $body_classes[] = preg_replace('/[^a-z\d_\-]+/i', '', "$key-$value");
         }

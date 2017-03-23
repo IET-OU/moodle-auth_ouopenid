@@ -8,7 +8,7 @@ define( 'CLI_SCRIPT', true );
 
 define( 'FLAG_BIG', '--big' );
 define( 'CSV_HEADINGS', 'oucu,course_present,tesla_instrument,notes,is_team,firstname,lastname,email' );
-define( 'CSV_BIG_MULTIPLE', 400 );  // 4000 x 5 = 20,000.
+define( 'CSV_BIG_MULTIPLE', 800 );  // 4000 x 5 = 20,000.
 define( 'CSV_TEAM_FILE', __DIR__ . '/../team.csv' );
 define( 'CSV_FILENAME', __DIR__ . '/../example.csv' );
 define( 'CSV_BIG_FILENAME', CSV_FILENAME );

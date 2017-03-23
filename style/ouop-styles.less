@@ -1,0 +1,72 @@
+/*!
+  OU-OpenID. © Nick Freear. © The Open University.
+*/
+
+body {
+  background-color: #f9f9f9;
+}
+[ data-region = drawer ] {
+  background-color: transparent;
+}
+
+#page-header .p-a-1 {
+  padding: 0.1rem 1rem !important;
+}
+
+.course-content ul.topics li.section .left {
+  padding: 0;
+}
+
+.card-block {
+  padding: .6rem;
+}
+
+.oup-action-alert {
+  text-align: center;
+  font-size: 1.15em;
+  padding: .7rem;
+}
+
+
+// ----------------------------------------
+
+.ouop-hide-unused-ui {
+
+  // Course main page.
+  [ data-key = badgesview ],
+  [ data-key = participants ],
+  [ href *= coursecompetencies ],
+  [ data-key = grade ],
+  [ data-key = calendar ],
+  [ href *= 'user/files' ] {
+    display: none;
+  }
+
+  [ data-title = 'grades,grades' ],
+  [ data-title = 'messages,message' ] {
+    display: none;
+  }
+
+  #nav-message-popover-container,
+  #nav-notification-popover-container,
+  .performanceinfo {
+    display: none;
+  }
+
+  // TeSLA enrolment status page.
+  .col-tesla-status-fa,
+  .col-tesla-status-fr,
+  .col-tesla-status-vr {
+    display: none;
+  }
+}
+
+
+.performanceinfo {
+  display: none;
+}
+.ouop_oucu-ndf42 {
+  .performanceinfo {
+    display: block;
+  }
+}

@@ -38,12 +38,12 @@
         C.debug('ouopenid JSON: ', data, jqXHR);
 
         $body.addClass(data.body_class)
-          .addClass(data.profile.is_team ? 'ouop-is-team' : 'ouop-not-team');
+          .addClass(data.profile.ouop_is_team ? 'ouop-is-team' : 'ouop-not-team');
 
         $body.addClass(data.debug);
 
         //if ( L.pathname.match(/^\/user\/edit/) )
-        if (! data.profile.is_team) {
+        if (! data.profile.ouop_is_team) {
           disable_moodle_user_profile_form($);
         }
 
@@ -57,6 +57,8 @@
 
 
       W.OUOP.local_fixes($);
+
+      ouop_less_test($);
 
     }); //End require.
 
@@ -93,6 +95,15 @@
       .find('input, select').each(function () {
       $(this).attr('disabled', 'disabled');
     });
+  }
+
+  function ouop_less_test($) {
+    var $less = $('style[ id ^= less ]');
+    if ($less.length) {
+      C.debug('ouopenid: ', $less.attr('id'));
+    } else {
+      C.error('ouopenid error: LESS CSS missing.');
+    }
   }
 
   function rand() {

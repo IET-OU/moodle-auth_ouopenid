@@ -47,10 +47,11 @@ To embed the plugin's Javascript and stylesheet on every page:
 
 
 ```html
-<link href="/auth/ouopenid/user/ouop-styles.css" rel="stylesheet" />
-
+<link href="/auth/ouopenid/style/ouop-styles.less" rel="stylesheet/less" />
 <script src="/auth/ouopenid/user/ouop-local-fixes.js"></script>
 <script src="/auth/ouopenid/user/script.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
 ```
 
 
