@@ -1,0 +1,29 @@
+/*!
+  OU-OpenID. © Nick Freear. © The Open University.
+*/
+
+body{
+  font: 1em sans-serif;
+  background-color: #f4f4f4;
+  color: #222;
+  margin: 1em auto;
+  max-width: 39em;
+  line-height: 1.4em;
+}
+abbr { border-bottom: 1px dotted #aaa; cursor: help; }
+h1, h2 { color: #444; }
+body > div { background-color: #fff; border-radius: .5rem; padding: .25em 1em; }
+input, button {
+  font-size: 1em;
+  padding: .5rem 1rem;
+  text-align: center;
+  border-radius: .25rem;
+  color: #373a3c;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+button { background: #eee; cursor: pointer; }
+input:focus { background: #ffffe0; }
+input:focus, button:focus,
+input:hover, button:hover { border-color: #999; }
+.XX[ name = openid_url ] { color: #666; display: none; }
