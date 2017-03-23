@@ -101,7 +101,7 @@
     var $less_error = $('style[ id = "less:error-message" ]')
       , $less = $('style[ id ^= less ]');
 
-    if ($less_error.length()) {
+    if ($less_error.length) {
       C.error('ouopenid LESS error:', $less.attr('id'), $('.less-error-message').text());
     } else if ($less.length) {
       C.debug('ouopenid: ', $less.attr('id'));

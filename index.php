@@ -44,7 +44,7 @@ class Ou_Open_Id_Form {
   data-X-onsubmit="if (document.openidlogin.openid_url.value == '') return false;">
           <div>
             <p>
-              <label >Your Open University username
+              <label >Open University username
                 (<abbr title="Open University computer username">OUCU</abbr>)
               <input
                 id="oucu" name="oucu" value="<?php Ou_Open_Id_Form::printOucu() ?>"

@@ -10,9 +10,22 @@ body{
   max-width: 39em;
   line-height: 1.4em;
 }
-abbr { border-bottom: 1px dotted #aaa; cursor: help; }
-h1, h2 { color: #444; }
-body > div { background-color: #fff; border-radius: .5rem; padding: .25em 1em; }
+li {
+  margin-top: 0.6em;
+}
+abbr {
+  border-bottom: 1px dotted #aaa;
+  cursor: help;
+}
+h1, h2 {
+  color: #444;
+}
+body > div {
+  background-color: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: .5rem;
+  padding: .25em 1em;
+}
 input, button {
   font-size: 1em;
   padding: .5rem 1rem;
@@ -22,8 +35,18 @@ input, button {
   background-color: #fff;
   border: 1px solid #ccc;
 }
-button { background: #eee; cursor: pointer; }
-input:focus { background: #ffffe0; }
+button {
+  background: #eee;
+  cursor: pointer;
+}
+input:focus {
+  background: #ffffe0;
+}
 input:focus, button:focus,
-input:hover, button:hover { border-color: #999; }
-.XX[ name = openid_url ] { color: #666; display: none; }
+input:hover, button:hover {
+  border-color: #999;
+}
+.XX[ name = openid_url ] {
+  color: #666;
+  display: none;
+}

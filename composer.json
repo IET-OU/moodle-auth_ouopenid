@@ -26,7 +26,7 @@
     "sym-links": [
       "cd ../moodle-auth-openid && ln -s ../moodle-auth-ouopenid/event.php"
     ],
-    "npm-install": "npm install eslint",
+    "npm-install": "npm install eslint less",
     "eslint-config": [
       "echo '---\n  extends: eslint:recommended\n  globals:\n    window: false\n    root: true\n' > .eslintrc.yaml",
       "echo '{\n  \"extends\": \"eslint:recommended\",\n  \"globals\": { \"window\": false }\n}' > .eslintrc-XX.json"
@@ -35,11 +35,13 @@
     "eslint": [
       "node_modules/.bin/eslint js/ user/*.js && echo eslint OK!"
     ],
+    "less": "node_modules/.bin/lessc style/*.less style/ouop-styles.css && echo less OK!",
     "test": [
       "vendor/bin/parallel-lint --exclude vendor .",
       "vendor/bin/phpcs --standard=PSR2 -n db/*.php",
       "composer cn",
       "composer eslint",
+      "composer less",
       "php -r 'simplexml_load_file(\"db/install.xml\");' && echo install.xml OK!"
     ],
     "mcs": "vendor/bin/phpcs --standard=./moodle-core.xml --ignore=vendor --ignore=.git --extensions=php .",
