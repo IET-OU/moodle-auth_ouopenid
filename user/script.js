@@ -98,7 +98,7 @@
   }
 
   function ouop_less_test($) {
-    var $less_error $('style[ id = "less:error-message" ]')
+    var $less_error = $('style[ id = "less:error-message" ]')
       , $less = $('style[ id ^= less ]');
 
     if ($less_error.length()) {
