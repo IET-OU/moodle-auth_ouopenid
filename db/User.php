@@ -132,6 +132,15 @@ class User
 
     public static function getMoodleProfile($mdl_user)
     {
+        if (0 === $mdl_user->id) {
+            self::debug([ __FUNCTION__, 'Guest user. Aborting' ]);
+            return (object) [
+                'profile' => (object) [],
+                'body_class' => null,
+                'redirect_url' => null,
+            ];
+        }
+
         $profile = [];
         $mdl_profile = isset($mdl_user->profile) ? $mdl_user->profile : [];
 
@@ -140,7 +149,11 @@ class User
         }
 
         foreach ($mdl_profile as $key => $value) {
-            $profile[ self::PREFIX . $key ] = $value;
+            if ('is_team' === $key) {
+                 $profile[ self::PREFIX . $key ] = (boolean) $value;
+            } else {
+                 $profile[ self::PREFIX . $key ] = $value;
+            }
         }
 
         /*foreach ($mdl_profile as $key => $value) {
@@ -152,7 +165,27 @@ class User
         return (object) [
             'profile' => (object) $profile,
             'body_class' => self::bodyClasses($profile),
+            'redirect_url' => self::getRedirectUrl($mdl_profile),
         ];
+    }
+
+    public static function getRoles()
+    {
+        global $USER;  // Moodle global.
+
+        $context = \context_system::instance();
+        $roles = get_user_roles($context, $USER->id, false);
+
+        self::debug([ __FUNCTION__, $roles, $USER->id ]);
+        return (object) [ 'is_admin' => is_siteadmin(), 'roles' => $roles ];
+    }
+
+    // ====================================================================
+
+    public static function getConsentEmbedUrl()
+    {
+        global $CFG;
+        return isset($CFG->auth_ouopenid_consent_embed_url) ? $CFG->auth_ouopenid_consent_embed_url : null;
     }
 
     public static function debug($obj)

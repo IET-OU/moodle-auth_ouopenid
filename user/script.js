@@ -4,7 +4,8 @@
 
 (function (W) {
 
-  var user_json_url = '/auth/ouopenid/user/ajax.php?r=' + rand()
+  var OUOP = W.OUOP
+    , user_json_url = '/auth/ouopenid/user/ajax.php?r=' + OUOP.rand()
     , form_warning = "Please don't edit your user profile!"
     , C = W.console
     , L = W.location;
@@ -37,10 +38,15 @@
 
         C.debug('ouopenid JSON: ', data, jqXHR);
 
+        OUOP.consent_document_embed($, data);
+
         $('#page-user-profile, #page-user-preferences')
           .find('#page-header')
           .after('<a id="ouop-course-link" href="%s">Continue to your pilot course</a>'
             .replace(/%s/, data.redirect_url));
+
+
+        OUOP.complete_moodle_user_profile_form($, data);
 
         if (! data.profile.ouop_is_team && $('#page-user-edit').length) {
             C.debug('ouopenid redirecting');
@@ -66,7 +72,7 @@
       });
 
 
-      W.OUOP.local_fixes($);
+      OUOP.local_fixes($);
 
       ouop_less_test($);
 
@@ -125,11 +131,6 @@
     } else {
       C.error('ouopenid error: LESS CSS missing.');
     }
-  }
-
-  function rand() {
-    var min = 11, max = 999;
-    return Math.floor(Math.random() * (max - min)) + min;
   }
 
   // https://gist.github.com/nfreear/f40470e1aec63f442a8a

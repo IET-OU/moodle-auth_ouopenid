@@ -22,6 +22,10 @@ class Ou_Open_Id_Form {
 }
 
 
+header('Content-Language: en');
+header('X-Frame-Options: sameorigin');
+header('X-UA-Compatible: IE=edge');
+
 ?>
 <!doctype html><html lang="en"><meta charset="utf-8" />
 
@@ -48,7 +52,7 @@ class Ou_Open_Id_Form {
                 (<abbr title="Open University computer username">OUCU</abbr>)
               <input
                 id="oucu" name="oucu" value="<?php Ou_Open_Id_Form::printOucu() ?>"
-                required="required" aria-required="1" pattern="[a-z]{2,4}\d{1,7}"
+                required="required" aria-required="1" pattern="[a-z]{2,4}\d{1,7}" minlength="3" maxlength="9"
                 title="Your OUCU &mdash; 2 to 4 letters, followed by 1 to 7 numbers." /></label>
 
               <input type="hidden" name="openid_url" />
