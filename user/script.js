@@ -37,6 +37,16 @@
 
         C.debug('ouopenid JSON: ', data, jqXHR);
 
+        $('#page-user-profile, #page-user-preferences')
+          .find('#page-header')
+          .after('<a id="ouop-course-link" href="%s">Continue to your pilot course</a>'
+            .replace(/%s/, data.redirect_url));
+
+        if (! data.profile.ouop_is_team && $('#page-user-edit').length) {
+            C.debug('ouopenid redirecting');
+            ///W.location = data.redirect_urL;
+        }
+
         $body.addClass(data.body_class)
           .addClass(data.profile.ouop_is_team ? 'ouop-is-team' : 'ouop-not-team');
 
@@ -89,12 +99,19 @@
   }
 
   function disable_moodle_user_profile_form($) {
-    $('form[ action *= "/user/edit" ]')
+    var $form = $('#page-user-edit #region-main form');
+
+    $form
       .attr('title', form_warning)
       .before('<p class="ouop-form-disable alert alert-warning">%s</p>'.replace(/%s/, form_warning))
       .find('input, select').each(function () {
-      $(this).attr('disabled', 'disabled');
+      //$(this).attr('disabled', 'disabled');
+      if (! $(this).hasClass('btn')) {
+        $(this).attr('readonly', 'readonly');
+      }
     });
+
+    $form.find('#id_submitbutton').val('Continue').text('Continue');
   }
 
   function ouop_less_test($) {

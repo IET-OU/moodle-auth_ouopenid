@@ -10,6 +10,20 @@ Available via IET-OU Satis:
 
 * <https://embed.open.ac.uk/iet-satis/#!/moo>
 
+## Purpose
+
+To facilitate pilot studies using Moodle (e.g. for TeSLA) by:
+
+1. Enabling OpenID login using just a username, not a full URL (e.g. https://openid.example.org/{username})
+2. Simple login page with custom instructions (hard-coded at present), `/index.php`,
+3. Importing pilot-related data into a separate DB table, `mdl_auth_ouopenid_users`,
+4. Making the pilot-related data available via `/user/ajax.php`,
+5. Tries to redirect the participant to a bespoke URL (a work-in-progress),
+6. LESS styles to hide parts of the Moodle user-interface to simplify the experience,
+7. Javascript & LESS fixes relating to the pilot study,
+8. ...?
+
+Note: this plugin probably needs splitting into two or more plugins!
 
 ## Install
 

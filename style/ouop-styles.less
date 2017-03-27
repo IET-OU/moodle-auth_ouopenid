@@ -2,9 +2,12 @@
   OU-OpenID. © Nick Freear. © The Open University.
 */
 
+// ( @import 'less/ouop-hide-unused.less'; )
+
 body {
   background-color: #f9f9f9;
 }
+
 [ data-region = drawer ] {
   background-color: transparent;
 }
@@ -21,9 +24,13 @@ body {
   padding: .6rem;
 }
 
+
+// Messages / links injected via Javascript.
+#ouop-course-link,
 .oup-action-alert {
+  display: block;
   text-align: center;
-  font-size: 1.15em;
+  font-size: 1.3em;
   padding: .7rem;
 }
 
@@ -49,8 +56,30 @@ body {
 
   #nav-message-popover-container,
   #nav-notification-popover-container,
-  .performanceinfo {
+  .XX.performanceinfo {
     display: none;
+  }
+
+  // User/edit page.
+  &#page-user-edit {
+    [ data-fieldtype = select ],
+    [ data-fieldtype = editor ],
+
+    #id_moodle_picture,
+    #id_moodle_additional_names,
+    #id_moodle_optional,
+    #id_category_2,
+    a.collapse-all,
+    .btn-link[ data-toggle ] {
+      display: none;
+    }
+
+    [ for = id_maildisplay ],
+    [ for = id_country ],
+    [ for = id_timezone ],
+    [ for = id_description_editor ] {
+      display: none !important;
+    }
   }
 
   // TeSLA enrolment status page.
@@ -70,3 +99,5 @@ body {
     display: block;
   }
 }
+
+// End.
