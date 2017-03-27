@@ -27,6 +27,7 @@ class User
     const CSV_TEAM = 4;
 
     const PREFIX = 'ouop_';
+    const UNDEF_INSTRUMENT = 'kd';
 
     const OPENID_URL_REGEX = '@^http:\/\/openid\.open\.ac\.uk\/oucu\/(?P<oucu>\w+)$@';
     const USERNAME_REGEX = '@^httpopenidopenacukoucu(?P<oucu>\w+)$@';
@@ -34,8 +35,7 @@ class User
 
     public static function getUser($username)
     {
-        // Moodle global.
-        global $DB;
+        global $DB;  // Moodle global.
 
         $oucu = preg_replace(self::USERNAME_REPLACE, '', $username);
 
@@ -45,13 +45,14 @@ class User
 
     public static function delete()
     {
-        global $DB;
+        global $DB;  // Moodle global.
+
         return $DB->delete_records(self::USER_TABLE);
     }
 
     public static function insertUser($user)
     {
-        global $DB;
+        global $DB;  // Moodle global.
 
         $user_record = (object) [
             'oucu' => $user->oucu,
@@ -80,7 +81,7 @@ class User
         $count = 0;
 
         $interpreter->addObserver(function (array $row) use (&$count, $ignore_heading, $callback) {
-            global $DB;
+            global $DB;  // Moodle global.
 
             $count++;
             if ($count <= 1 && $ignore_heading) {
@@ -182,9 +183,25 @@ class User
 
     // ====================================================================
 
+    protected static function getRedirectUrl($profile, $action = null) {
+        global $CFG;  // Moodle global.
+
+        $redirects = $CFG->auth_ouopenid_redirects;
+        $instrument = isset($profile->teslainstrument) ? $profile->teslainstrument : self::UNDEF_INSTRUMENT;
+
+        if (! isset($profile->teslainstrument)) {
+            self::debug([ __FUNCTION__, 'Undefined instrument', $profile ]);
+        }
+
+        $url = $redirects[ $instrument ]->url;
+
+        return $CFG->wwwroot . sprintf($url, $action);
+    }
+
     public static function getConsentEmbedUrl()
     {
-        global $CFG;
+        global $CFG;  // Moodle global.
+
         return isset($CFG->auth_ouopenid_consent_embed_url) ? $CFG->auth_ouopenid_consent_embed_url : null;
     }
 
@@ -199,7 +216,8 @@ class User
     */
     public static function debugLevel()
     {
-        global $CFG;
+        global $CFG;  // Moodle global.
+
         switch ($CFG->debug) {
             case DEBUG_NONE:
                 $level = 'debug-none';
