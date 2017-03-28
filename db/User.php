@@ -204,7 +204,8 @@ class User
     /** Get URL relating to the TeSLA instrument assigned to the user (in the DB) [ MOVE ] ?
      * @return string
      */
-    protected static function getRedirectUrl($profile, $action = null) {
+    protected static function getRedirectUrl($profile, $action = null)
+    {
         global $CFG;  // Moodle global.
 
         $redirects = $CFG->auth_ouopenid_redirects;
