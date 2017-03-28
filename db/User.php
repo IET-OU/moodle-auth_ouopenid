@@ -5,15 +5,14 @@
  *
  * (Note: follows PSR-2, not Moodle coding style.)
  *
- * @author Nick Freear, 13-March-2017.
+ * @package auth_ouopenid
+ * @author  Nick Freear, 13-March-2017.
  * @copyright (c) 2017 The Open University.
  *
  * @link https://docs.moodle.org/dev/Data_manipulation_API
  * @link https://github.com/goodby/csv#import-to-database-via-pdo
  * @link http://csv.thephpleague.com/8.0/examples/#importing-a-csv-into-a-database-table
  */
-
-//require_once __DIR__ . '/../vendor/autoload.php';
 
 use Goodby\CSV\Import\Standard\Lexer;
 use Goodby\CSV\Import\Standard\Interpreter;
@@ -33,6 +32,9 @@ class User
     const USERNAME_REGEX = '@^httpopenidopenacukoucu(?P<oucu>\w+)$@';
     const USERNAME_REPLACE = '@^(httpopenidopenacukoucu)?@';
 
+    /** Get plugin DB record for given username.
+     * @return object
+     */
     public static function getUser($username)
     {
         global $DB;  // Moodle global.
@@ -43,6 +45,8 @@ class User
         return $user;
     }
 
+    /** Delete all records from plugin DB table.
+     */
     public static function delete()
     {
         global $DB;  // Moodle global.
@@ -50,6 +54,9 @@ class User
         return $DB->delete_records(self::USER_TABLE);
     }
 
+    /** Insert user to plugin DB table.
+     * @return int User ID.
+     */
     public static function insertUser($user)
     {
         global $DB;  // Moodle global.
@@ -68,6 +75,9 @@ class User
         return $user_id;
     }
 
+    /** Insert rows from CSV file to plugin DB table.
+     * @return int Count of rows added.
+     */
     public static function insertFromCsv($filename = '../example.csv', $ignore_heading = true, $unstrict = true, $callback = null)
     {
         $config = new LexerConfig();
@@ -112,6 +122,8 @@ class User
         return $count;
     }
 
+    /** Attempt to add plugin data to Moodle custom profile fields [ DEPRECATED ]
+    */
     public static function setMoodleUser($oucu, &$m_user, $fn = null)
     {
         $ou_user = self::getUser($oucu);
@@ -131,6 +143,9 @@ class User
         $m_user->profile[ self::PREFIX . 'fn' ] = $fn;
     }
 
+    /** Get authentication plugin-related profile data [ MIS-NAMED ]
+     * @return object
+     */
     public static function getMoodleProfile($mdl_user)
     {
         if (0 === $mdl_user->id) {
@@ -170,6 +185,9 @@ class User
         ];
     }
 
+    /** Get Moodle roles for currently logged in user.
+     * @return object
+     */
     public static function getRoles()
     {
         global $USER;  // Moodle global.
@@ -183,6 +201,9 @@ class User
 
     // ====================================================================
 
+    /** Get URL relating to the TeSLA instrument assigned to the user (in the DB) [ MOVE ] ?
+     * @return string
+     */
     protected static function getRedirectUrl($profile, $action = null) {
         global $CFG;  // Moodle global.
 
@@ -198,6 +219,9 @@ class User
         return $CFG->wwwroot . sprintf($url, $action);
     }
 
+    /** Get Google Doc. embed URL [ MOVE ]
+     * @return string
+     */
     public static function getConsentEmbedUrl()
     {
         global $CFG;  // Moodle global.
@@ -205,6 +229,18 @@ class User
         return isset($CFG->auth_ouopenid_consent_embed_url) ? $CFG->auth_ouopenid_consent_embed_url : null;
     }
 
+    /** Get language strings for Javascript / Ajax [ MOVE ]
+     * @return object
+     */
+    public static function getStringsAjax()
+    {
+        $string_ids = [ 'continuelink', 'form_warning', 'wordcount', 'wordcount_title', 'continuebutton', 'question_progress' ];
+
+        return get_strings($string_ids, 'auth_ouopenid');
+    }
+
+    /** Output arbitrary data, eg. to HTTP header.
+    */
     public static function debug($obj)
     {
         static $count = 0;
@@ -212,8 +248,10 @@ class User
         $count++;
     }
 
-    /** https://github.com/moodle/moodle/blob/master/lib/setuplib.php#L30-L40
-    */
+    /** Output the Moodle debug level.
+     * @link https://github.com/moodle/moodle/blob/master/lib/setuplib.php#L30-L40
+     * @return string
+     */
     public static function debugLevel()
     {
         global $CFG;  // Moodle global.

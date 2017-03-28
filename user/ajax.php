@@ -2,12 +2,14 @@
 /**
  * JSON output. OU-OpenID authentication plugin.
  *
+ * @package auth_ouopenid
  * @author  Nick Freear, 08-March-2017.
  * @copyright (c) 2017 The Open University.
  */
 
 require_once __DIR__ . '/../../../config.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
+//require_once __DIR__ . '/../lang/en/auth_ouopenid.php';
 
 define('DEBUG', filter_input(INPUT_GET, 'debug'));
 
@@ -19,7 +21,7 @@ if (DEBUG) {
 
 use IET_OU\Moodle\Auth\Ouopenid\Db\User as OuUser;
 
-global $USER;  // Moodle global.
+global $USER; //, $string;  // Moodle global.
 
 $fields = [ 'auth', 'email', 'firstname', 'id', 'lastip', 'lastname', 'username', 'currentcourseaccess' ];
 
@@ -44,6 +46,7 @@ echo json_encode([
     'user_roles' => OuUser::getRoles(),
     'redirect_url' => $prof->redirect_url,
     'consent_embed_url' => OuUser::getConsentEmbedUrl(),
+    'strings' => OuUser::getStringsAjax(),
 ]);
 
 //End.
