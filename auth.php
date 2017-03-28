@@ -2,6 +2,7 @@
 /**
  * OU-OpenID authentication plugin.
  *
+ * @package auth_ouopenid
  * @author  Nick Freear, 07-March-2017.
  * @copyright (c) 2017 The Open University.
  *
@@ -14,8 +15,6 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 use IET_OU\Moodle\Auth\Ouopenid\Db\User as OuUser;
 
 class auth_plugin_ouopenid extends auth_plugin_base {
-
-    const OPENID_URL_REGEX = '@^http:\/\/openid\.open\.ac\.uk\/oucu\/(?P<oucu>\w+)$@';
 
     /**
      * Class constructor
@@ -45,7 +44,7 @@ class auth_plugin_ouopenid extends auth_plugin_base {
             $user->email = $oucu . '@openmail.open.ac.uk';
         }*/
 
-        OuUser::setMoodleUser($oucu, $user, $fn);
+        // Was: OuUser::setMoodleUser($oucu, $user, $fn);
 
         self::debug([
           __FUNCTION__, $identity_url, $oucu, $user->email, $user->username, 'userid=', $user->id, $user->profile ]);
@@ -56,4 +55,4 @@ class auth_plugin_ouopenid extends auth_plugin_base {
     }
 }
 
-//End.
+// End.
