@@ -2,10 +2,10 @@
 /**
  * OU-OpenID module version information
  *
- * @author Nick Freear, 07-March-2017.
+ * @package auth_ouopenid
+ * @author  Nick Freear, 07-March-2017.
  * @copyright (c) 2017 The Open University.
  * @license proprietary
- * @package ouopenid
  */
 
 //defined('MOODLE_INTERNAL') || die();

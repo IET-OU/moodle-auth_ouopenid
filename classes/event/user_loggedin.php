@@ -2,7 +2,7 @@
 /**
  * OU-OpenID: user login event.
  *
- * @package    auth_ouopuenid
+ * @package    auth_ouopenid
  * @copyright  2017 Nick Freear & The Open University.
  */
 

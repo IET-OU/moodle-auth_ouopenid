@@ -1,8 +1,10 @@
 <?php
 /**
- * Write example student data to a CSV file, regular size or BIG!
+ * CLI. Commandline script to write example student data to a CSV file, regular size or BIG!
  *
- * @author NDF, 09-March-2017.
+ * @package auth_ouopenid
+ * @author  Nick Freear, 09-March-2017.
+ * @copyright (c) 2017 The Open University.
  */
 define( 'CLI_SCRIPT', true );
 
@@ -12,7 +14,7 @@ define( 'CSV_BIG_MULTIPLE', 800 );  // 4000 x 5 = 20,000.
 define( 'CSV_TEAM_FILE', __DIR__ . '/../team.csv' );
 define( 'CSV_FILENAME', __DIR__ . '/../example.csv' );
 define( 'CSV_BIG_FILENAME', CSV_FILENAME );
-#Was: define( 'CSV_BIG_FILENAME', __DIR__ . '/../example-big.csv' );
+// Was: define( 'CSV_BIG_FILENAME', __DIR__ . '/../example-big.csv' );
 
     $csv_examples = <<<CSV
 jb123,K101-J,kd,(Joe Bloggs)
@@ -36,7 +38,7 @@ CSV;
     $team = file_get_contents( CSV_TEAM_FILE );
     $bytes += file_put_contents( $filename, $team . "\n" );
 
-    //$bytes += file_put_contents( $filename, CSV_HEADINGS . "\n" );
+    // Was: $bytes += file_put_contents( $filename, CSV_HEADINGS . "\n" );
 
     for ( $idx = 0; $idx < $limit; $idx++ ) {
         $bytes += file_put_contents( $filename, $csv_examples, FILE_APPEND );
@@ -44,3 +46,5 @@ CSV;
 
     echo 'Outputting CSV file: ' . $filename;
     echo "\nBytes:  $bytes\n";
+
+//End.

@@ -2,7 +2,7 @@
 /**
  * OU-OpenID. Event observer class.
  *
- * @package   auth_ouopuenid
+ * @package   auth_ouopenid
  * @copyright 2017 Nick Freear & The Open University.
  * @author    Nick Freear, 17-March-2017.
  */

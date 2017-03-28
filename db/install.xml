@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../../lib/xmldb/xmldb.xsd">
     <!--
+        @package auth_ouopenid
         @copyright (c) 2017 The Open University.
     -->
     <TABLES>

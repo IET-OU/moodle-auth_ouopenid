@@ -6,7 +6,8 @@
  *
  *     cd ../moodle-auth-openid && ln -s ../moodle-auth-ouopenid/event.php
  *
- * @author Nick Freear, 07-March-2017.
+ * @package auth_ouopenid
+ * @author  Nick Freear, 07-March-2017.
  * @copyright (c) 2017 The Open University.
  *
  * @link https://github.com/remotelearner/moodle-auth_openid/blob/MOODLE_30_STABLE/example-event.php#L21-L34

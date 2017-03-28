@@ -3,6 +3,7 @@
  * OU-OpenID login form.
  * Open University wrapper around 3rd-party OpenID authentication plugin.
  *
+ * @package auth_ouopenid
  * @author  Nick Freear, 06-March-2017, 23:20.
  * @copyright (c) 2017 The Open University.
  */

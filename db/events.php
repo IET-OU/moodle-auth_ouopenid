@@ -2,7 +2,9 @@
 /**
  * Event observers.
  *
- * @author Nick Freear, 17-March-2017.
+ * @package auth_ouopenid
+ * @author  Nick Freear, 17-March-2017.
+ * @copyright (c) 2017 The Open University.
  */
 
 $observers = [

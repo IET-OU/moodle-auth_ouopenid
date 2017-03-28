@@ -1,8 +1,10 @@
 <?php
 /**
- * Simple CSV to database import script.
+ * CLI. Simple CSV to database import commandline script.
  *
- * @author Nick Freear, 13-March-2017.
+ * @package auth_ouopenid
+ * @author  Nick Freear, 13-March-2017.
+ * @copyright (c) 2017 The Open University.
  */
 define( 'CLI_SCRIPT', true );
 
