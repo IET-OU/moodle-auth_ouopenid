@@ -8,6 +8,11 @@
  * @copyright (c) 2017 The Open University.
  */
 
+// For 'print_string()' language support!
+require_once __DIR__ . '/../../config.php';
+
+define( 'OUOP_STRING', 'auth_ouopenid' );
+
 // TODO: check if plugin is enabled or not !!
 
 class Ou_Open_Id_Form {
@@ -33,7 +38,7 @@ header('X-UA-Compatible: IE=edge');
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Sign in &mdash; TeSLA Pilot 2 (The Open University)</title>
+<title><?php print_string( 'login_title', OUOP_STRING ) ?></title>
 
 <link rel="stylesheet" href="/auth/ouopenid/style/login.css" />
 
@@ -49,16 +54,17 @@ header('X-UA-Compatible: IE=edge');
   data-X-onsubmit="if (document.openidlogin.openid_url.value == '') return false;">
           <div>
             <p>
-              <label >Open University username
-                (<abbr title="Open University computer username">OUCU</abbr>)
+              <label ><?php
+              print_string( 'login_label', OUOP_STRING, get_string( 'login_label_abbr', OUOP_STRING ));
+              ?>
               <input
                 id="oucu" name="oucu" value="<?php Ou_Open_Id_Form::printOucu() ?>"
                 required="required" aria-required="1" pattern="[a-z]{2,4}\d{1,7}" minlength="3" maxlength="9"
-                title="Your OUCU &mdash; 2 to 4 letters, followed by 1 to 7 numbers." /></label>
+                title="<?php print_string( 'login_field_help', OUOP_STRING ) ?>" /></label>
 
               <input type="hidden" name="openid_url" />
 
-              <button type="submit" >Sign in</button>
+              <button type="submit" ><?php print_string( 'login_submit', OUOP_STRING ) ?></button>
             </p>
 
               <!--<p><a href="http://openid.net/"><small>What's this?</small></a>-->
@@ -68,7 +74,8 @@ header('X-UA-Compatible: IE=edge');
 </form>
 
 <p class="footer"><small>
-    <a href="https://www.open.ac.uk">&copy; 2017 The Open University</a>.
+    <a href="<?php print_string( 'login_footer_link', OUOP_STRING ) ?>"
+      ><?php print_string( 'login_footer', OUOP_STRING ) ?></a>.
 </small></p>
 
 </div>
