@@ -196,7 +196,7 @@ class User
         $roles = get_user_roles($context, $USER->id, false);
 
         self::debug([ __FUNCTION__, $roles, $USER->id ]);
-        return (object) [ 'is_admin' => is_siteadmin(), 'roles' => $roles ];
+        return (object) [ 'is_admin' => is_siteadmin(), 'roles' => $roles, 'is_loggedin' => isloggedin() ];
     }
 
     // ====================================================================

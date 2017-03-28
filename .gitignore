@@ -1,6 +1,7 @@
 
 *.css
 !login.css
+/style/less/
 *.csv
 
 #/bin

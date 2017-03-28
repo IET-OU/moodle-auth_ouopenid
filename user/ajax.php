@@ -9,9 +9,9 @@
 
 require_once __DIR__ . '/../../../config.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
-//require_once __DIR__ . '/../lang/en/auth_ouopenid.php';
 
 define('DEBUG', filter_input(INPUT_GET, 'debug'));
+define('USER_LOGGED_IN', isloggedin());  // Was: 0 !== $USER->id;
 
 if (DEBUG) {
     $CFG->debug = DEBUG_DEVELOPER;
@@ -21,7 +21,7 @@ if (DEBUG) {
 
 use IET_OU\Moodle\Auth\Ouopenid\Db\User as OuUser;
 
-global $USER; //, $string;  // Moodle global.
+global $USER;  // Moodle global.
 
 $fields = [ 'auth', 'email', 'firstname', 'id', 'lastip', 'lastname', 'username', 'currentcourseaccess' ];
 
@@ -34,19 +34,20 @@ foreach ($fields as $field) {
 
 $oucu = preg_match(OuUser::USERNAME_REGEX, $user->username, $matches) ? $matches[ 1 ] : $user->username;
 $stat = $oucu ? 'ok' : 'warn';
-$msg = (0 === $USER->id) ? 'Not logged in.' : '';
+$msg = USER_LOGGED_IN ? '' : 'Not logged in.';
 
 if (DEBUG) {
     OuUser::debug($USER);
 }
 
+header('Access-Control-Allow-Origin: ' . $CFG->wwwroot); // Security.
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode([
     'stat' => $stat, 'msg' => $msg, 'debug' => OuUser::debugLevel(), 'user' => $user, 'profile' => $prof->profile, 'body_class' => $prof->body_class,
     'user_roles' => OuUser::getRoles(),
-    'redirect_url' => $prof->redirect_url,
-    'consent_embed_url' => OuUser::getConsentEmbedUrl(),
-    'strings' => OuUser::getStringsAjax(),
+    'redirect_url' => USER_LOGGED_IN ? $prof->redirect_url : null,
+    'consent_embed_url' => USER_LOGGED_IN ? OuUser::getConsentEmbedUrl() : null,
+    'strings' => USER_LOGGED_IN ? OuUser::getStringsAjax() : [],
 ]);
 
 //End.
