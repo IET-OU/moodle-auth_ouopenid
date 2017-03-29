@@ -24,7 +24,7 @@
     "squizlabs/php_codesniffer": "2.8.1"
   },
   "scripts": {
-    "ci-ignore": [
+    "write-ignore-xml": [
       "echo '<?xml version=\"1.0\"?>\n<libraries>' > thirdpartylibs.xml",
       "echo '\t<library><location>db/User.php</location></library>' >> thirdpartylibs.xml",
       "echo '\t<library><location>vendor/</location></library>' >> thirdpartylibs.xml",
@@ -46,7 +46,10 @@
     "sym-links": [
       "cd ../moodle-auth-openid && ln -s ../moodle-auth-ouopenid/event.php"
     ],
-    "npm-install": "npm install eslint less",
+    "npm-install": [
+      "npm install eslint less",
+      "npm install -g csslint"
+    ],
     "jshint-config": "echo '{ \"laxcomma\": true }' > .jshintrc",
     "eslint-config": [
       "echo '---\n  extends: eslint:recommended\n  globals:\n    window: false\n    root: true\n' > .eslintrc.yaml",
