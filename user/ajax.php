@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../../config.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 define('DEBUG', filter_input(INPUT_GET, 'debug'));
-define('USER_LOGGED_IN', isloggedin());  // Was: 0 !== $USER->id;
+define('USER_LOGGED_IN', isloggedin());  // Was: ( 0 !== $USER->id )
 
 if (DEBUG) {
     $CFG->debug = DEBUG_DEVELOPER;
@@ -43,7 +43,10 @@ if (DEBUG) {
 header('Access-Control-Allow-Origin: ' . $CFG->wwwroot); // Security.
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode([
-    'stat' => $stat, 'msg' => $msg, 'debug' => OuUser::debugLevel(), 'user' => $user, 'profile' => $prof->profile, 'body_class' => $prof->body_class,
+    'stat' => $stat, 'msg' => $msg, 'debug' => OuUser::debugLevel(),
+    'user' => $user,
+    'profile' => $prof->profile,
+    'body_class' => $prof->body_class,
     'user_roles' => OuUser::getRoles(),
     'redirect_url' => USER_LOGGED_IN ? $prof->redirect_url : null,
     'consent_embed_url' => USER_LOGGED_IN ? OuUser::getConsentEmbedUrl() : null,

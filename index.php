@@ -59,7 +59,7 @@ header('X-UA-Compatible: IE=edge');
               ?>
               <input
                 id="oucu" name="oucu" value="<?php Ou_Open_Id_Form::printOucu() ?>"
-                required="required" aria-required="1" pattern="[a-z]{2,4}\d{1,7}" minlength="3" maxlength="9"
+                required="required" aria-required="true" pattern="[a-z]{2,4}\d{1,7}" minlength="3" maxlength="9"
                 title="<?php print_string( 'login_field_help', OUOP_STRING ) ?>" /></label>
 
               <input type="hidden" name="openid_url" />
