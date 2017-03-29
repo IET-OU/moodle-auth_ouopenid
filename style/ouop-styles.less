@@ -8,7 +8,7 @@ body {
   background-color: #f9f9f9;
 }
 
-[ data-region = drawer ] {
+div[ data-region = drawer ] {
   background-color: transparent;
 }
 
@@ -38,7 +38,8 @@ body {
 
 #page-local-tesla-views-agreement {
 
-  iframe[ src *= 'docs.google.com' ] {
+  iframe.ouop-consent-doc {
+  //Was: iframe[ src *= 'docs.google.com' ] {
     display: block;
     border: 1px solid #ddd;
     width: 100%;
@@ -53,17 +54,17 @@ body {
 .ouop-hide-unused-ui {
 
   // Course main page.
-  [ data-key = badgesview ],
-  [ data-key = participants ],
-  [ href *= coursecompetencies ],
-  [ data-key = grade ],
-  [ data-key = calendar ],
-  [ href *= 'user/files' ] {
+  a[ data-key = badgesview ],
+  a[ data-key = participants ],
+  a[ href *= coursecompetencies ],
+  a[ data-key = grade ],
+  a[ data-key = calendar ],
+  a[ href *= 'user/files' ] { // csslint: Attribute selectors with *= are slow!
     display: none;
   }
 
-  [ data-title = 'grades,grades' ],
-  [ data-title = 'messages,message' ] {
+  a[ data-title = 'grades,grades' ],
+  a[ data-title = 'messages,message' ] {
     display: none;
   }
 
@@ -75,22 +76,22 @@ body {
 
   // User/edit page.
   &#page-user-edit {
-    [ data-fieldtype = select ],
-    [ data-fieldtype = editor ],
+    div[ data-fieldtype = select ],
+    div[ data-fieldtype = editor ],
 
     #id_moodle_picture,
     #id_moodle_additional_names,
     #id_moodle_optional,
     #id_category_2,
     a.collapse-all,
-    .btn-link[ data-toggle ] {
+    a.btn-link[ data-toggle ] {
       display: none;
     }
 
-    [ for = id_maildisplay ],
-    [ for = id_country ],
-    [ for = id_timezone ],
-    [ for = id_description_editor ] {
+    label[ for = id_maildisplay ],
+    label[ for = id_country ],
+    label[ for = id_timezone ],
+    label[ for = id_description_editor ] {
       display: none !important;
     }
   }

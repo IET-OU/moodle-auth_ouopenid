@@ -15,9 +15,13 @@ install:
   - composer install
   - composer npm-install
   - composer eslint-config
+  - composer jshint-config
+  - composer ci-ignore
+  - composer less
 
 script:
   - composer test
   - composer validate
+  - composer ci-test
 
 #End.

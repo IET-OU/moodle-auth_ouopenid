@@ -35,7 +35,7 @@
     }
 
     C.debug('ouop: complete-user-profile-form');
-  }
+  };
 
 
   OUOP.local_fixes = function ($) {
@@ -69,7 +69,7 @@
   OUOP.rand = function () {
     var min = 11, max = 9999;
     return Math.floor(Math.random() * (max - min)) + min;
-  }
+  };
 
 
 }(window));

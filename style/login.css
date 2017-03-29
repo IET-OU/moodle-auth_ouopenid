@@ -17,8 +17,9 @@ abbr {
   border-bottom: 1px dotted #aaa;
   cursor: help;
 }
-h1, h2 {
+h1, h2, label, button {
   color: #444;
+  font-weight: bold;
 }
 body > div {
   background-color: #fff;
@@ -46,7 +47,7 @@ input:focus, button:focus,
 input:hover, button:hover {
   border-color: #999;
 }
-.XX[ name = openid_url ] {
+input.XX[ name = openid_url ] {
   color: #666;
   display: none;
 }

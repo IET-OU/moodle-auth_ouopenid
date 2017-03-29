@@ -6,6 +6,7 @@
 
 #/bin
 
+thirdpartylibs.xml
 phpcs.xml
 /*.xml
 
@@ -15,5 +16,7 @@ vendor
 
 node_modules
 .eslintrc*
+.jshintrc*
+.env
 
 #End.
