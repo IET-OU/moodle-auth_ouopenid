@@ -17,9 +17,9 @@ install:
   - composer eslint-config
   - composer jshint-config
   - composer write-ignore-xml
-  - composer less
 
 script:
+  - composer less
   - composer test
   - composer validate
   - composer ci-test

@@ -48,7 +48,7 @@
     ],
     "npm-install": [
       "npm install eslint less",
-      "npm install -g csslint"
+      "npm i -g csslint && npm i -g jshint"
     ],
     "jshint-config": "echo '{ \"laxcomma\": true }' > .jshintrc",
     "eslint-config": [
