@@ -2,18 +2,20 @@
   OU-OpenID. © Nick Freear. © The Open University.
 */
 
-(function (W) {
+/* eslint camelcase: 0 */
 
-  var OUOP = W.OUOP
-    , user_json_url = '/auth/ouopenid/user/ajax.php?r=' + OUOP.rand()
-    , form_warning = "Please don't edit your user profile!"
-    , C = W.console
-    , L = W.location;
+(function (W) {
+  'use strict';
+
+  var OUOP = W.OUOP;
+  var user_json_url = '/auth/ouopenid/user/ajax.php?r=' + OUOP.rand();
+  var form_warning = "Please don't edit your user profile!";
+  var C = W.console;
+  var L = W.location;
 
   if (L.pathname.match(/^\/admin\//)) {
     return C.debug('ouopenid: admin page, exiting.');
   }
-
 
   when_call(function () {
     return W.require;
@@ -29,8 +31,7 @@
       C.debug('ouopenid $:', $.fn.jquery);
 
       $.getJSON(user_json_url).done(function (data, textStat, jqXHR) {
-
-        if (! data.profile.ouop_oucu) {
+        if (!data.profile.ouop_oucu) {
           C.error('ouopenid error: missing profile.');
 
           $body.addClass('ouop-ouopenid-error-profile');
@@ -45,12 +46,11 @@
           .after('<a id="ouop-course-link" href="%s">Continue to your pilot course</a>'
             .replace(/%s/, data.redirect_url));
 
-
         OUOP.complete_moodle_user_profile_form($, data);
 
-        if (! data.profile.ouop_is_team && $('#page-user-edit').length) {
-            C.debug('ouopenid redirecting');
-            ///W.location = data.redirect_urL;
+        if (!data.profile.ouop_is_team && $('#page-user-edit').length) {
+          C.debug('ouopenid redirecting');
+          // Was: W.location = data.redirect_urL;
         }
 
         $body.addClass(data.body_class)
@@ -58,41 +58,36 @@
 
         $body.addClass(data.debug);
 
-        //if ( L.pathname.match(/^\/user\/edit/) )
-        if (! data.profile.ouop_is_team) {
+        // Was: if ( L.pathname.match(/^\/user\/edit/) )
+        if (!data.profile.ouop_is_team) {
           disable_moodle_user_profile_form($);
         }
 
         ouop_course_welcome_alert($);
-
-      }).fail(function (jqXHR, textStat, ex) {
+      })
+      .fail(function (jqXHR, textStat, ex) {
         C.error('ouopenid error: ', textStat, jqXHR, ex);
 
         $body.addClass('ouop-ouopenid-error-' + jqXHR.status);
       });
 
-
       OUOP.local_fixes($);
 
       ouop_less_test($);
-
-    }); //End require.
-
+    }); // End require.
   });
-
 
   /* ------------------------------------------- */
 
-  function ouop_course_welcome_alert($) {
-    var match = L.href.match(/[\?&]ouop_action=(return|newenrol)/)
-      , ouop_action = match ? match[ 1 ] : null
-      , course_title = $('#page-header h1:first').text()
-      , msg;
+  function ouop_course_welcome_alert ($) {
+    var match = L.href.match(/[?&]ouop_action=(return|newenrol)/);
+    var ouop_action = match ? match[ 1 ] : null;
+    var course_title = $('#page-header h1:first').text();
+    var msg;
 
-    if ('return' === ouop_action) {
-      msg = "Welcome back to the %s!";
-    }
-    else if ('newenrol' === ouop_action) {
+    if (ouop_action === 'return') {
+      msg = 'Welcome back to the %s!';
+    } else if (ouop_action === 'newenroll') {
       msg = "You've been enrolled in the %s course. Welcome!";
     }
 
@@ -100,29 +95,28 @@
       msg = msg.replace(/%s/, course_title);
 
       $('#page-header').after('<p class="oup-action-alert alert alert-success">%s</p>'.replace(/%s/, msg));
-      //$('#page').prepend(..);
     }
   }
 
-  function disable_moodle_user_profile_form($) {
+  function disable_moodle_user_profile_form ($) {
     var $form = $('#page-user-edit #region-main form');
 
     $form
       .attr('title', form_warning)
       .before('<p class="ouop-form-disable alert alert-warning">%s</p>'.replace(/%s/, form_warning))
       .find('input, select').each(function () {
-      //$(this).attr('disabled', 'disabled');
-      if (! $(this).hasClass('btn')) {
-        $(this).attr('readonly', 'readonly');
-      }
-    });
+        // Was: $(this).attr('disabled', 'disabled');
+        if (!$(this).hasClass('btn')) {
+          $(this).attr('readonly', 'readonly');
+        }
+      });
 
     $form.find('#id_submitbutton').val('Continue').text('Continue');
   }
 
-  function ouop_less_test($) {
-    var $less_error = $('style[ id = "less:error-message" ]')
-      , $less = $('style[ id ^= less ]');
+  function ouop_less_test ($) {
+    var $less_error = $('style[ id = "less:error-message" ]');
+    var $less = $('style[ id ^= less ]');
 
     if ($less_error.length) {
       C.error('ouopenid LESS error:', $less.attr('id'), $('.less-error-message').text());
@@ -134,7 +128,7 @@
   }
 
   // https://gist.github.com/nfreear/f40470e1aec63f442a8a
-  function when_call(when_true_FN, callback_FN, interval) {
+  function when_call (when_true_FN, callback_FN, interval) {
     var int_id = W.setInterval(function () {
       if (when_true_FN()) {
         W.clearInterval(int_id);
@@ -143,4 +137,5 @@
     }, interval || 300); // Milliseconds.
   }
 
+  // .
 }(window));

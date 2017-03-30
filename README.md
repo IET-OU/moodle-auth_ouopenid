@@ -1,5 +1,6 @@
 
 [![Build status — Travis-CI][travis-icon]][travis]
+[![js-semistandard-style][semi-icon]][semi]
 
 
 # moodle-auth_ouopenid
@@ -90,3 +91,6 @@ Developed for the [TeSLA project][].
 [travis]:  https://travis-ci.org/IET-OU/moodle-auth_ouopenid
 [travis-icon]: https://api.travis-ci.org/IET-OU/moodle-auth_ouopenid.svg
     "Build status – Travis-CI (PHP + NPM/eslint)"
+[semi]: https://github.com/Flet/semistandard
+[semi-icon]: https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square
+    "Javascript coding style — 'semistandard'"

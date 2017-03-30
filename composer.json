@@ -41,13 +41,13 @@
       "vendor/bin/moodle-plugin-ci shifter .",
       "vendor/bin/moodle-plugin-ci jshint .",
       "# N/A? vendor/bin/moodle-plugin-ci validate .",
-      "# vendor/bin/moodle-plugin-ci phpunit . --coverage-text"
+      "vendor/bin/moodle-plugin-ci phpunit . --coverage-text"
     ],
     "sym-links": [
       "cd ../moodle-auth-openid && ln -s ../moodle-auth-ouopenid/event.php"
     ],
     "npm-install": [
-      "npm install eslint less",
+      "npm install eslint less semistandard",
       "npm i -g csslint && npm i -g jshint"
     ],
     "jshint-config": "echo '{ \"laxcomma\": true }' > .jshintrc",
@@ -59,12 +59,14 @@
     "eslint": [
       "node_modules/.bin/eslint js/ user/*.js && echo eslint OK!"
     ],
+    "semistandard": "node_modules/.bin/semistandard",
     "less": "node_modules/.bin/lessc style/*.less style/ouop-styles.css && echo less OK!",
     "test": [
       "vendor/bin/parallel-lint --exclude vendor .",
       "vendor/bin/phpcs --standard=PSR2 -n db/*.php",
       "composer cn",
-      "composer eslint",
+      "composer semistandard",
+      "# composer eslint",
       "php -r 'simplexml_load_file(\"db/install.xml\");' && echo install.xml OK!"
     ],
     "mcs": "vendor/bin/phpcs --standard=./moodle-core.xml --ignore=vendor --ignore=.git --extensions=php .",
