@@ -14,8 +14,7 @@ before_install:
 install:
   - composer install
   - composer npm-install
-  - composer eslint-config
-  - composer jshint-config
+  #- composer eslint-config
   - composer write-ignore-xml
 
 script:

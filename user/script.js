@@ -9,7 +9,6 @@
 
   var OUOP = W.OUOP;
   var user_json_url = '/auth/ouopenid/user/ajax.php?r=' + OUOP.rand();
-  var form_warning = "Please don't edit your user profile!";
   var C = W.console;
   var L = W.location;
 
@@ -31,6 +30,8 @@
       C.debug('ouopenid $:', $.fn.jquery);
 
       $.getJSON(user_json_url).done(function (data, textStat, jqXHR) {
+        OUOP.set_strings(data);
+
         if (!data.profile.ouop_oucu) {
           C.error('ouopenid error: missing profile.');
 
@@ -43,8 +44,8 @@
 
         $('#page-user-profile, #page-user-preferences')
           .find('#page-header')
-          .after('<a id="ouop-course-link" href="%s">Continue to your pilot course</a>'
-            .replace(/%s/, data.redirect_url));
+          .after('<p id="ouop-course-link" class="alert alert-info"><a href="%u">%s</a></p>'
+            .replace(/%u/, data.redirect_url).replace(/%s/, OUOP.str('continuelink')));
 
         OUOP.complete_moodle_user_profile_form($, data);
 
@@ -85,16 +86,10 @@
     var course_title = $('#page-header h1:first').text();
     var msg;
 
-    if (ouop_action === 'return') {
-      msg = 'Welcome back to the %s!';
-    } else if (ouop_action === 'newenroll') {
-      msg = "You've been enrolled in the %s course. Welcome!";
-    }
+    if (ouop_action) {
+      msg = OUOP.str(ouop_action + '_msg').replace(/{$a}/, course_title);
 
-    if (msg) {
-      msg = msg.replace(/%s/, course_title);
-
-      $('#page-header').after('<p class="oup-action-alert alert alert-success">%s</p>'.replace(/%s/, msg));
+      $('#page-header').after('<p class="ouop-action-alert alert alert-success">%s</p>'.replace(/%s/, msg));
     }
   }
 
@@ -102,8 +97,8 @@
     var $form = $('#page-user-edit #region-main form');
 
     $form
-      .attr('title', form_warning)
-      .before('<p class="ouop-form-disable alert alert-warning">%s</p>'.replace(/%s/, form_warning))
+      .attr('title', OUOP.str('form_warning'))
+      .before('<p class="ouop-form-disable alert alert-warning">%s</p>'.replace(/%s/, OUOP.str('form_warning')))
       .find('input, select').each(function () {
         // Was: $(this).attr('disabled', 'disabled');
         if (!$(this).hasClass('btn')) {

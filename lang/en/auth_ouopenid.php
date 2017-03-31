@@ -12,9 +12,11 @@
 $string[ 'pluginname' ] = 'OU-OpenID';
 $string[ 'auth_ouopeniddescription' ] = 'This plugin is a wrapper around the OpenID authentication plugin';
 
-// Used in Javascript / Ajax.
-$string[ 'continuelink' ] = 'Continue to your pilot course';
+// Used via Javascript / Ajax.
+$string[ 'continuelink' ] = 'Continue to your pilot course &rarr;';
 $string[ 'form_warning' ] = 'Please don\'t edit your user profile!';
+$string[ 'newenrol_msg' ] = 'You\'ve been enrolled in the {$a} course. Welcome!';
+$string[ 'return_msg' ] = 'Welcome back to the {$a}!';
 $string[ 'wordcount' ] = 'Words: {$a}';
 $string[ 'wordcount_title' ] = 'Word count';
 $string[ 'continuebutton' ] = 'Continue';

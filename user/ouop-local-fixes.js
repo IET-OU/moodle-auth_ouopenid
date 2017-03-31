@@ -28,11 +28,13 @@
     var $inp_fname = $form.find('[ name = firstname ]');
     var $inp_lname = $form.find('[ name = lastname ]');
     var $inp_email = $form.find('[ name = email ]');
+    var prof = resp.profile;
+    var isteam = prof.ouop_is_team;
 
     if ($form.length && !$inp_fname.val()) {
-      $inp_fname.val(resp.profile.ouop_oucu);
-      $inp_lname.val('Test');
-      $inp_email.val('tesla.ouuk+%s@gmail.com'.replace(/%s/, resp.profile.ouop_oucu));
+      $inp_fname.val(isteam ? prof.ouop_firstname : prof.ouop_oucu);
+      $inp_lname.val(isteam ? prof.ouop_lastname : 'test');
+      $inp_email.val(isteam ? prof.ouop_email : 'tesla.ouuk+%s@gmail.com'.replace(/%s/, prof.ouop_oucu));
     }
 
     C.debug('ouop: complete-user-profile-form');
@@ -68,6 +70,17 @@
     var min = 11;
     var max = 9999;
     return Math.floor(Math.random() * (max - min)) + min;
+  };
+
+  // Javascript translation/localisation [i18n].
+  var strings = {};
+
+  OUOP.set_strings = function (resp) {
+    strings = resp.strings;
+  };
+
+  OUOP.str = function (sid) {
+    return strings[ sid ];
   };
 
   // .

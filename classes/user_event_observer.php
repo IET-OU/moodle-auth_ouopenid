@@ -20,7 +20,9 @@ class user_event_observer {
         // TODO: Enroll the user on course!
         // self::enroll_user();
 
-        self::redirect($user_created = true, __FUNCTION__);
+        // Was: self::redirect($user_created = true, __FUNCTION__);
+
+        OuUser::debug(__FUNCTION__);
     }
 
     public static function core_user_loggedin($event) {
@@ -33,22 +35,18 @@ class user_event_observer {
 
         $redirects  = $CFG->auth_ouopenid_redirects;
 
+        if (! isset($USER->username)) {
+            return self::debug([ __FUNCTION__, 'Warning, nno username.', $USER ]);
+        }
+
         $ou_profile = OuUser::getUser($USER->username);
 
         OuUser::debug([ __FUNCTION__, $fn, $redirects, $ou_profile ]);
 
-        if (isset($redirects[ $ou_profile->teslainstrument ])) {
-            $redirect_obj = $redirects[ $ou_profile->teslainstrument ];
+        $url = OuUser::getRedirectUrl($ou_profile, $user_created ? 'newenrol' : 'return');
 
-            $url = sprintf($redirect_obj->url, $user_created ? 'newenrol' : 'return');
-
-            header('Location: '. $url, true, 302);
-            exit();
-        }
-        else {
-            // ERROR !!
-            OuUser::debug([ __FUNCTION__, 'ERROR', $ou_profile ]);
-        }
+        header('Location: '. $url, true, 302);
+        exit();
     }
 }
 

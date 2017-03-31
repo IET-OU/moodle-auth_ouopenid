@@ -29,7 +29,7 @@ div[ data-region = drawer ] {
 // Messages / links / HTML injected via plugin Javascript.
 
 #ouop-course-link,
-.oup-action-alert {
+.ouop-action-alert {
   display: block;
   text-align: center;
   font-size: 1.3em;
@@ -93,6 +93,22 @@ div[ data-region = drawer ] {
     label[ for = id_timezone ],
     label[ for = id_description_editor ] {
       display: none !important;
+    }
+  }
+
+  // User/preferences page (ouop-not-team ?)
+  &#page-user-preferences {
+    #region-main-box {
+      display: none;
+    }
+  }
+
+  // User/profile page.
+  &#page-user-profile {
+    .breadcrumb-button,
+    #page-header .action-menu,
+    #region-main .node_category:nth-of-type( 3 ) {
+      display: none;
     }
   }
 

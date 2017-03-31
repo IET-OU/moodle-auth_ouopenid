@@ -235,7 +235,7 @@ class User
      */
     public static function getStringsAjax()
     {
-        $string_ids = [ 'continuelink', 'form_warning', 'wordcount', 'wordcount_title', 'continuebutton', 'question_progress' ];
+        $string_ids = [ 'continuelink', 'form_warning', 'wordcount', 'wordcount_title', 'continuebutton', 'question_progress', 'return_msg', 'newenrol_msg' ];
 
         return get_strings($string_ids, 'auth_ouopenid');
     }
