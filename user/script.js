@@ -40,6 +40,8 @@
 
         C.debug('ouopenid JSON: ', data, jqXHR);
 
+        OUOP.analytics($, data);
+
         OUOP.consent_document_embed($, data);
 
         $('#page-user-profile, #page-user-preferences')
@@ -87,7 +89,7 @@
     var msg;
 
     if (ouop_action) {
-      msg = OUOP.str(ouop_action + '_msg').replace(/{$a}/, course_title);
+      msg = OUOP.str(ouop_action + '_msg').replace('{$a}', course_title);
 
       $('#page-header').after('<p class="ouop-action-alert alert alert-success">%s</p>'.replace(/%s/, msg));
     }

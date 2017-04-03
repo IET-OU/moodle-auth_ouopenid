@@ -51,6 +51,7 @@ echo json_encode([
     'redirect_url' => USER_LOGGED_IN ? $prof->redirect_url : null,
     'consent_embed_url' => USER_LOGGED_IN ? OuUser::getConsentEmbedUrl() : null,
     'strings' => USER_LOGGED_IN ? OuUser::getStringsAjax() : [],
+    'config' => isset($CFG->auth_ouopenid_js_config) ? $CFG->auth_ouopenid_js_config : [],
 ]);
 
-//End.
+// End.

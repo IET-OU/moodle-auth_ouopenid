@@ -7,7 +7,7 @@
 (function (W) {
   'use strict';
 
-  var OUOP = window.OUOP = window.OUOP || {};
+  var OUOP = W.OUOP = W.OUOP || {};
   var C = W.console;
 
   OUOP.consent_document_embed = function ($, resp) {
