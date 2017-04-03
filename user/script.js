@@ -13,7 +13,7 @@
   var L = W.location;
 
   if (L.pathname.match(/^\/admin\//)) {
-    return C.debug('ouopenid: admin page, exiting.');
+    return C.warn('ouopenid: admin page, exiting.');
   }
 
   when_call(function () {
@@ -33,9 +33,9 @@
         OUOP.set_strings(data);
 
         if (!data.profile.ouop_oucu) {
-          C.error('ouopenid error: missing profile.');
+          C.warn('ouopenid warning: missing profile.');
 
-          $body.addClass('ouop-ouopenid-error-profile');
+          $body.addClass('ouop-ouopenid-warn-profile');
         }
 
         C.debug('ouopenid JSON: ', data, jqXHR);

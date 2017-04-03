@@ -82,6 +82,7 @@ header('X-UA-Compatible: IE=edge');
 
 
 <script src="<?php echo Ou_Open_Id_Form::JQUERY_URL ?>"></script>
+<script src="/auth/ouopenid/user/ouop-analytics.js"></script>
 <script>
 window.jQuery(function ($) {
 
@@ -94,5 +95,8 @@ window.jQuery(function ($) {
     });
 
 });
+</script>
+<script>
+    OUOP.analytics($, { config: <?php echo json_encode($CFG->auth_ouopenid_js_config) ?> });
 </script>
 </html>
