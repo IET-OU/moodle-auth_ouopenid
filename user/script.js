@@ -71,6 +71,8 @@
         }
 
         ouop_course_welcome_alert($);
+
+        OUOP.toggle_hidden_ui_button($);
       })
       .fail(function (jqXHR, textStat, ex) {
         C.error('ouopenid error: ', textStat, jqXHR, ex);

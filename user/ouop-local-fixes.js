@@ -79,6 +79,17 @@
     }
   };
 
+  function OUOP.toggle_hidden_ui_button = function ($) {
+    var $body = $('body');
+
+    $body.append('<button id="ouop-toggle-hidden-ui-btn">Toggle hidden</button>');
+
+    $('#ouop-toggle-hidden-ui-btn').on('click', function () {
+      $body.toggleClass('ouop-hide-unused-ui').toggleClass('ouop-show-unused-ui');
+      C.warn('ouop: toggle-hidden-btn');
+    });
+  }
+
   OUOP.rand = function () {
     var min = 11;
     var max = 9999;
