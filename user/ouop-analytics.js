@@ -15,6 +15,7 @@
   'use strict';
 
   var OUOP = W.OUOP = W.OUOP || {};
+  var C = W.console;
 
   OUOP.analytics = function ($, resp) {
     /* Google Analytics.
@@ -22,7 +23,7 @@
     ga('create', resp.config.ga, 'auto');
     ga('send', 'pageview');
 
-    W.console.debug('ouop: analytics', resp.config.ga);
+    C.debug('ouop: analytics', resp.config.ga);
   };
 
   OUOP.handle_moodle_events = function ($, resp) {
