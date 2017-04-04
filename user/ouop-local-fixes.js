@@ -79,7 +79,7 @@
     }
   };
 
-  function OUOP.toggle_hidden_ui_button = function ($) {
+  OUOP.toggle_hidden_ui_button = function ($) {
     var $body = $('body');
 
     $body.append('<button id="ouop-toggle-hidden-ui-btn">Toggle hidden</button>');
