@@ -25,5 +25,15 @@
     W.console.debug('ouop: analytics', resp.config.ga);
   };
 
+  OUOP.handle_moodle_events = function ($, resp) {
+    var $events = $('script[ data-ouop-event ]');
+
+    $events.each(function (idx, el) { // if ($events.length > 0) {
+      var event = JSON.parse($(el).text());
+
+      C.warn('ouop: event', idx, event);
+    });
+  };
+
   // .
 }(window));

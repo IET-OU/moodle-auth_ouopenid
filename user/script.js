@@ -38,9 +38,11 @@
           $body.addClass('ouop-ouopenid-warn-profile');
         }
 
-        C.debug('ouopenid JSON: ', data, jqXHR);
+        C.debug('ouopenid JSON: ', data, W.M.cfg, jqXHR);
 
         OUOP.analytics($, data);
+
+        OUOP.handle_moodle_events($, data);
 
         OUOP.consent_document_embed($, data);
 

@@ -29,9 +29,14 @@ class user_event_observer {
         self::redirect($user_created = false, __FUNCTION__);
     }
 
+    public static function embed_event_data(\core\event\base $event) {
+        echo "\n<script data-ouop-event='1' type='application/json'>" .
+            json_encode( $event->get_data() ) .
+            "</script>\n";
+    }
+
     protected static function redirect($user_created, $fn) {
-        // Moodle globals.
-        global $CFG, $USER;
+        global $CFG, $USER;  // Moodle globals.
 
         $redirects  = $CFG->auth_ouopenid_redirects;
 
