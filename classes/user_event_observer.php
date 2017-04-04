@@ -30,9 +30,13 @@ class user_event_observer {
     }
 
     public static function embed_event_data(\core\event\base $event) {
-        echo "\n<script data-ouop-event='1' type='application/json'>" .
-            json_encode( $event->get_data() ) .
-            "</script>\n";
+        if (headers_sent()) {
+            echo "\n<script data-ouop-event='1' type='application/json'>" .
+                json_encode( $event->get_data() ) .
+                "</script>\n";
+        } else {
+            OuUser::debug([ __FUNCTION__, $event->get_data() ]);
+        }
     }
 
     protected static function redirect($user_created, $fn) {

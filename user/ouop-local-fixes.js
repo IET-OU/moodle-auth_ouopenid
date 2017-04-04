@@ -66,6 +66,19 @@
     C.debug('ouop: local-fixes');
   };
 
+  OUOP.fix_pilot_post_survey_link = function ($, resp) {
+    var $link = $('#region-main a[ href *= OUCU ]').first();
+    var url = $link.attr('href');
+
+    if (url) {
+      $link
+        .attr('href', url.replace(/\{?OUCU\}?/, resp.profile.ouop_oucu))
+        .addClass('ouop-pilot-post-survey-link');
+
+      C.warn('ouop: ouop-pilot-post-survey-link', $link);
+    }
+  };
+
   OUOP.rand = function () {
     var min = 11;
     var max = 9999;

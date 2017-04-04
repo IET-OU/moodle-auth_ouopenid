@@ -42,9 +42,11 @@
 
         OUOP.analytics($, data);
 
-        OUOP.handle_moodle_events($, data);
+        OUOP.handle_moodle_events($);
 
         OUOP.consent_document_embed($, data);
+
+        OUOP.fix_pilot_post_survey_link($, data);
 
         $('#page-user-profile, #page-user-preferences')
           .find('#page-header')

@@ -26,7 +26,7 @@
     C.debug('ouop: analytics', resp.config.ga);
   };
 
-  OUOP.handle_moodle_events = function ($, resp) {
+  OUOP.handle_moodle_events = function ($) {
     var $events = $('script[ data-ouop-event ]');
 
     $events.each(function (idx, el) { // if ($events.length > 0) {
