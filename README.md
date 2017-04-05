@@ -52,7 +52,7 @@ composer eslint
 ```
 
 ## Site-wide Javascript and styles
-### Admin / Additional HTML
+### Additional HTML - development
 
 To embed the plugin's Javascript and stylesheet on every page:
 
@@ -68,6 +68,14 @@ To embed the plugin's Javascript and stylesheet on every page:
 <script src="/auth/ouopenid/user/script.js"></script>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
+```
+
+
+### Additional HTML - live
+
+```html
+<link href="/auth/ouopenid/style/ouop-styles.css" rel="stylesheet" />
+<script src="/auth/ouopenid/ouop.dist.js"></script>
 ```
 
 

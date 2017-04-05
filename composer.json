@@ -46,9 +46,15 @@
     "sym-links": [
       "cd ../moodle-auth-openid && ln -s ../moodle-auth-ouopenid/event.php"
     ],
-    "npm-install": [
-      "npm install eslint less semistandard",
+    "npm-install": "npm install uglify-js && npm i less",
+    "npm-install-dev": [
+      "composer npm-install",
+      "npm install eslint semistandard",
       "npm i -g csslint && npm i -g jshint"
+    ],
+    "build": [
+      "node_modules/.bin/uglifyjs user/*.js --comments=/^!/ --preamble='/*eslint-disable*/' -bo ouop.dist.js",
+      "node_modules/.bin/lessc style/*.less style/ouop-styles.css"
     ],
     "jshint-config": "echo '{ \"laxcomma\": true }' > .jshintrc",
     "eslint-config": [
@@ -60,7 +66,6 @@
       "node_modules/.bin/eslint js/ user/*.js && echo eslint OK!"
     ],
     "semistandard": "node_modules/.bin/semistandard",
-    "less": "node_modules/.bin/lessc style/*.less style/ouop-styles.css && echo less OK!",
     "test": [
       "vendor/bin/parallel-lint --exclude vendor .",
       "vendor/bin/phpcs --standard=PSR2 -n db/*.php",

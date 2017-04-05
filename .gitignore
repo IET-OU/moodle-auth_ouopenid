@@ -3,6 +3,7 @@
 !login.css
 /style/less/
 *.csv
+*.dist.js
 
 #/bin
 
