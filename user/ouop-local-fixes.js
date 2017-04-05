@@ -86,9 +86,10 @@
 
     $('#ouop-toggle-hidden-ui-btn').on('click', function () {
       $body.toggleClass('ouop-hide-unused-ui').toggleClass('ouop-show-unused-ui');
-      C.warn('ouop: toggle-hidden-btn');
+
+      C.warn('ouop: toggle-hidden-ui-btn');
     });
-  }
+  };
 
   OUOP.rand = function () {
     var min = 11;
