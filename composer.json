@@ -53,7 +53,7 @@
       "npm i -g csslint && npm i -g jshint"
     ],
     "build": [
-      "node_modules/.bin/uglifyjs user/*.js --comments=/^!/ --preamble='/*eslint-disable*/' -bo ouop.dist.js",
+      "node_modules/.bin/uglifyjs user/*.js --comments=/^!/ --preamble='/*eslint-disable*//*jshint ignore:start*/' -bo ouop.dist.js",
       "node_modules/.bin/lessc style/*.less style/ouop-styles.css"
     ],
     "jshint-config": "echo '{ \"laxcomma\": true }' > .jshintrc",
