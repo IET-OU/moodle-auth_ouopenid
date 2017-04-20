@@ -3,7 +3,7 @@
 /**
  * DB model for an OU-OpenID 'User' or potential pilot participant.
  *
- * (Note: follows PSR-2, not Moodle coding style.)
+ * (Note: this file follows PSR-2, not Moodle coding style.)
  *
  * @package auth_ouopenid
  * @author  Nick Freear, 13-March-2017.
@@ -27,7 +27,9 @@ class User
 
     const PREFIX = 'ouop_';
     const UNDEF_INSTRUMENT = 'kd';
+    const INSTRUMENT_REGEX = '@^(kd|tpt)@';
 
+    const OUCU_REGEX = '@^[a-z]{2,4}\d{1,7}$@';
     const OPENID_URL_REGEX = '@^http:\/\/openid\.open\.ac\.uk\/oucu\/(?P<oucu>\w+)$@';
     const USERNAME_REGEX = '@^httpopenidopenacukoucu(?P<oucu>\w+)$@';
     const USERNAME_REPLACE = '@^(httpopenidopenacukoucu)?@';
@@ -100,9 +102,9 @@ class User
             }
 
             $user_record = (object) [
-                'oucu' => $row[ self::CSV_OUCU ],  # 0,
+                'oucu' => self::validateOucu($row[ self::CSV_OUCU ]),  # 0,
                 'course_presentation' => $row[ self::CSV_OUCU + 1 ], # 1,
-                'teslainstrument' => self::row($row, self::CSV_OUCU + 2),
+                'teslainstrument' => self::validateInstrument(self::row($row, self::CSV_OUCU + 2)),
                 'notes'     => self::row($row, self::CSV_OUCU + 3),  # 3,
                 'is_team'   => self::row($row, self::CSV_TEAM),      # 4,
                 'firstname' => self::row($row, self::CSV_TEAM + 1),  # 5,
@@ -120,6 +122,22 @@ class User
         $lexer->parse($filename, $interpreter);
 
         return $count;
+    }
+
+    protected static function validateOucu($oucu)
+    {
+        if (!preg_match(self::OUCU_REGEX, $oucu)) {
+            throw new Exception('Unexpected OUCU format: ' . $oucu);
+        }
+        return $oucu;
+    }
+
+    protected static function validateInstrument($instrument)
+    {
+        if (!preg_match(self::INSTRUMENT_REGEX, $instrument)) {
+            throw new Exception('Unexpected TeSLA instrument code: '. $instrument);
+        }
+        return $instrument;
     }
 
     /** Attempt to add plugin data to Moodle custom profile fields [ DEPRECATED ]
@@ -235,7 +253,7 @@ class User
      */
     public static function getStringsAjax()
     {
-        $string_ids = [ 'continuelink', 'form_warning', 'wordcount', 'wordcount_title', 'continuebutton', 'question_progress', 'return_msg', 'newenrol_msg' ];
+        $string_ids = [ 'continuelink', 'form_warning', 'wordcount', 'wordcount_title', 'continuebutton', 'question_progress', 'return_msg', 'newenrol_msg', 'testmail' ];
 
         return get_strings($string_ids, 'auth_ouopenid');
     }

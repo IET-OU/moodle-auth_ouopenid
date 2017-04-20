@@ -34,10 +34,23 @@
     if ($form.length && !$inp_fname.val()) {
       $inp_fname.val(isteam ? prof.ouop_firstname : prof.ouop_oucu);
       $inp_lname.val(isteam ? prof.ouop_lastname : 'test');
-      $inp_email.val(isteam ? prof.ouop_email : 'tesla.ouuk+%s@gmail.com'.replace(/%s/, prof.ouop_oucu));
+      $inp_email.val(isteam ? prof.ouop_email : OUOP.str('testmail', prof.ouop_oucu));
     }
 
     C.debug('ouop: complete-user-profile-form');
+  };
+
+  OUOP.user_profile_continue_link = function ($, resp) {
+    var $pages = $('#page-user-profile, #page-user-preferences');
+
+    $pages.find('#page-header')
+      .after(OUOP.alert('<a href="' + resp.redirect_url + '">' + OUOP.str('continuelink') + '</a>'));
+
+    if (!resp.profile.ouop_is_team && $('#page-user-edit').length) {
+      C.debug('ouopenid redirecting');
+
+      // Was: W.location = data.redirect_urL;
+    }
   };
 
   OUOP.local_fixes = function ($) {
@@ -66,17 +79,19 @@
     C.debug('ouop: local-fixes');
   };
 
-  OUOP.fix_pilot_post_survey_link = function ($, resp) {
-    var $link = $('#region-main a[ href *= OUCU ]').first();
-    var url = $link.attr('href');
+  OUOP.fix_pilot_survey_links = function ($, resp) {
+    var $links = $('#region-main a[ href *= OUCU ]');
 
-    if (url) {
+    $links.each(function (idx, el) {
+      var $link = $(el);
+      var url = $link.attr('href');
+
       $link
         .attr('href', url.replace(/\{?OUCU\}?/, resp.profile.ouop_oucu))
-        .addClass('ouop-pilot-post-survey-link');
+        .addClass('ouop-pilot-survey-link').addClass('a' + idx);
 
-      C.warn('ouop: ouop-pilot-post-survey-link', $link);
-    }
+      C.warn('ouop: pilot-survey-links', idx, $link);
+    });
   };
 
   OUOP.toggle_hidden_ui_button = function ($) {
@@ -97,15 +112,20 @@
     return Math.floor(Math.random() * (max - min)) + min;
   };
 
-  // Javascript translation/localisation [i18n].
-  var strings = {};
-
-  OUOP.set_strings = function (resp) {
-    strings = resp.strings;
+  OUOP.alert = function (msg, id, cls) {
+    return '<p id="' + (id || 'oua') + '" class="ouop alert ' +
+       (cls || 'alert-info') + '" role="alert">' + msg + '</p>';
   };
 
-  OUOP.str = function (sid) {
-    return strings[ sid ];
+  // Javascript translation/localisation [i18n].
+  var trans = {};
+
+  OUOP.set_strings = function (resp) {
+    trans = resp.strings;
+  };
+
+  OUOP.str = function (sid, val) {
+    return val ? trans[ sid ].replace('{$a}', val) : trans[ sid ];
   };
 
   // .

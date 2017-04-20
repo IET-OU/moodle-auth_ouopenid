@@ -46,19 +46,9 @@
 
         OUOP.consent_document_embed($, data);
 
-        OUOP.fix_pilot_post_survey_link($, data);
-
-        $('#page-user-profile, #page-user-preferences')
-          .find('#page-header')
-          .after('<p id="ouop-course-link" class="alert alert-info"><a href="%u">%s</a></p>'
-            .replace(/%u/, data.redirect_url).replace(/%s/, OUOP.str('continuelink')));
+        OUOP.fix_pilot_survey_links($, data);
 
         OUOP.complete_moodle_user_profile_form($, data);
-
-        if (!data.profile.ouop_is_team && $('#page-user-edit').length) {
-          C.debug('ouopenid redirecting');
-          // Was: W.location = data.redirect_urL;
-        }
 
         $body.addClass(data.body_class)
           .addClass(data.profile.ouop_is_team ? 'ouop-is-team' : 'ouop-not-team');
@@ -69,6 +59,8 @@
         if (!data.profile.ouop_is_team) {
           disable_moodle_user_profile_form($);
         }
+
+        OUOP.user_profile_continue_link($, data);
 
         ouop_course_welcome_alert($);
 
@@ -95,9 +87,9 @@
     var msg;
 
     if (ouop_action) {
-      msg = OUOP.str(ouop_action + '_msg').replace('{$a}', course_title);
+      msg = OUOP.str(ouop_action + '_msg', course_title);
 
-      $('#page-header').after('<p class="ouop-action-alert alert alert-success">%s</p>'.replace(/%s/, msg));
+      $('#page-header').after(OUOP.alert(msg));
     }
   }
 
@@ -106,7 +98,7 @@
 
     $form
       .attr('title', OUOP.str('form_warning'))
-      .before('<p class="ouop-form-disable alert alert-warning">%s</p>'.replace(/%s/, OUOP.str('form_warning')))
+      .before(OUOP.alert(OUOP.str('form_warning'), 'ouop-form-disable'))
       .find('input, select').each(function () {
         // Was: $(this).attr('disabled', 'disabled');
         if (!$(this).hasClass('btn')) {

@@ -13,6 +13,7 @@ $string[ 'pluginname' ] = 'OU-OpenID';
 $string[ 'auth_ouopeniddescription' ] = 'This plugin is a wrapper around the OpenID authentication plugin';
 
 // Used via Javascript / Ajax.
+$string[ 'testmail' ] = 'tesla.ouuk+{$a}@gmail.com';
 $string[ 'continuelink' ] = 'Continue to your pilot course &rarr;';
 $string[ 'form_warning' ] = 'Please don\'t edit your user profile!';
 $string[ 'newenrol_msg' ] = 'You\'ve been enrolled in the {$a} course. Welcome!';
