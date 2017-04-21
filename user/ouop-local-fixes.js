@@ -12,9 +12,9 @@
 
   OUOP.consent_document_embed = function ($, resp) {
     var $container = $('#page-local-tesla-views-agreement #consent_doc');
-    var consent_embed_url = resp.consent_embed_url + '&r=' + Math.random();
+    var consent_embed_url = resp.config.consent_embed_url + '&r=' + OUOP.rand();
 
-    if (resp.consent_embed_url) {
+    if (resp.config.consent_embed_url) {
       $container.html(
         '<iframe class="ouop-consent-doc" src="%s"></iframe>'.replace(/%s/, consent_embed_url)
       );

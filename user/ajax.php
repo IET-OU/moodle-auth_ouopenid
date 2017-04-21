@@ -35,6 +35,7 @@ foreach ($fields as $field) {
 $oucu = preg_match(OuUser::USERNAME_REGEX, $user->username, $matches) ? $matches[ 1 ] : $user->username;
 $stat = $oucu ? 'ok' : 'warn';
 $msg = USER_LOGGED_IN ? '' : 'Not logged in.';
+$config = isset($CFG->auth_ouopenid_js_config) ? $CFG->auth_ouopenid_js_config : null;
 
 if (DEBUG) {
     OuUser::debug($USER);
@@ -49,9 +50,8 @@ echo json_encode([
     'body_class' => $prof->body_class,
     'user_roles' => OuUser::getRoles(),
     'redirect_url' => USER_LOGGED_IN ? $prof->redirect_url : null,
-    'consent_embed_url' => USER_LOGGED_IN ? OuUser::getConsentEmbedUrl() : null,
     'strings' => USER_LOGGED_IN ? OuUser::getStringsAjax() : [],
-    'config' => isset($CFG->auth_ouopenid_js_config) ? $CFG->auth_ouopenid_js_config : [],
-]);
+    'config' => USER_LOGGED_IN && $config ? $config : [ 'ga' => $config[ 'ga' ] ],
+], DEBUG ? JSON_PRETTY_PRINT : null);
 
 // End.
