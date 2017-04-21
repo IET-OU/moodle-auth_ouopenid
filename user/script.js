@@ -38,7 +38,7 @@
           $body.addClass('ouop-ouopenid-warn-profile');
         }
 
-        C.debug('ouopenid JSON: ', data, W.M.cfg, jqXHR);
+        C.debug('ouopenid JSON: ', data, OUOP, W.M.cfg, jqXHR);
 
         OUOP.analytics($, data);
 
@@ -47,8 +47,10 @@
         OUOP.consent_document_embed($, data);
 
         OUOP.fix_pilot_survey_links($, data);
+        OUOP.inject_post_activity_survey_link($, data);
 
         OUOP.complete_moodle_user_profile_form($, data);
+        OUOP.user_profile_form_redirect($, data);
 
         $body.addClass(data.body_class)
           .addClass(data.profile.ouop_is_team ? 'ouop-is-team' : 'ouop-not-team');
@@ -98,7 +100,7 @@
 
     $form
       .attr('title', OUOP.str('form_warning'))
-      .before(OUOP.alert(OUOP.str('form_warning'), 'ouop-form-disable'))
+      // Was: .before(OUOP.alert(OUOP.str('form_warning'), 'ouop-form-disable'))
       .find('input, select').each(function () {
         // Was: $(this).attr('disabled', 'disabled');
         if (!$(this).hasClass('btn')) {

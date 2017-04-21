@@ -16,12 +16,17 @@ $string[ 'auth_ouopeniddescription' ] = 'This plugin is a wrapper around the Ope
 $string[ 'testmail' ] = 'tesla.ouuk+{$a}@gmail.com';
 $string[ 'continuelink' ] = 'Continue to your pilot course &rarr;';
 $string[ 'form_warning' ] = 'Please don\'t edit your user profile!';
+$string[ 'form_redirect_msg' ] = 'Redirecting ... <p> If nothing happens just click "Continue" below.';
 $string[ 'newenrol_msg' ] = 'You\'ve been enrolled in the {$a} course. Welcome!';
 $string[ 'return_msg' ] = 'Welcome back to the {$a}!';
 $string[ 'wordcount' ] = 'Words: {$a}';
 $string[ 'wordcount_title' ] = 'Word count';
 $string[ 'continuebutton' ] = 'Continue';
 $string[ 'question_progress' ] = 'Question <i>{$a}</i><span> of {$a2}</span>';
+$string[ 'post_survey_msg' ] =
+  '<p> Thank you for completing the pilot activity.
+<p> Please <a href="{$a}">complete the short and important post-activity questionnaire</a>.
+<p> Thank you! Your participation is very much appreciated.';
 
 // Used in the login form (index.php)
 $string[ 'login_title' ] = 'Sign in — TeSLA Pilot 2 (The Open University)'; // Page <title> element.

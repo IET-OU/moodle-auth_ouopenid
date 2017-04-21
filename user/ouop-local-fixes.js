@@ -40,6 +40,26 @@
     C.debug('ouop: complete-user-profile-form');
   };
 
+  OUOP.user_profile_form_redirect = function ($, resp) {
+    var $form = $('#page-user-edit #region-main form');
+    var cfg = resp.config;
+
+    if ($form.length && cfg.user_form_redirect) {
+      W.setTimeout(function () {
+        C.warn('ouop: user-profile-form-redirect - trigger');
+
+        $form.trigger('submit');
+      },
+      cfg.redirect_timeout || 2000);
+    }
+
+    if (cfg.user_form_redirect) {
+      $form.before(OUOP.alert(OUOP.str('form_warning'), 'ouop-form-disable'));
+    } else {
+      $form.before(OUOP.alert(OUOP.str('form_redirect_msg'), 'ouop-form-disable'));
+    }
+  };
+
   OUOP.user_profile_continue_link = function ($, resp) {
     var $pages = $('#page-user-profile, #page-user-preferences');
 
@@ -94,6 +114,13 @@
     });
   };
 
+  OUOP.inject_post_activity_survey_link = function ($, resp) {
+    var $container = $('#page-mod-quiz-review #user-notifications');
+    var survey_url = resp.config.post_survey_url.replace('{OUCU}', resp.profile.ouop_oucu);
+
+    $container.append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
+  };
+
   OUOP.toggle_hidden_ui_button = function ($) {
     var $body = $('body');
 
@@ -113,8 +140,8 @@
   };
 
   OUOP.alert = function (msg, id, cls) {
-    return '<p id="' + (id || 'oua') + '" class="ouop alert ' +
-       (cls || 'alert-info') + '" role="alert">' + msg + '</p>';
+    return '<div id="' + (id || 'oua') + '" class="ouop alert ' +
+       (cls || 'alert-info') + '" role="alert">' + msg + '</div>';
   };
 
   // Javascript translation/localisation [i18n].
