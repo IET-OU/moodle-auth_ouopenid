@@ -62,7 +62,7 @@ header('X-UA-Compatible: IE=edge');
                 required="required" aria-required="true" pattern="[a-z]{2,4}\d{1,7}" minlength="3" maxlength="9"
                 title="<?php print_string( 'login_field_help', OUOP_STRING ) ?>" /></label>
 
-              <input type="hidden" id="openid_base_url" val="<?php echo Ou_Open_Id_Form::OPEN_ID_URL ?>" />
+              <input type="hidden" id="openid_base_url" value="<?php echo Ou_Open_Id_Form::OPEN_ID_URL ?>" />
               <input type="hidden" name="openid_url" />
 
               <button type="submit" ><?php print_string( 'login_submit', OUOP_STRING ) ?></button>
