@@ -58,10 +58,11 @@ header('X-UA-Compatible: IE=edge');
               print_string( 'login_label', OUOP_STRING, get_string( 'login_label_abbr', OUOP_STRING ));
               ?>
               <input
-                id="oucu" name="oucu" value="<?php Ou_Open_Id_Form::printOucu() ?>"
+                id="oucu" value="<?php Ou_Open_Id_Form::printOucu() ?>"
                 required="required" aria-required="true" pattern="[a-z]{2,4}\d{1,7}" minlength="3" maxlength="9"
                 title="<?php print_string( 'login_field_help', OUOP_STRING ) ?>" /></label>
 
+              <input type="hidden" id="openid_base_url" val="<?php echo Ou_Open_Id_Form::OPEN_ID_URL ?>" />
               <input type="hidden" name="openid_url" />
 
               <button type="submit" ><?php print_string( 'login_submit', OUOP_STRING ) ?></button>
@@ -83,19 +84,7 @@ header('X-UA-Compatible: IE=edge');
 
 <script src="<?php echo Ou_Open_Id_Form::JQUERY_URL ?>"></script>
 <script src="/auth/ouopenid/user/ouop-analytics.js"></script>
-<script>
-window.jQuery(function ($) {
-
-    $('form#openidlogin').on('submit', function () {
-        var oucu = $('#oucu').val();
-
-        window.console.debug('Submit, OUCU: ', oucu);
-
-        $('[ name = openid_url ]').val('<?php echo Ou_Open_Id_Form::OPEN_ID_URL ?>' + oucu);
-    });
-
-});
-</script>
+<script src="/auth/ouopenid/js/login.js"></script>
 <script>
     OUOP.analytics($, { config: <?php echo json_encode($CFG->auth_ouopenid_js_config) ?> });
 </script>

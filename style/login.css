@@ -7,8 +7,8 @@ body{
   background-color: #f4f4f4;
   color: #222;
   margin: 1em auto;
-  max-width: 39em;
-  min-width: 25em;
+  max-width: 40em;
+  min-width: 26em;
   line-height: 1.4em;
 }
 li {
@@ -36,6 +36,9 @@ input, button {
   color: #373a3c;
   background-color: #fff;
   border: 1px solid #ccc;
+}
+input#oucu {
+  width: 12em;
 }
 button {
   background: #eee;
