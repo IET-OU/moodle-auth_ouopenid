@@ -161,6 +161,22 @@ class User
         $m_user->profile[ self::PREFIX . 'fn' ] = $fn;
     }
 
+    protected static function getUserDummy($username)
+    {
+         return (object) [
+             'oucu' => preg_replace(self::USERNAME_REPLACE, '', $username),
+             'course_presentation' => null,
+             'teslainstrument' => self::UNDEF_INSTRUMENT,
+             'notes'    => null,
+             'is_team'  => false,
+             'firstname'=> null,
+             'lastname' => null,
+             'email'    => null,
+             'timecreated'=> time(),
+             'x_is_dummy' => true,
+         ];
+    }
+
     /** Get authentication plugin-related profile data [ MIS-NAMED ]
      * @return object
      */
@@ -181,6 +197,8 @@ class User
         if (isset($mdl_user->username)) {
             $mdl_profile = self::getUser($mdl_user->username);
         }
+
+        $mdl_profile = $mdl_profile ? $mdl_profile : self::getUserDummy($mdl_user->username);
 
         foreach ($mdl_profile as $key => $value) {
             if ('is_team' === $key) {

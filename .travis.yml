@@ -14,6 +14,8 @@ before_install:
 install:
   - composer install
   - composer npm-install-dev
+  # Try to fix Travis-CI, https://github.com/eslint/eslint/issues/3782
+  - npm i -g eslint-plugin-react
   - composer eslint-config
   - composer write-ignore-xml
 
