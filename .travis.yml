@@ -9,6 +9,7 @@ git:
 
 before_install:
   - nvm install v4.4
+  - npm install npm -g
   - npm --version
 
 install:
