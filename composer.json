@@ -55,7 +55,7 @@
     "npm-install": "npm install uglify-js && npm i less",
     "npm-install-dev": [
       "composer npm-install",
-      "npm install eslint semistandard",
+      "npm i eslint eslint-plugin-react semistandard",
       "npm i -g csslint && npm i -g jshint"
     ],
     "build": [
