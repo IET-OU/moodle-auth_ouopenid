@@ -114,9 +114,12 @@
   function ouop_less_test ($) {
     var $less_error = $('style[ id = "less:error-message" ]');
     var $less = $('style[ id ^= less ]');
+    var $css = $('link[ href *= "ouop-styles.css" ]');
 
     if ($less_error.length) {
       C.error('ouopenid LESS error:', $less.attr('id'), $('.less-error-message').text());
+    } else if ($css.length) {
+      C.debug('ouopenid: ', $css.attr('href'));
     } else if ($less.length) {
       C.debug('ouopenid: ', $less.attr('id'));
     } else {

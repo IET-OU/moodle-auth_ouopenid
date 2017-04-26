@@ -115,10 +115,18 @@
   };
 
   OUOP.inject_post_activity_survey_link = function ($, resp) {
-    var $container = $('#page-mod-quiz-review #user-notifications');
+    var $container_quiz = $('#page-mod-quiz-review #user-notifications');
+    var $container_assign = $('#page-mod-assign-view');
     var survey_url = resp.config.post_survey_url.replace('{OUCU}', resp.profile.ouop_oucu);
 
-    $container.append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
+    $container_quiz.append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
+
+    if ($container_assign.find('.submissionstatussubmitted').length) {
+        $container_assign.find('#user-notifications').append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
+        $container_assign.addClass('ouop-submitted');
+
+        C.warn('post-activity-survey-link: assign');
+    }
   };
 
   OUOP.toggle_hidden_ui_button = function ($) {
