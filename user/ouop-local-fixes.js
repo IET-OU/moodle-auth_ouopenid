@@ -122,10 +122,10 @@
     $container_quiz.append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
 
     if ($container_assign.find('.submissionstatussubmitted').length) {
-        $container_assign.find('#user-notifications').append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
-        $container_assign.addClass('ouop-submitted');
+      $container_assign.find('#user-notifications').append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
+      $container_assign.addClass('ouop-submitted');
 
-        C.warn('post-activity-survey-link: assign');
+      C.warn('ouop: post-activity-survey-link ~ assign');
     }
   };
 
