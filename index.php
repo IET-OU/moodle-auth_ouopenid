@@ -18,7 +18,8 @@ define( 'OUOP_STRING', 'auth_ouopenid' );
 class Ou_Open_Id_Form {
 
     const ACTION = '/login/index.php';
-    const OUCU_REGEX  = '[a-z]{2,4}\d{1,7}';
+    const OUCU_REGEX  = '[a-z]{1,6}\d{1,7}';  // Was: '[a-z]{2,4}\d{1,7}'.
+    const OUCU_MIN    = 2;  // Was: 3.
     const OPEN_ID_URL = 'http://openid.open.ac.uk/oucu/';
     const JQUERY_URL  = 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js';
 
@@ -59,7 +60,7 @@ header('X-UA-Compatible: IE=edge');
               ?>
               <input
                 id="oucu" value="<?php Ou_Open_Id_Form::printOucu() ?>"
-                required="required" aria-required="true" pattern="[a-z]{2,4}\d{1,7}" minlength="3" maxlength="9"
+                required="required" aria-required="true" pattern="<?php echo Ou_Open_Id_Form::OUCU_REGEX ?>" minlength="2" maxlength="9"
                 title="<?php print_string( 'login_field_help', OUOP_STRING ) ?>" /></label>
 
               <input type="hidden" id="openid_base_url" value="<?php echo Ou_Open_Id_Form::OPEN_ID_URL ?>" />

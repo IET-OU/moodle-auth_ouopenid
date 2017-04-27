@@ -49,6 +49,10 @@ $count = OuUser::insertFromCsv($csvfile, CSV_HEADING, CSV_UNSTRICT, function ($i
     cli_write('.');
 });
 
+
+cli_writeln("\nWarnings:");
+print_r(OuUser::getWarnings());
+
 cli_writeln("\nUsers inserted:  $count");
 
 

@@ -27,13 +27,15 @@ class User
     const CSV_TEAM = 4;
 
     const PREFIX = 'ouop_';
-    const UNDEF_INSTRUMENT = 'kd';
+    const UNDEF_INSTRUMENT = 'tpt';  //'kd';
     const INSTRUMENT_REGEX = '@^(kd|tpt)@';
 
     const OUCU_REGEX = '@^[a-z]{2,4}\d{1,7}$@';
     const OPENID_URL_REGEX = '@^http:\/\/openid\.open\.ac\.uk\/oucu\/(?P<oucu>\w+)$@';
     const USERNAME_REGEX = '@^httpopenidopenacukoucu(?P<oucu>\w+)$@';
     const USERNAME_REPLACE = '@^(httpopenidopenacukoucu)?@';
+
+    protected static $warnings = [];
 
     /** Get plugin DB record for given username.
      * @return object
@@ -103,9 +105,9 @@ class User
             }
 
             $user_record = (object) [
-                'oucu' => self::validateOucu($row[ self::CSV_OUCU ]),  # 0,
+                'oucu' => self::validateOucu($row[ self::CSV_OUCU ], $count),  # 0,
                 'course_presentation' => $row[ self::CSV_OUCU + 1 ], # 1,
-                'teslainstrument' => self::validateInstrument(self::row($row, self::CSV_OUCU + 2)),
+                'teslainstrument' => self::validateInstrument(self::row($row, self::CSV_OUCU + 2), $count, $row[ self::CSV_OUCU ]),
                 'notes'     => self::row($row, self::CSV_OUCU + 3),  # 3,
                 'is_team'   => self::row($row, self::CSV_TEAM),      # 4,
                 'firstname' => self::row($row, self::CSV_TEAM + 1),  # 5,
@@ -125,18 +127,20 @@ class User
         return $count;
     }
 
-    protected static function validateOucu($oucu)
+    protected static function validateOucu($oucu, $row)
     {
         if (!preg_match(self::OUCU_REGEX, $oucu)) {
-            throw new Exception('Unexpected OUCU format: ' . $oucu);
+            self::$warnings[] = [ 'row' => $row, 'msg' => 'Unexpected OUCU', 'oucu' => $oucu ];
+            echo 'W';
+            //throw new Exception('Unexpected OUCU format: ' . $oucu);
         }
         return $oucu;
     }
 
-    protected static function validateInstrument($instrument)
+    protected static function validateInstrument($instrument, $row, $ref)
     {
         if (!preg_match(self::INSTRUMENT_REGEX, $instrument)) {
-            throw new Exception('Unexpected TeSLA instrument code: '. $instrument);
+            throw new Exception(sprintf('Unexpected TeSLA instrument code, %d, %s: "%s"', $row, $ref, $instrument));
         }
         return $instrument;
     }
@@ -234,6 +238,11 @@ class User
 
         self::debug([ __FUNCTION__, $roles, $USER->id ]);
         return (object) [ 'is_admin' => is_siteadmin(), 'roles' => $roles, 'is_loggedin' => isloggedin() ];
+    }
+
+    public static function getWarnings()
+    {
+        return self::$warnings;
     }
 
     // ====================================================================
