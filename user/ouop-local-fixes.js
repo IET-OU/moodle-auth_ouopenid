@@ -125,8 +125,21 @@
       $container_assign.find('#user-notifications').append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
       $container_assign.addClass('ouop-submitted');
 
-      C.warn('ouop: post-activity-survey-link ~ assign');
+      C.warn('ouop: post-activity-survey-link - assign');
     }
+  };
+
+  OUOP.fix_mod_assign_redirect = function ($, resp) {
+    var $page = $('#page-mod-assign-redirect.ouop-fix-assign-redirect');
+    var errormsg = $page.find('.debuggingmessage').text();
+    var $link = $page.find('.continuebutton a');
+
+    if (errormsg && errormsg.match(/Error calling message processor email/)) {
+      C.warn('ouop: mod-assign-redirect-fix - trigger');
+
+      $link.trigger('click');
+    }
+
   };
 
   OUOP.toggle_hidden_ui_button = function ($) {

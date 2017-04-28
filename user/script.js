@@ -49,6 +49,8 @@
         OUOP.fix_pilot_survey_links($, data);
         OUOP.inject_post_activity_survey_link($, data);
 
+        OUOP.fix_mod_assign_redirect($, data);
+
         OUOP.complete_moodle_user_profile_form($, data);
         OUOP.user_profile_form_redirect($, data);
 

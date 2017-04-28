@@ -40,14 +40,20 @@ class User
     /** Get plugin DB record for given username.
      * @return object
      */
-    public static function getUser($username)
+    public static function getUser($username, $strictness = IGNORE_MISSING | IGNORE_MULTIPLE)
     {
         global $DB;  // Moodle global.
 
         $oucu = preg_replace(self::USERNAME_REPLACE, '', $username);
 
-        $user = $DB->get_record(self::USER_TABLE, [ 'oucu' => $oucu ], $fields = '*', $strictness = IGNORE_MISSING);
+        $user = $DB->get_record(self::USER_TABLE, [ 'oucu' => $oucu ], $fields = '*', $strictness);
         return $user;
+    }
+
+    public static function countUsers()
+    {
+        global $DB;  // Moodle global.
+        return $DB->count_records(self::USER_TABLE);
     }
 
     /** Delete all records from plugin DB table.
