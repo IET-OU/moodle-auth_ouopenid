@@ -49,7 +49,7 @@
         OUOP.fix_pilot_survey_links($, data);
         OUOP.inject_post_activity_survey_link($, data);
 
-        OUOP.fix_mod_assign_redirect($, data);
+        OUOP.fix_mod_assign_redirect($);
 
         OUOP.complete_moodle_user_profile_form($, data);
         OUOP.user_profile_form_redirect($, data);
@@ -67,6 +67,8 @@
         OUOP.user_profile_continue_link($, data);
 
         ouop_course_welcome_alert($);
+
+        OUOP.tesla_results_statistics($);
 
         OUOP.toggle_hidden_ui_button($);
       })
