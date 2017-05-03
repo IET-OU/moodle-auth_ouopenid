@@ -100,7 +100,7 @@
   };
 
   OUOP.fix_pilot_survey_links = function ($, resp) {
-    var $links = $('a[ href= "#!-pre-survey-link" ], a[ href= "#!-post-survey-link" ]');
+    var $links = $('a[ href = "#!-pre-survey-link" ], a[ href = "#!-post-survey-link" ]');
     // var $links = $('#region-main a[ href *= OUCU ]');
 
     $links.each(function (idx, el) {
@@ -149,10 +149,9 @@
   OUOP.tesla_results_statistics = function ($) {
     var $page = $('#page-local-tesla-views-tesla_results');
     var $rows = $page.find('#page-content table tbody tr');
-    // var $heading = $page.find('#page-content h2');
     var counts = {
-      rows: $rows.length,
-      num: 0,
+      total_rows: $rows.length,
+      with_number: 0,
       no_enroll: 0,
       no_consent: 0,
       no_results: 0,
@@ -162,17 +161,15 @@
     $rows.each(function () {
       var cell_2 = $(this).find('td:nth-child( 2 )').text();
 
-      /* if (cell_2.match(/[\d\.]+/)) {
-        counts.num++;
-      } */
-
-      counts.num += /[\d.]+/.test(cell_2);
+      counts.with_number += /[\d.]+/.test(cell_2);
       counts.no_enroll += /Enrollment not passed/.test(cell_2);
       counts.no_consent += /The user has not accepted the informed consent/.test(cell_2);
       counts.no_results += /No results/.test(cell_2);
     });
 
-    C.warn('ouop: TeSLA results stats:', counts);
+    if ($page.length) {
+      C.warn('ouop: TeSLA results stats:', counts);
+    }
   };
 
   OUOP.toggle_hidden_ui_button = function ($) {
