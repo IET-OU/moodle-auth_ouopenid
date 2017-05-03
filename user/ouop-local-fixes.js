@@ -100,15 +100,20 @@
   };
 
   OUOP.fix_pilot_survey_links = function ($, resp) {
-    var $links = $('#region-main a[ href *= OUCU ]');
+    var $links = $('a[ href= "#!-pre-survey-link" ], a[ href= "#!-post-survey-link" ]');
+    // var $links = $('#region-main a[ href *= OUCU ]');
 
     $links.each(function (idx, el) {
       var $link = $(el);
       var url = $link.attr('href');
+      var survey_urls = resp.survey_urls; // TODO: bug #5.
 
-      $link
-        .attr('href', url.replace(/\{?OUCU\}?/, resp.profile.ouop_oucu))
-        .addClass('ouop-pilot-survey-link').addClass('a' + idx);
+      if (url.match(/#!-pre-survey-/)) {
+        $link.attr('href', survey_urls.pre.replace(/\{?OUCU\}?/, resp.profile.ouop_oucu));
+      } else {
+        $link.attr('href', survey_urls.post.replace(/\{?OUCU\}?/, resp.profile.ouop_oucu));
+      }
+      $link.addClass('ouop-pilot-survey-link').addClass('a' + idx);
 
       C.warn('ouop: pilot-survey-links', idx, $link);
     });

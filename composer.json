@@ -74,7 +74,7 @@
     "semistandard": "node_modules/.bin/semistandard",
     "test": [
       "vendor/bin/parallel-lint --exclude vendor .",
-      "vendor/bin/phpcs --standard=PSR2 -n db/*.php",
+      "vendor/bin/phpcs --standard=PSR2 -n db/User.php",
       "composer cn",
       "composer semistandard",
       "composer eslint",

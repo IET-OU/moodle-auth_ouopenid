@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="lib/db" VERSION="20170314" COMMENT="XMLDB file for OU-OpenId authentication."
+<XMLDB PATH="auth/openid/db" VERSION="20170428" COMMENT="XMLDB file for OU-OpenId authentication."
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="../../lib/xmldb/xmldb.xsd">
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
     <!--
         @package auth_ouopenid
         @copyright (c) 2017 The Open University.
@@ -19,6 +19,9 @@
                 <FIELD NAME="lastname" TYPE="char" LENGTH="64" NOTNULL="false" SEQUENCE="false" COMMENT="Empty for a student."/>
                 <FIELD NAME="email" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="Empty for a student."/>
                 <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Time-date."/>
+
+                <!-- New fields. -->
+                <FIELD NAME="batch" TYPE="int" LENGTH="5" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Optional; a batch or tranche number within the student sample."/>
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

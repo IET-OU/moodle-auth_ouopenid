@@ -48,6 +48,7 @@ echo json_encode([
     'user' => $user,
     'profile' => $prof->profile,
     'body_class' => $prof->body_class,
+    'survey_urls'=> $prof->survey_urls,
     'user_roles' => OuUser::getRoles(),
     'redirect_url' => USER_LOGGED_IN ? $prof->redirect_url : null,
     'strings' => USER_LOGGED_IN ? OuUser::getStringsAjax() : [],

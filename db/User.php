@@ -25,6 +25,7 @@ class User
 
     const CSV_OUCU = 0;  // CSV file column offsets.
     const CSV_TEAM = 4;
+    const CSV_BATCH = 8; // TODO: bug #5.
 
     const PREFIX = 'ouop_';
     const UNDEF_INSTRUMENT = 'tpt';  //'kd';
@@ -120,6 +121,7 @@ class User
                 'lastname'  => self::row($row, self::CSV_TEAM + 2),  # 6,
                 'email'     => self::row($row, self::CSV_TEAM + 3),  # 7,
                 'timecreated' => time(),
+                'batch'     => self::row($row, self::CSV_BATCH, 0),
             ];
             $user_id = $DB->insert_record(self::USER_TABLE, $user_record, $returnid = true);
 
@@ -199,6 +201,7 @@ class User
                 'profile' => (object) [],
                 'body_class' => null,
                 'redirect_url' => null,
+                'survey_urls' => null,
             ];
         }
 
@@ -229,7 +232,21 @@ class User
             'profile' => (object) $profile,
             'body_class' => self::bodyClasses($profile),
             'redirect_url' => self::getRedirectUrl($mdl_profile),
+            'survey_urls' => self::getSurveyUrls($profile),
         ];
+    }
+
+    public static function getSurveyUrls($profile)
+    {
+        global $CFG;  // Moodle global;
+
+        $survey_urls = $CFG->auth_ouopenid_survey_urls;
+
+        $batch = $profile->batch;
+        if (! isset($survey_urls[ $batch ])) {
+            self::debug([ __FUNCTION__, 'error', ]);
+        }
+        return isset($survey_urls[ $batch ]) ? $survey_urls[ $batch ] : $survey_urls[ 0 ];
     }
 
     /** Get Moodle roles for currently logged in user.
@@ -325,9 +342,9 @@ class User
         return $level;
     }
 
-    protected static function row($row, $offset)
+    protected static function row($row, $offset, $default = null)
     {
-        return isset($row[ $offset ]) ? $row[ $offset ] : null;
+        return isset($row[ $offset ]) ? $row[ $offset ] : $default;
     }
 
     protected static function bodyClasses($fields)
