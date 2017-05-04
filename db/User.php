@@ -232,7 +232,7 @@ class User
             'profile' => (object) $profile,
             'body_class' => self::bodyClasses($profile),
             'redirect_url' => self::getRedirectUrl($mdl_profile),
-            'survey_urls' => self::getSurveyUrls($profile),
+            'survey_urls' => self::getSurveyUrls($mdl_profile),
         ];
     }
 

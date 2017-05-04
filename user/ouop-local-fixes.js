@@ -122,7 +122,7 @@
   OUOP.inject_post_activity_survey_link = function ($, resp) {
     var $container_quiz = $('#page-mod-quiz-review #user-notifications');
     var $container_assign = $('#page-mod-assign-view');
-    var survey_url = resp.config.post_survey_url.replace('{OUCU}', resp.profile.ouop_oucu);
+    var survey_url = resp.survey_urls.post.replace('{OUCU}', resp.profile.ouop_oucu);
 
     $container_quiz.append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
 

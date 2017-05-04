@@ -54,8 +54,8 @@ function xmldb_auth_ouopenid_upgrade($oldversion) {
     }
 }
 
-function _auth_ouopenid_debug($obj) {
+function __auth_ouopenid_debug($obj) {
     static $count = 0;
-    header(sprintf('X-auth-ou-openid-upgrade-%02d: %s', $count, json_encode($obj)));
+    // ?? header(sprintf('X-auth-ou-openid-upgrade-%02d: %s', $count, json_encode($obj)));
     $count++;
 }
