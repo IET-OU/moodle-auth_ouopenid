@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="auth/openid/db" VERSION="20170428" COMMENT="XMLDB file for OU-OpenId authentication."
+<XMLDB PATH="auth/openid/db" VERSION="20170428" COMMENT="XMLDB file for OU-OpenId authentication plugin."
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+    >
     <!--
-        @package auth_ouopenid
+        @package   auth_ouopenid
         @copyright (c) 2017 The Open University.
     -->
     <TABLES>
-        <TABLE NAME="auth_ouopenid_users" COMMENT="List of potential pilot students, and TeSLA team members (CSV).">
+        <TABLE NAME="auth_ouopenid_users" COMMENT="List of potential pilot students, and TeSLA team members (CSV import).">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-                <FIELD NAME="oucu" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="Open University user login, eg. 'ab12', 'xyz4321'"/>
-                <FIELD NAME="course_presentation" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="Open University course module presentation code, eg. 'AA100-J'"/>
-                <FIELD NAME="teslainstrument" TYPE="char" LENGTH="16" NOTNULL="false" SEQUENCE="false" COMMENT="Initial setting for a TeSLA istrument for the user, eg. 'kd'"/>
-                <FIELD NAME="notes" TYPE="char" LENGTH="150" NOTNULL="false" SEQUENCE="false" COMMENT="Optional free-form text ??"/>
-                <FIELD NAME="is_team" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Is the user a member of the TeSLA team? Boolean."/>
+                <FIELD NAME="oucu" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="Required. Open University user login, eg. 'ab12', 'xyz4321'"/>
+                <FIELD NAME="course_presentation" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="Optional. Open University course module presentation code, eg. 'AA100-J'."/>
+                <FIELD NAME="teslainstrument" TYPE="char" LENGTH="16" NOTNULL="false" SEQUENCE="false" COMMENT="Required. Initial setting for a TeSLA istrument for the user, eg. 'kd' or 'tpt'."/>
+                <FIELD NAME="notes" TYPE="char" LENGTH="150" NOTNULL="false" SEQUENCE="false" COMMENT="Optional. Free-form text."/>
+                <FIELD NAME="is_team" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Optional, Boolean. Is the user a member of the TeSLA team?"/>
                 <FIELD NAME="firstname" TYPE="char" LENGTH="64" NOTNULL="false" SEQUENCE="false" COMMENT="Empty for a student."/>
                 <FIELD NAME="lastname" TYPE="char" LENGTH="64" NOTNULL="false" SEQUENCE="false" COMMENT="Empty for a student."/>
                 <FIELD NAME="email" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="Empty for a student."/>
                 <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Time-date."/>
 
                 <!-- New fields. -->
-                <FIELD NAME="batch" TYPE="int" LENGTH="5" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Optional; a batch or tranche number within the student sample."/>
+                <FIELD NAME="batch" TYPE="int" LENGTH="5" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Optional. A batch or tranche number within the student sample."/>
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
