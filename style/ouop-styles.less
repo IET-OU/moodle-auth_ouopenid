@@ -36,14 +36,29 @@ div[ data-region = drawer ] {
   text-align: center;
 }
 
+// TeSLA page(s)
 #page-local-tesla-views-agreement {
 
   iframe.ouop-consent-doc {
   //Was: iframe[ src *= 'docs.google.com' ] {
     border: 1px solid #ddd;
     display: block;
-    height: 60em;
+    height: 52em;
     width: 100%;
+    min-width: 500px; // Small devices, min-width: 576px.
+  }
+}
+
+@media (max-width: 767px) {
+
+  #page {
+    padding: 0;
+  }
+
+  #page-local-tesla-views-agreement {
+    iframe.ouop-consent-doc {
+      height: 64em;
+    }
   }
 }
 
