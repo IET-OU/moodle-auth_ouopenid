@@ -136,13 +136,18 @@
 
   OUOP.fix_mod_assign_redirect = function ($) {
     var $page = $('#page-mod-assign-redirect.ouop-fix-assign-redirect');
-    var errormsg = $page.find('.debuggingmessage').text();
+    var errormsg = $('.debuggingmessage').text();
     var $link = $page.find('.continuebutton a');
+    var url = $link.attr('href');
 
-    if (errormsg && errormsg.match(/Error calling message processor email/)) {
-      C.warn('ouop: mod-assign-redirect-fix - trigger');
+    if ($page.length && errormsg && errormsg.match(/Error calling message processor email/)) {
+      W.setTimeout(function () {
+        C.warn('ouop: mod-assign-redirect-fix - trigger:', url);
 
-      $link.trigger('click');
+        W.location = url;
+
+        // Does not work ~ $link.trigger('click');
+      }, 200);
     }
   };
 

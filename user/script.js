@@ -44,6 +44,11 @@
 
         OUOP.handle_moodle_events($);
 
+        $body.addClass(data.body_class)
+          .addClass(data.profile.ouop_is_team ? 'ouop-is-team' : 'ouop-not-team');
+
+        $body.addClass(data.debug);
+
         OUOP.consent_document_embed($, data);
 
         OUOP.fix_pilot_survey_links($, data);
@@ -53,11 +58,6 @@
 
         OUOP.complete_moodle_user_profile_form($, data);
         OUOP.user_profile_form_redirect($, data);
-
-        $body.addClass(data.body_class)
-          .addClass(data.profile.ouop_is_team ? 'ouop-is-team' : 'ouop-not-team');
-
-        $body.addClass(data.debug);
 
         // Was: if ( L.pathname.match(/^\/user\/edit/) )
         if (!data.profile.ouop_is_team) {
