@@ -186,6 +186,7 @@ class User
              'lastname' => null,
              'email'    => null,
              'timecreated'=> time(),
+             'batch'    => 0,
              'x_is_dummy' => true,
          ];
     }
@@ -242,7 +243,7 @@ class User
 
         $survey_urls = $CFG->auth_ouopenid_survey_urls;
 
-        $batch = $profile->batch;
+        $batch = isset($profile->batch) ? $profile->batch : 0;
         if (! isset($survey_urls[ $batch ])) {
             self::debug([ __FUNCTION__, 'error', ]);
         }
