@@ -25,6 +25,7 @@
     "squizlabs/php_codesniffer": "2.8.1"
   },
   "bin": [
+    "bin/ouop-query.php",
     "bin/csv-example.php",
     "bin/csv-import.php"
   ],

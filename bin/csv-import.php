@@ -50,8 +50,8 @@ $count = OuUser::insertFromCsv($csvfile, CSV_HEADING, CSV_UNSTRICT, function ($i
 });
 
 
-cli_writeln("\nWarnings:");
-print_r(OuUser::getWarnings());
+cli_write(sprintf( "\nWarnings (%d): ", count(OuUser::getWarnings()) ));
+cli_writeln(json_encode( OuUser::getWarnings(), JSON_PRETTY_PRINT ));
 
 cli_writeln("\nUsers inserted:  $count");
 

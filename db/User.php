@@ -51,10 +51,22 @@ class User
         return $user;
     }
 
-    public static function countUsers()
+    /** Count DB records, with or without conditions.
+     * @return int
+     */
+    public static function count($conditions = null)
     {
         global $DB;  // Moodle global.
-        return $DB->count_records(self::USER_TABLE);
+        return $DB->count_records(self::USER_TABLE, $conditions);
+    }
+
+    /** Select DB records, based on conditions.
+     * @return array Array of objects.
+     */
+    public static function query($conditions, $limitnum = 4)
+    {
+        global $DB;  // Moodle global.
+        return $DB->get_records(self::USER_TABLE, $conditions, $sort = '', $fields = '*', $from = 0, $limitnum);
     }
 
     /** Delete all records from plugin DB table.
@@ -62,7 +74,6 @@ class User
     public static function delete()
     {
         global $DB;  // Moodle global.
-
         return $DB->delete_records(self::USER_TABLE);
     }
 
@@ -125,7 +136,7 @@ class User
             ];
             $user_id = $DB->insert_record(self::USER_TABLE, $user_record, $returnid = true);
 
-            if ($callback) {
+            if ($callback && is_callable($callback)) {
                 $callback ($count, $user_id);
             }
         });
@@ -287,7 +298,8 @@ class User
 
         $url = $redirects[ $instrument ]->url;
 
-        return $CFG->wwwroot . sprintf($url, $action);
+        return $CFG->wwwroot . str_replace('%s', $action, $url);
+        // Was: return $CFG->wwwroot . sprintf($url, $action);
     }
 
     /** Get Google Doc. embed URL [ MOVE ]
