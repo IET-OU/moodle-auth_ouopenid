@@ -169,16 +169,17 @@
     var counts = {
       total_rows: $rows.length,
       with_number: 0,
+      just_zero: 0,
       no_enroll: 0,
       no_consent: 0,
-      no_results: 0,
-      other: 0
+      no_results: 0
     };
 
     $rows.each(function () {
       var cell_2 = $(this).find('td:nth-child( 2 )').text();
 
       counts.with_number += /[\d.]+/.test(cell_2);
+      counts.just_zero += /^0$/.test(cell_2);
       counts.no_enroll += /Enrollment not passed/.test(cell_2);
       counts.no_consent += /The user has not accepted the informed consent/.test(cell_2);
       counts.no_results += /No results/.test(cell_2);

@@ -4,6 +4,7 @@
 /style/less/
 *.csv
 *.dist.js
+*.min.js
 
 #/bin
 

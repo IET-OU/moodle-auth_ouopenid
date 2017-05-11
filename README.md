@@ -42,6 +42,7 @@ composer install
 composer sym-links
 composer npm-install
 composer eslint-config
+composer build
 ```
 
 ## Test
@@ -75,7 +76,7 @@ To embed the plugin's Javascript and stylesheet on every page:
 
 ```html
 <link href="/auth/ouopenid/style/ouop-styles.css" rel="stylesheet" />
-<script src="/auth/ouopenid/ouop.dist.js"></script>
+<script src="/auth/ouopenid/ouop.min.js"></script>
 ```
 
 
