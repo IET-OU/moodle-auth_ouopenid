@@ -53,6 +53,7 @@
 
         OUOP.fix_pilot_survey_links($, data);
         OUOP.inject_post_activity_survey_link($, data);
+        OUOP.survey_return_redirect($, data);
 
         OUOP.fix_mod_assign_redirect($);
 

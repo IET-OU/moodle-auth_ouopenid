@@ -134,6 +134,18 @@
     }
   };
 
+  OUOP.survey_return_redirect = function ($, resp) {
+    var $flag = $('.ouop-survey-return-redirect');
+    var params = W.location.search;
+    var is_survey_return = /utm_(source|medium)=.*(survey|questionnaire)/.test(params);
+
+    if (is_survey_return && $flag.length) {
+      C.warn('ouop: survey-return-redirect');
+
+      W.location = resp.redirect_url;
+    }
+  };
+
   OUOP.fix_mod_assign_redirect = function ($) {
     var $page = $('#page-mod-assign-redirect.ouop-fix-assign-redirect');
     var errormsg = $('.debuggingmessage').text();
