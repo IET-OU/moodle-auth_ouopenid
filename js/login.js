@@ -11,9 +11,10 @@ window.jQuery(function ($) {
     var oucu = $('#oucu').val();
     var openid_base_url = $('#openid_base_url').val();
     var $openidurl = $('input[ name = openid_url ]');
+    var url = /%s/.test(openid_base_url) ? openid_base_url.replace(/%s/, oucu) : (openid_base_url + oucu);
 
-    window.console.debug('Submit, OUCU: ', oucu);
+    window.console.warn('ouop: submit, OUCU - ', oucu, url);
 
-    $openidurl.val(openid_base_url + oucu);
+    $openidurl.val(url);
   });
 });

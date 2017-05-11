@@ -20,11 +20,20 @@ class Ou_Open_Id_Form {
     const ACTION = '/login/index.php';
     const OUCU_REGEX  = '[a-z]{1,6}\d{1,7}';  // Was: '[a-z]{2,4}\d{1,7}'.
     const OUCU_MIN    = 2;  // Was: 3.
-    const OPEN_ID_URL = 'http://openid.open.ac.uk/oucu/';
+    const OPEN_ID_URL = 'http://openid.open.ac.uk/oucu/%s';
     const JQUERY_URL  = 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js';
 
     public static function printOucu() {
         echo filter_input(INPUT_GET, 'oucu', FILTER_SANITIZE_STRING);
+    }
+
+    public static function printOpenIdUrl() {
+        global $CFG;  // Moodle global.
+        echo isset($CFG->auth_ouopenid_openid_url) ? $CFG->auth_ouopenid_openid_url : self::OPEN_ID_URL;
+    }
+
+    public static function versionParam() {
+        echo '?r=' . mt_rand(11, 9999);
     }
 }
 
@@ -63,7 +72,7 @@ header('X-UA-Compatible: IE=edge');
                 required="required" aria-required="true" pattern="<?php echo Ou_Open_Id_Form::OUCU_REGEX ?>" minlength="2" maxlength="9"
                 title="<?php print_string( 'login_field_help', OUOP_STRING ) ?>" /></label>
 
-              <input type="hidden" id="openid_base_url" value="<?php echo Ou_Open_Id_Form::OPEN_ID_URL ?>" />
+              <input type="hidden" id="openid_base_url" value="<?php Ou_Open_Id_Form::printOpenIdUrl() ?>" />
               <input type="hidden" name="openid_url" />
 
               <button type="submit" ><?php print_string( 'login_submit', OUOP_STRING ) ?></button>
@@ -84,9 +93,9 @@ header('X-UA-Compatible: IE=edge');
 
 
 <script src="<?php echo Ou_Open_Id_Form::JQUERY_URL ?>"></script>
-<script src="/auth/ouopenid/user/ouop-analytics.js"></script>
-<script src="/auth/ouopenid/js/login.js"></script>
+<script src="/auth/ouopenid/user/ouop-analytics.js<?php Ou_Open_Id_Form::versionParam() ?>"></script>
+<script src="/auth/ouopenid/js/login.js<?php Ou_Open_Id_Form::versionParam() ?>"></script>
 <script>
-    OUOP.analytics($, { config: <?php echo json_encode($CFG->auth_ouopenid_js_config) ?> });
+  OUOP.analytics($, { config: { ga: <?php echo json_encode($CFG->auth_ouopenid_js_config[ 'ga' ]) ?> } });
 </script>
 </html>
