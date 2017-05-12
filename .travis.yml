@@ -16,6 +16,7 @@ install:
   - composer install
   - composer npm-install-dev
   - composer eslint-config
+  - composer jshint-config
   - composer write-ignore-xml
 
 script:

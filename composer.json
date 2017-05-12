@@ -60,10 +60,10 @@
       "npm i -g csslint && npm i -g jshint"
     ],
     "build": [
-      "node_modules/.bin/uglifyjs user/*.js --comments=/^!/ --preamble='/*eslint-disable*//* jshint ignore:start */' -bo ouop.min.js",
+      "node_modules/.bin/uglifyjs user/*.js --comments='/^!/' -bo ouop.min.js",
       "node_modules/.bin/lessc style/*.less style/ouop-styles.css"
     ],
-    "jshint-config": "echo '{ \"laxcomma\": true }' > .jshintrc",
+    "jshint-config": "# echo '{ }' > .jshintrc;\necho '*.min.js\n*.dist.js' > .jshintignore",
     "eslint-config": [
       "echo '---\n  extends: eslint:recommended\n  globals:\n    window: false\n    root: true\n' > .eslintrc.yaml",
       "echo '{\n  \"extends\": \"eslint:recommended\",\n  \"globals\": { \"window\": false }\n}' > .eslintrc-XX.json"
@@ -84,9 +84,5 @@
     "mcs": "vendor/bin/phpcs --standard=./moodle-core.xml --ignore=vendor --ignore=.git --extensions=php .",
     "phpcs": "vendor/bin/phpcs --standard=./phpcs.xml --ignore=vendor --ignore=.git --extensions=php .",
     "cn": "vendor/bin/phpcs --standard=PHPCS --sniffs=Generic.NamingConventions.ConstructorName --extensions=php --ignore=vendor ."
-  },
-
-  "_comment": [
-    "https://github.com/squizlabs/PHP_CodeSniffer"
-  ]
+  }
 }

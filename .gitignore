@@ -18,7 +18,7 @@ vendor
 
 node_modules
 .eslintrc*
-.jshintrc*
+.jshint*
 .env
 
 #End.
