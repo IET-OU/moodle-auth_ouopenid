@@ -2,14 +2,14 @@
   OU-OpenID. © Nick Freear. © The Open University.
 */
 
-body{
-  font: 1em sans-serif;
+body {
   background-color: #f4f4f4;
   color: #222;
+  font: 1em sans-serif;
+  line-height: 1.4em;
   margin: 1em auto;
   max-width: 40em;
   min-width: 26em;
-  line-height: 1.4em;
 }
 li {
   margin-top: 0.6em;
@@ -18,7 +18,8 @@ abbr {
   border-bottom: 1px dotted #aaa;
   cursor: help;
 }
-h1, h2, label, button {
+h1, h2,
+label, button {
   color: #444;
   font-weight: bold;
 }
@@ -29,13 +30,13 @@ body > div {
   padding: .25em 1em;
 }
 input, button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: .25rem;
+  color: #373a3c;
   font-size: 1em;
   padding: .5rem 1rem;
   text-align: center;
-  border-radius: .25rem;
-  color: #373a3c;
-  background-color: #fff;
-  border: 1px solid #ccc;
 }
 input#oucu {
   width: 12em;

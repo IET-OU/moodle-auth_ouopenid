@@ -13,7 +13,7 @@ div[ data-region = drawer ] {
 }
 
 #page-header .p-a-1 {
-  padding: 0.1rem 1rem !important;
+  padding: 0.1rem 1rem !important; /* csslint allow:important */
 }
 
 .course-content ul.topics li.section .left {
@@ -37,6 +37,18 @@ div[ data-region = drawer ] {
 }
 
 // TeSLA page(s)
+#page-local-tesla-views-tesla_results {
+
+  #ouop-stats {
+    border: 1px solid #ddd;
+    margin: 2em 0;
+    padding: 1em;
+    text-transform: capitalize;
+    width: 100%;
+    word-spacing: 1em;
+  }
+}
+
 #page-local-tesla-views-agreement {
 
   iframe.ouop-consent-doc {
@@ -44,8 +56,8 @@ div[ data-region = drawer ] {
     border: 1px solid #ddd;
     display: block;
     height: 52em;
-    width: 100%;
     min-width: 500px; // Small devices, min-width: 576px.
+    width: 100%;
   }
 }
 
@@ -122,7 +134,9 @@ div[ data-region = drawer ] {
     label[ for = id_country ],
     label[ for = id_timezone ],
     label[ for = id_description_editor ] {
+      /* csslint ignore:start */
       display: none !important;
+      /* csslint ignore:end */
     }
   }
 

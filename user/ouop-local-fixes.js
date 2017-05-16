@@ -120,17 +120,31 @@
   };
 
   OUOP.inject_post_activity_survey_link = function ($, resp) {
-    var $container_quiz = $('#page-mod-quiz-review #user-notifications');
+    var $container_quiz_rev = $('#page-mod-quiz-review #user-notifications');
+    var $container_quiz = $('#page-mod-quiz-view');
     var $container_assign = $('#page-mod-assign-view');
     var survey_url = resp.survey_urls.post.replace('{OUCU}', resp.profile.ouop_oucu);
 
-    $container_quiz.append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
+    $container_quiz_rev.append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
 
     if ($container_assign.find('.submissionstatussubmitted').length) {
       $container_assign.find('#user-notifications').append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
       $container_assign.addClass('ouop-submitted');
 
       C.warn('ouop: post-activity-survey-link - assign');
+    }
+    else if ($container_quiz.find('.quizattemptsummary').length) {
+      $container_quiz.find('#user-notifications').append(OUOP.alert(OUOP.str('post_survey_msg', survey_url)));
+      $container_quiz.addClass('ouop-submitted');
+
+      C.warn('ouop: post-activity-survey-link - quiz-view');
+    }
+
+    // TODO: Is "preview" text just visible to teachers?
+    var continue_btn = $container_quiz.find('#region-main button').first().text();
+    var has_confusing_text = continue_btn && /Continue the last preview/.test(continue_btn);
+    if (has_confusing_text) {
+      $container_quiz.find('#region-main button').first().addClass('ouop-fix').text('Continue the last attempt');
     }
   };
 
@@ -186,6 +200,9 @@
     });
 
     if ($page.length) {
+      var summary = '<pre id="ouop-stats">Summary: %s</pre>'.replace(/%s/, JSON.stringify(counts, null, '\t'));
+      $page.find('table').before(summary);
+
       C.warn('ouop: TeSLA results stats:', counts);
     }
   };
