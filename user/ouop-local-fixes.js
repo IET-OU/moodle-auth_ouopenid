@@ -199,7 +199,7 @@
     });
 
     if ($page.length) {
-      var summary = '<pre id="ouop-stats">Summary: %s</pre>'.replace(/%s/, JSON.stringify(counts, null, '\t'));
+      var summary = '<pre id="ouop-stats">Summary: %s</pre>'.replace(/%s/, objToCsv(counts));
       $page.find('table').before(summary);
 
       C.warn('ouop: TeSLA results stats:', counts);
@@ -239,6 +239,10 @@
   OUOP.str = function (sid, val) {
     return val ? trans[ sid ].replace('{$a}', val) : trans[ sid ];
   };
+
+  function objToCsv (obj) {
+    return JSON.stringify(obj, null, 2).replace(/:/g, ',').replace(/_/g, ' ');
+  }
 
   // .
 }(window));
