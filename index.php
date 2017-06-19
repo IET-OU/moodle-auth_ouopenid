@@ -35,7 +35,17 @@ class Ou_Open_Id_Form {
     public static function versionParam() {
         echo '?r=' . mt_rand(11, 9999);
     }
+
+    public static function checkMaintenanceMode() {
+        global $CFG;
+        header('X-auth-ouopenid-maintain: ' . $CFG->maintenance_enabled);
+
+        if ($CFG->maintenance_enabled && ! filter_input(INPUT_GET, 'admin')) {
+            header('Location: '. $CFG->wwwroot, true, 302);
+        }
+    }
 }
+Ou_Open_Id_Form::checkMaintenanceMode();
 
 
 header('Content-Language: en');
