@@ -53,16 +53,17 @@
     "sym-links": [
       "cd ../moodle-auth-openid && ln -s ../moodle-auth-ouopenid/event.php"
     ],
-    "npm-install": "npm install uglify-js && npm i less",
+    "npm-install": "npm i browserify@14 uglify-js@3 less@2",
     "npm-install-dev": [
       "composer npm-install",
-      "npm i eslint eslint-plugin-react semistandard",
+      "npm i eslint eslint-plugin-react semistandard@11",
       "npm i -g csslint && npm i -g jshint"
     ],
     "build": [
       "node_modules/.bin/uglifyjs user/*.js --comments='/^!/' -bo ouop.min.js",
       "node_modules/.bin/lessc style/*.less style/ouop-styles.css"
     ],
+    "browserify": "node_modules/.bin/browserify src/index.js > dist.min.js",
     "jshint-config": "# echo '{ }' > .jshintrc;\necho '*.min.js\n*.dist.js' > .jshintignore",
     "eslint-config": [
       "echo '---\n  extends: eslint:recommended\n  globals:\n    window: false\n    root: true\n' > .eslintrc.yaml",
