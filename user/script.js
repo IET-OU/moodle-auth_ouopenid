@@ -52,6 +52,7 @@
         OUOP.consent_document_embed($, data);
 
         OUOP.fix_pilot_survey_links($, data);
+        OUOP.embed_pilot_surveys($, data);
         OUOP.inject_post_activity_survey_link($, data);
         OUOP.survey_return_redirect($, data);
 

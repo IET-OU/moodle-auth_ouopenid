@@ -99,6 +99,28 @@
     C.debug('ouop: local-fixes');
   };
 
+  OUOP.embed_pilot_surveys = function ($, resp) {
+    var $links = $('a[ href *= -pre-survey-embed ], a[ href *= -post-survey-embed ]');
+
+    $links.each(function (idx, el) {
+      var $link = $(el);
+      var url = $link.attr('href');
+      var survey_urls = resp.survey_urls;
+      var survey_url = url.match(/-pre-survey-/) ? survey_urls.pre : survey_urls.post;
+      var m_height = url.match(/height=(\d+\w+);?/);
+      var height = 'height: ' + (m_height ? m_height[ 1 ] : '1000px;');
+
+      survey_url = survey_url.replace(/\{?OUCU\}?/, resp.profile.ouop_oucu);
+
+      $link.replaceWith(
+      '<iframe src="%s" style="%h" class="ouop-pilot-survey-ifr" id="s%d"></iframe>'.replace(/%s/, survey_url).replace(/%h/, height).replace(/%d/, idx)
+      );
+      var $iframe = $('#s' + idx);
+
+      C.warn('ouop: pilot-survey-embeds', idx, $iframe);
+    });
+  };
+
   OUOP.fix_pilot_survey_links = function ($, resp) {
     var $links = $('a[ href = "#!-pre-survey-link" ], a[ href = "#!-post-survey-link" ]');
     // var $links = $('#region-main a[ href *= OUCU ]');
