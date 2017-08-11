@@ -3,7 +3,7 @@
 !login.css
 /style/less/
 *.csv
-*.dist.js
+*dist*.js
 *.min.js
 
 /src
@@ -19,6 +19,7 @@ vendor
 *BAK*
 
 package.json
+package-lock.json
 node_modules
 .eslintrc*
 .jshint*
