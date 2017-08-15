@@ -6,8 +6,7 @@
 *dist*.js
 *.min.js
 
-/src
-
+#/src
 #/bin
 
 thirdpartylibs.xml
@@ -18,7 +17,7 @@ composer.lock
 vendor
 *BAK*
 
-package.json
+#package.json
 package-lock.json
 node_modules
 .eslintrc*

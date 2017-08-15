@@ -1,11 +1,13 @@
 
 [![Build status — Travis-CI][travis-icon]][travis]
 [![js-semistandard-style][semi-icon]][semi]
+[![OU-OpenID moodle plugin][browse-icon]][gh]
 
 
 # moodle-auth_ouopenid
 
-This plugin is a wrapper around the [OpenID authentication plugin][openid] for [Moodle][].
+This plugin is a wrapper around the [OpenID authentication plugin][openid] for [Moodle][],
+plus other research-related functionality.
 
 Available via IET-OU Satis:
 
@@ -95,7 +97,9 @@ Developed for the [TeSLA project][].
 [Moodle]: https://moodle.org/
 [openid]: https://github.com/remotelearner/moodle-auth_openid
 [ouopenid]: https://github.com/IET-OU/moodle-auth_ouopenid
+[gh]: https://github.com/IET-OU/moodle-auth_ouopenid
 [composer]: https://getcomposer.org/
+[npm]: https://npmjs.com/
 [iet]: http://iet.open.ac.uk/
 [ou]: http://www.open.ac.uk/
 [travis]:  https://travis-ci.org/IET-OU/moodle-auth_ouopenid
@@ -104,3 +108,6 @@ Developed for the [TeSLA project][].
 [semi]: https://github.com/Flet/semistandard
 [semi-icon]: https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square
     "Javascript coding style — 'semistandard'"
+[browse]: https://npmjs.com/package/browserify
+[browse-icon]: https://img.shields.io/badge/built_with-browserify-blue.svg
+    "Built with browserify"

@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "name": "moodle-auth-ouopenid",
+  "description": "(See - 'composer.json') | © The Open University.",
+  "version": "1.3.0-beta",
+  "license": "UNLICENSED",
+  "main": "js/index.js",
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "derequire": "^2.0.6",
+    "less": "^2.7.2",
+    "semistandard": "^11.0.0",
+    "uglify-js": "^3.0.27",
+    "uncomment-cli": "git://github.com/nfreear/uncomment-cli.git#0.9.0"
+  },
+  "x-deps": {
+    "eslint": "^4.3.0",
+    "eslint-plugin-react": "^7.1.0"
+  },
+  "scripts": {
+    "browserify": "browserify js/index.js | derequire | _unc > dist.js",
+    "uglify-2": "uglifyjs js/src/_comment.js dist.js --comments -co dist.min.js",
+    "uglify": "uglifyjs user/*.js --comments='/^!/' -bo ouop.min.js",
+    "less": "lessc style/*.less style/ouop-styles.css",
+    "eslint": "eslint js/ src/ user/*.js && echo eslint OK!",
+    "semi": "semistandard"
+  },
+  "semistandard": {
+    "ignore": [
+      "bundle.js",
+      "dist*.js",
+      "/ouop*.js",
+      "*.min.js"
+    ]
+  }
+}
