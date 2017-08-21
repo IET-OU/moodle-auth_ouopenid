@@ -20,9 +20,9 @@
     "composer/installers": "^1.2"
   },
   "require-dev": {
-    "moodlerooms/moodle-plugin-ci": "^1.5",
+    "moodlerooms/moodle-plugin-ci": "^2.0",
     "jakub-onderka/php-parallel-lint": "^0.9.2",
-    "squizlabs/php_codesniffer": "2.8.1"
+    "squizlabs/php_codesniffer": "2.9.1"
   },
   "bin": [
     "bin/ouop-query.php",
@@ -37,53 +37,54 @@
       "echo '\t<library><location>node_modules/</location></library>' >> thirdpartylibs.xml",
       "echo '</libraries>' >> thirdpartylibs.xml"
     ],
-    "ci-install": "vendor/bin/moodle-plugin-ci install",
+    "ci-install": "moodle-plugin-ci install",
     "ci-test": [
-      "vendor/bin/moodle-plugin-ci phplint .",
-      "vendor/bin/moodle-plugin-ci phpcpd .",
-      "# vendor/bin/moodle-plugin-ci phpmd .",
-      "# vendor/bin/moodle-plugin-ci codechecker .",
-      "vendor/bin/moodle-plugin-ci csslint .",
-      "vendor/bin/moodle-plugin-ci shifter .",
-      "vendor/bin/moodle-plugin-ci jshint .",
-      "# N/A? vendor/bin/moodle-plugin-ci validate .",
-      "vendor/bin/moodle-plugin-ci phpunit . --coverage-text"
+      "moodle-plugin-ci phplint .",
+      "moodle-plugin-ci phpcpd .",
+      "# moodle-plugin-ci phpmd .",
+      "# moodle-plugin-ci codechecker .",
+      "moodle-plugin-ci csslint .",
+      "moodle-plugin-ci shifter .",
+      "moodle-plugin-ci jshint .",
+      "# N/A? moodle-plugin-ci validate .",
+      "moodle-plugin-ci phpunit . --coverage-text"
     ],
-    "qa": "vendor/bin/moodle-plugin-ci codechecker .",
+    "qa": "moodle-plugin-ci codechecker .",
     "sym-links": [
       "cd ../moodle-auth-openid && ln -s ../moodle-auth-ouopenid/event.php"
     ],
-    "npm-install": "npm i browserify@14 derequire@2 uglify-js@3 less@2",
-    "npm-install-dev": [
-      "composer npm-install",
-      "npm i eslint eslint-plugin-react semistandard@11",
+    "npm-install": [
+      "npm install",
+      "# npm i eslint eslint-plugin-react semistandard@11",
       "npm i -g csslint && npm i -g jshint"
     ],
-    "build": [
-      "node_modules/.bin/uglifyjs user/*.js --comments='/^!/' -bo ouop.min.js",
-      "node_modules/.bin/lessc style/*.less style/ouop-styles.css"
+    "phantom-clone": "git clone --depth=5 https://github.com/ariya/phantomjs.git && ln -s phantomjs/examples/rasterize.js",
+    "poem-srv": "php -S localhost:8000 bin/www-poem.php",
+    "poem-images": [
+      "phantomjs rasterize.js 'http://localhost:8000?id=poem_1&serif=1' pix/poem_1.png  # '600px*716px'",
+      "phantomjs rasterize.js 'http://localhost:8000?id=poem_2&serif=1' pix/poem_2.png"
     ],
-    "browserify": "node_modules/.bin/browserify src/index.js | node_modules/.bin/derequire > dist.min.js",
-    "jshint-config": "# echo '{ }' > .jshintrc;\necho '*.min.js\n*.dist.js' > .jshintignore",
+    "build": [
+      "npm run browserify",
+      "npm run uglify && npm run uglify-2",
+      "npm run less"
+    ],
+    "jshint-config": "# echo '{ }' > .jshintrc;\necho '*.min.js\ndist.js' > .jshintignore",
     "eslint-config": [
       "echo '---\n  extends: eslint:recommended\n  globals:\n    window: false\n    root: true\n' > .eslintrc.yaml",
       "echo '{\n  \"extends\": \"eslint:recommended\",\n  \"globals\": { \"window\": false }\n}' > .eslintrc-XX.json"
     ],
     "eslint-echo": "node_modules/.bin/eslint --print-config .eslintrc.yaml",
-    "eslint": [
-      "node_modules/.bin/eslint js/ user/*.js && echo eslint OK!"
-    ],
-    "semistandard": "node_modules/.bin/semistandard",
     "test": [
-      "vendor/bin/parallel-lint --exclude vendor .",
-      "vendor/bin/phpcs --standard=PSR2 -n db/User.php",
+      "parallel-lint --exclude vendor .",
+      "phpcs --standard=PSR2 -n db/User.php",
       "composer cn",
-      "composer semistandard",
-      "composer eslint",
+      "# npm run semi",
+      "# npm run eslint",
       "php -r 'simplexml_load_file(\"db/install.xml\");' && echo install.xml OK!"
     ],
-    "mcs": "vendor/bin/phpcs --standard=./moodle-core.xml --ignore=vendor --ignore=.git --extensions=php .",
-    "phpcs": "vendor/bin/phpcs --standard=./phpcs.xml --ignore=vendor --ignore=.git --extensions=php .",
-    "cn": "vendor/bin/phpcs --standard=PHPCS --sniffs=Generic.NamingConventions.ConstructorName --extensions=php --ignore=vendor ."
+    "mcs": "phpcs --standard=./moodle-core.xml --ignore=vendor --ignore=.git --extensions=php .",
+    "phpcs": "phpcs --standard=./phpcs.xml --ignore=vendor --ignore=.git --extensions=php .",
+    "cn": "phpcs --standard=PHPCS --sniffs=Generic.NamingConventions.ConstructorName --extensions=php --ignore=vendor ."
   }
 }

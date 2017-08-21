@@ -315,10 +315,12 @@ class User
     /** Get language strings for Javascript / Ajax [ MOVE ]
      * @return object
      */
-    public static function getStringsAjax()
+    public static function getStringsAjax($poems = false)
     {
         $string_ids = [ 'continuelink', 'form_warning', 'form_redirect_msg', 'wordcount', 'wordcount_title',
             'continuebutton', 'question_progress', 'return_msg', 'newenrol_msg', 'testmail', 'post_survey_msg' ];
+
+        $string_ids = $poems ? array_merge($string_ids, [ 'poem_1', 'poem_2' ]) : $string_ids;
 
         return get_strings($string_ids, 'auth_ouopenid');
     }

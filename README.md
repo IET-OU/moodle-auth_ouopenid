@@ -15,7 +15,7 @@ Available via IET-OU Satis:
 
 ## Purpose
 
-To facilitate pilot studies using Moodle (e.g. for TeSLA) by:
+To facilitate pilot research studies using Moodle (e.g. for TeSLA) by:
 
 1. Enabling OpenID login using just a username, not a full URL (e.g. https://openid.example.org/{username})
 2. Simple login page with custom instructions (edit via Moodle language customisations), `/index.php`,
@@ -31,8 +31,8 @@ Note: this plugin probably needs splitting into two or more plugins!
 ## Install
 
 1. To integrate within Moodle, either use the composer-based method described below, or unzip the code at:
-    ```
-    PATHTOMOODLE/auth/ouopenid
+    ```sh
+    {PATHTOMOODLE}/auth/ouopenid
     ```
 
     Then, enable the plugin in the [authentication plugins section of your Moodle's site administration][auth].
@@ -54,6 +54,17 @@ composer test
 composer eslint
 ```
 
+## Generate text-images
+
+Re-create images of poetry / other text, to prevent copy-paste
+(e.g. for TeSLA keystroke dynamics pilot):
+
+```sh
+composer phantom-clone
+composer poem-srv
+composer poem-images
+```
+
 ## Site-wide Javascript and styles
 ### Additional HTML - development
 
@@ -66,19 +77,17 @@ To embed the plugin's Javascript and stylesheet on every page:
 
 ```html
 <link href="/auth/ouopenid/style/ouop-styles.less" rel="stylesheet/less" />
-<script src="/auth/ouopenid/user/ouop-local-fixes.js"></script>
-<script src="/auth/ouopenid/user/ouop-analytics"></script>
-<script src="/auth/ouopenid/user/script.js"></script>
+<script src="/auth/ouopenid/dist.js"></script>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
+<script src="https://unpkg.com/less@2.7.2/dist/less.min.js"></script>
 ```
 
 
 ### Additional HTML - live
 
 ```html
-<link href="/auth/ouopenid/style/ouop-styles.css" rel="stylesheet" />
-<script src="/auth/ouopenid/ouop.min.js"></script>
+<link href="/auth/ouopenid/style/ouop-styles.css?r=2017-08-16.a" rel="stylesheet" />
+<script src="/auth/ouopenid/dist.min.js?r=2017-08-16.a"></script>
 ```
 
 

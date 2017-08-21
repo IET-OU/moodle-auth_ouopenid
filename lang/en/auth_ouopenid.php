@@ -12,6 +12,9 @@
 $string[ 'pluginname' ] = 'OU-OpenID';
 $string[ 'auth_ouopeniddescription' ] = 'This plugin is a wrapper around the OpenID authentication plugin';
 
+// A hack!
+require_once __DIR__ . '/local_oupilot_poem.php';
+
 // Used via Javascript / Ajax.
 $string[ 'testmail' ] = 'tesla.ouuk+{$a}@gmail.com';
 $string[ 'continuelink' ] = 'Continue to your pilot course &rarr;';

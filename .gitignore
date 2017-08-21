@@ -24,4 +24,9 @@ node_modules
 .jshint*
 .env
 
+/pix
+
+phantomjs
+rasterize.js
+
 #End.
