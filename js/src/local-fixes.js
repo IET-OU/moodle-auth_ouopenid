@@ -1,10 +1,10 @@
 // TeSLA-specific fixes ~~ usability and clarity.
 // OUOP.local_fixes = function
 
-module.exports = function ($, resp) {
+module.exports = function ($) {
 
   fix_typing_enrollment_page($);
-  fix_enrollment_start_page($, resp);
+  fix_enrollment_start_page($);
 
   console.warn('ouop: tesla-local-fixes');
 };
@@ -42,7 +42,7 @@ function fix_typing_enrollment_page($) {
 }
 
 // 14-August-2017.
-function fix_enrollment_start_page($, resp) {
+function fix_enrollment_start_page($) {
   var $alert = $('#page-local-tesla-views-enrollment #user-notifications .alert');
   var message = $alert.text();
   var m_enroll = message ? message.match(/The required enrollments are: ([\w ]+)/) : null;

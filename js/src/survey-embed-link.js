@@ -1,7 +1,5 @@
 // Embed or link to BOS pilot surveys.
 
-'use strict';
-
 module.exports = function ($, resp) {
 
   embed_pilot_surveys($, resp);

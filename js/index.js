@@ -6,8 +6,6 @@
 
 // IMPORTANT: console.debug() does NOT print output !!
 
-'use strict';
-
 var util = require('./src/ouop-utils');
 var userJsonUrl = '/auth/ouopenid/user/ajax.php?r=' + util.rand();
 
@@ -63,7 +61,7 @@ require('./src/when-call')(
 
       // ..
 
-      require('./src/local-fixes')($, data);
+      require('./src/local-fixes')($);
 
       require('./src/survey-embed-link')($, data);
 

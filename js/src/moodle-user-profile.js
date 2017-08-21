@@ -33,7 +33,7 @@ function complete_user_profile_form ($, resp) {
   }
 
   C.debug('ouop: complete-user-profile-form');
-};
+}
 
 function user_profile_form_redirect ($, resp) {
   var $form = $('#page-user-edit #region-main form');
@@ -53,7 +53,7 @@ function user_profile_form_redirect ($, resp) {
   } else {
     $form.before(util.alert(util.str('form_redirect_msg'), 'ouop-form-disable'));
   }
-};
+}
 
 function user_profile_continue_link ($, resp) {
   var $pages = $('#page-user-profile, #page-user-preferences');

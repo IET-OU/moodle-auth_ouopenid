@@ -2,10 +2,6 @@
   OU-OpenID. © Nick Freear. © The Open University. (NDF / 02-April-2017)
 */
 
-/* global ga: false */
-
-'use strict';
-
 module.exports = {
   run: function ($, resp) {
     include_ga_javascript();

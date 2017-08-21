@@ -1,7 +1,5 @@
 // Utility functions.
 
-'use strict';
-
 // Javascript translation/localisation [i18n].
 var trans = {};
 
