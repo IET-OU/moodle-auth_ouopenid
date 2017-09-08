@@ -63,7 +63,7 @@ require('./src/when-call')(
 
       // ..
 
-      require('./src/local-fixes')($);
+      require('./src/local-fixes')($, data);
 
       require('./src/survey-embed-link')($, data);
 

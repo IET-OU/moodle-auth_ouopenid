@@ -1,11 +1,13 @@
 // TeSLA-specific fixes ~~ usability and clarity.
 // OUOP.local_fixes = function
 
-module.exports = function ($) {
+module.exports = function ($, resp) {
 
   fix_enrollment_calibrate_page($)
   fix_typing_enrollment_page($);
   fix_enrollment_start_page($);
+
+  fix_pilot_fallback_link($, resp);
 
   console.warn('ouop: tesla-local-fixes');
 };
@@ -75,4 +77,31 @@ function fix_enrollment_calibrate_page($) {
 
     console.warn('ouop. Calibrate instrument:', inst_code);
   }
+}
+
+// Pilot alternative or fallback.
+function fix_pilot_fallback_link($, resp) {
+  var $msg = $('.ouop-pilot-fallback-msg');
+  var $link = $('.path-course-view p a[ href *= "#!-pilot-fallback-" ]');
+
+  var url = $link.attr('href');
+  var m_inst = url ? url.match(/-pilot-fallback-for-(\w+)/) : null;
+  var inst_code = m_inst ? m_inst[ 1 ] : null;
+  var fallback = resp.config.fallback_for;
+  var fallback_url = fallback[ inst_code ] || null;
+
+  $msg.addClass('alert alert-info');
+  $msg.find('a[href]').addClass('btn btn-primary');
+
+  if ($link.length) {
+    $link
+      .addClass('ouop-pilot-fallback-link')
+      .attr({ href: fallback_url + url });
+
+    // $link.closest('p').addClass('ouop-pilot-fallback-msg'); // ????
+
+    console.warn('ouop-pilot-fallback-link: ', inst_code, fallback_url);
+  }
+
+  // console.warn('>> ouop-pilot-fallback-link: ', $link, m_inst);
 }
