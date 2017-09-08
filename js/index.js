@@ -6,6 +6,8 @@
 
 // IMPORTANT: console.debug() does NOT print output !!
 
+var BUILD_TIME = '-'; // <Auto>
+
 var util = require('./src/ouop-utils');
 var userJsonUrl = '/auth/ouopenid/user/ajax.php?r=' + util.rand();
 
@@ -28,7 +30,7 @@ require('./src/when-call')(
 
     $body.addClass(L.href.match(/debug=1/) ? 'debug-param' : '');
 
-    console.warn('ouopenid $:', $.fn.jquery, W.M.cfg); // W.Y.version
+    console.warn('ouopenid $:', $.fn.jquery, BUILD_TIME, W.M.cfg); // W.Y.version
 
     $.getJSON(userJsonUrl).done(function (data, textStat, jqXHR) { // W.M.cfg.wwwroot + ..
       console.debug('>> getJSON..');

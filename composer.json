@@ -67,7 +67,8 @@
     "build": [
       "npm run browserify",
       "npm run uglify && npm run uglify-2",
-      "npm run less"
+      "npm run less",
+      "bin/_ver.js"
     ],
     "jshint-config": "# echo '{ }' > .jshintrc;\necho '*.min.js\ndist.js' > .jshintignore",
     "eslint-config": [

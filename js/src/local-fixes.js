@@ -3,6 +3,7 @@
 
 module.exports = function ($) {
 
+  fix_enrollment_calibrate_page($)
   fix_typing_enrollment_page($);
   fix_enrollment_start_page($);
 
@@ -16,6 +17,8 @@ var tesla_inst_names = {
   'Face Recognition': 'fr',
   'Voice Recognition': 'vr'
 };
+var tesla_inst_url_regex = /&target=(ks|tpt|fa|fr|vr)/;
+
 
 function fix_typing_enrollment_page($) {
   var $wordcount = $('.path-local-tesla-views .btn #word_counter');
@@ -58,5 +61,18 @@ function fix_enrollment_start_page($) {
     $alert.removeClass('alert-danger').addClass('alert-warning');
 
     console.warn('ouop. Enroll instrument:', inst_code, inst);
+  }
+}
+
+function fix_enrollment_calibrate_page($) {
+  var m_instrument = window.location.search.match(tesla_inst_url_regex);
+  var inst_code = m_instrument ? m_instrument[ 1 ] : null;
+
+  if (inst_code) {
+    $('body')
+      .addClass('ouop-enroll-calibrate')
+      .addClass('ouop-enroll-' + inst_code);
+
+    console.warn('ouop. Calibrate instrument:', inst_code);
   }
 }

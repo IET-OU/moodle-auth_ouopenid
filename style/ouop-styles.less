@@ -1,5 +1,7 @@
 /*!
   OU-OpenID. LESS/ CSS fixes etc. © Nick Freear. © The Open University.
+
+  $ BUILD_TIME $
 */
 
 // ( @import 'less/ouop-hide-unused.less'; )
@@ -46,6 +48,17 @@ div[ data-region = drawer ] {
     text-transform: capitalize;
     width: 100%;
     word-spacing: .1em;
+  }
+}
+
+.path-local-tesla-views {
+
+  // Accessibility: fix contrast!
+  .btn-info,
+  .btn-info:hover {
+    background-color: navy; // Was: #5bc0de;
+    border-color: navy;
+    color: #fff;
   }
 }
 
