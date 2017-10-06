@@ -31,6 +31,9 @@
   "eslintConfig": {
     "extends": "eslint:recommended",
     "env": { "commonjs": true },
+    "rules": {
+      "no-console": "off"
+    },
     "globals": {
       "window": false,
       "console": false,

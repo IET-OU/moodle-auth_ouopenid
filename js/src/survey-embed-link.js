@@ -50,17 +50,19 @@ function embed_pilot_surveys ($, resp) {
       var m_height = url.match(/height=(\d+\w+);?/);
       var height = 'height: ' + (m_height ? m_height[ 1 ] : '1000px;');
 
-      survey_url = survey_url.replace(/\{?OUCU\}?/, resp.profile.ouop_oucu);
+      survey_url = survey_url.replace(/\{?OUCU\}?/, resp.profile.ouop_oucu).replace(/\{COURSE\}/gi, resp.course_code);
 
-      $link.replaceWith(resp.util.replace('<iframe src="{u}" style="{h}" class="ouop-pilot-survey-ifr" id="s-{i}"></iframe>', {
-        '{u}': url, '{h}': height, '{i}': idx
+      $link.replaceWith(resp.util.replace('<iframe src="{u}" style="{h}" id="ifr-{i}"></iframe>', {
+        '{u}': survey_url, '{h}': height, '{i}': idx
       })); // .replace(/%s/, survey_url).replace(/%h/, height).replace(/%d/, idx)
-      var $iframe = $('#s' + idx);
 
-      C.warn('ouop: pilot-survey-embeds', idx, $iframe);
+      var $iframe = $('#ifr-' + idx).addClass('ouop-pilot-survey-ifr');
+
+      C.warn('ouop: pilot-survey-embeds', idx, survey_url, $iframe);
     });
 }
 
+// DEPRECATED.
 function fix_pilot_survey_links ($, resp) {
     var $links = $('a[ href = "#!-pre-survey-link" ], a[ href = "#!-post-survey-link" ]');
     // var $links = $('#region-main a[ href *= OUCU ]');

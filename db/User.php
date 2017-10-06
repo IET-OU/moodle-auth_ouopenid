@@ -255,8 +255,10 @@ class User
         $survey_urls = $CFG->auth_ouopenid_survey_urls;
 
         $batch = isset($profile->batch) ? $profile->batch : 0;
+        $batch = isset($CFG->auth_ouopenid_batch_override) ? $CFG->auth_ouopenid_batch_override : $batch;
+
         if (! isset($survey_urls[ $batch ])) {
-            self::debug([ __FUNCTION__, 'error', ]);
+            self::debug([ __FUNCTION__, 'error', $batch ]);
         }
         return isset($survey_urls[ $batch ]) ? $survey_urls[ $batch ] : $survey_urls[ 0 ];
     }

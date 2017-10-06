@@ -36,6 +36,8 @@ require('./src/when-call')(
       console.debug('>> getJSON..');
 
       util.set_strings(data);
+      util.set_course_name($, data);
+      util.site_message($, data);
 
       data.util = util;
       data.$ = $;

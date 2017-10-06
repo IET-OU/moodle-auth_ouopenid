@@ -72,7 +72,7 @@
     ],
     "jshint-config": "# echo '{ }' > .jshintrc;\necho '*.min.js\ndist.js' > .jshintignore",
     "eslint-config": [
-      "echo '---\n  extends: eslint:recommended\n  globals:\n    window: false\n    root: true\n' > .eslintrc.yaml",
+      "echo '---\n  extends: eslint:recommended\n  globals:\n    window: false\n    console: false\n    root: true\n' > .eslintrc.yaml",
       "echo '{\n  \"extends\": \"eslint:recommended\",\n  \"globals\": { \"window\": false }\n}' > .eslintrc-XX.json"
     ],
     "eslint-echo": "node_modules/.bin/eslint --print-config .eslintrc.yaml",
@@ -81,7 +81,7 @@
       "phpcs --standard=PSR2 -n db/User.php",
       "composer cn",
       "# npm run semi",
-      "# npm run eslint",
+      "npm run eslint",
       "php -r 'simplexml_load_file(\"db/install.xml\");' && echo install.xml OK!"
     ],
     "mcs": "phpcs --standard=./moodle-core.xml --ignore=vendor --ignore=.git --extensions=php .",

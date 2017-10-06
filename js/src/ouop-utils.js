@@ -11,10 +11,15 @@ module.exports = {
     return Math.floor(Math.random() * (max - min)) + min;
   },
 
-  alert: function (msg, id, cls) {
-    return '<div id="' + (id || 'oua') + '" class="ouop alert ' +
-       (cls || 'alert-info') + '" role="alert">' + msg + '</div>';
+  site_message: function ($, resp) {
+    var message = resp.config.site_message;
+
+    if (message) {
+      $('#page').prepend(alert(message, 'oum', 'alert-info site-message'));
+    }
   },
+
+  alert: alert,
 
   // Javascript translation/localisation [i18n].
   set_strings: function (resp) {
@@ -27,6 +32,17 @@ module.exports = {
 
   objToCsv: function (obj) {
     return JSON.stringify(obj, null, 2).replace(/:/g, ',').replace(/_/g, ' ');
+  },
+
+  set_course_name: function ($, resp) {
+    var $course_name = $('.path-course-view, .path-mod-page').find('.breadcrumb-item a[ href *= "course/view.php" ]').first(); // .find('a[ data-key = coursehome ]');
+    var course_code = $course_name.text();
+
+    resp.course_code = course_code || null;
+
+    if (course_code) {
+      $('body').addClass('ouop-course-code-' + course_code).attr('data-course-code', course_code);
+    }
   },
 
   replace: replace_object,
@@ -58,4 +74,9 @@ function replace_object (str, mapObj) {
   return str.replace(re, function (matched) {
     return mapObj[ matched ]; // Was: matched.toLowerCase().
   });
+}
+
+function alert (msg, id, cls) {
+  return '<div id="' + (id || 'oua') + '" class="ouop alert ' +
+     (cls || 'alert-info') + '" role="alert">' + msg + '</div>';
 }
