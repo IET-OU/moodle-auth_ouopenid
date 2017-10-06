@@ -56,7 +56,7 @@
     "npm-install": [
       "npm install",
       "# npm i eslint eslint-plugin-react semistandard@11",
-      "npm i -g csslint && npm i -g jshint"
+      "npm i -g csslint@^1 && npm i -g jshint@^2"
     ],
     "phantom-clone": "git clone --depth=5 https://github.com/ariya/phantomjs.git && ln -s phantomjs/examples/rasterize.js",
     "poem-srv": "php -S localhost:8000 bin/www-poem.php",
@@ -71,11 +71,6 @@
       "bin/_ver.js"
     ],
     "jshint-config": "# echo '{ }' > .jshintrc;\necho '*.min.js\ndist.js' > .jshintignore",
-    "eslint-config": [
-      "echo '---\n  extends: eslint:recommended\n  globals:\n    window: false\n    console: false\n    root: true\n' > .eslintrc.yaml",
-      "echo '{\n  \"extends\": \"eslint:recommended\",\n  \"globals\": { \"window\": false }\n}' > .eslintrc-XX.json"
-    ],
-    "eslint-echo": "node_modules/.bin/eslint --print-config .eslintrc.yaml",
     "test": [
       "parallel-lint --exclude vendor .",
       "phpcs --standard=PSR2 -n db/User.php",

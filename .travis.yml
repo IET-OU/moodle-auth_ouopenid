@@ -8,15 +8,16 @@ git:
   depth: 8
 
 before_install:
+  # "$ npm --version // ERROR: npm is known not to run on Node.js v4.4.7"
   #- nvm install v4.4
   - nvm install v8.1
   - npm install npm -g
-  - npm --version
+  - npm -v
 
 install:
   - composer install
   - composer npm-install
-  - composer eslint-config
+  #- composer eslint-config # Not needed!
   - composer jshint-config
   - composer write-ignore-xml
 
