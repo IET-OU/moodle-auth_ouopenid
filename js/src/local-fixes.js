@@ -3,7 +3,7 @@
 
 module.exports = function ($, resp) {
 
-  fix_enrollment_calibrate_page($)
+  fix_enrollment_calibrate_page($);
   fix_typing_enrollment_page($);
   fix_enrollment_start_page($);
 

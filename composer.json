@@ -70,7 +70,7 @@
       "npm run less",
       "bin/_ver.js"
     ],
-    "jshint-config": "# echo '{ }' > .jshintrc;\necho '*.min.js\ndist.js' > .jshintignore",
+    "jshint-config": "echo '*.min.js\ndist.js\nphantomjs/**/*.js\nraster*.js' > .jshintignore",
     "test": [
       "parallel-lint --exclude vendor .",
       "phpcs --standard=PSR2 -n db/User.php",

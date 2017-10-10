@@ -26,6 +26,15 @@ div[ data-region = drawer ] {
   padding: .6rem;
 }
 
+.breadcrumb-item a,
+.path-mod div[ role = main ] h2 {
+  display: inline-block;
+  max-width: 26em;
+  height: 1.3em; // Show underline (!)
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 // ----------------------------------------
 // Messages / links / HTML injected via plugin Javascript.
