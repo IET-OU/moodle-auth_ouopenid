@@ -39,4 +39,10 @@ class bootstrap {
             require_once(__DIR__ . '/../../../config.php');
         }
     }
+
+    public static function moodle_lib($libname) {
+        if (! self::is_local_install()) {
+            require_once($CFG->libdir . $libname . '.php');
+        }
+    }
 }
