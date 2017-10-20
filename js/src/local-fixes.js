@@ -8,6 +8,7 @@ module.exports = function ($, resp) {
   fix_enrollment_start_page($);
 
   fix_pilot_fallback_link($, resp);
+  fix_voice_enrollment_controls($, resp);
 
   console.warn('ouop: tesla-local-fixes');
 };
@@ -21,6 +22,22 @@ var tesla_inst_names = {
 };
 var tesla_inst_url_regex = /&target=(ks|tpt|fa|fr|vr)/;
 
+function fix_voice_enrollment_controls($, resp) {
+  var $voxcounter = $('.ouop-enroll-vr button#counter');
+  var $startbutton = $('.ouop-enroll-vr button#start_recording');
+
+  if (! $voxcounter.length) {
+    return;
+  }
+
+  window.setTimeout(function () {
+    // $voxcounter.text('02:00').addClass('ouop-vr-counter-fix').attr({ title: 'Countdown timer' });
+    $voxcounter.attr({ title: 'Voice recording timer' });
+    $startbutton.attr({ title: 'Start voice recording' });
+
+    console.warn('ouop. fix-voice-enrollment-controls: ', $voxcounter.text());
+  }, 2000);
+}
 
 function fix_typing_enrollment_page($) {
   var $wordcount = $('.path-local-tesla-views .btn #word_counter');
