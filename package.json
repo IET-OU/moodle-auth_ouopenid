@@ -5,6 +5,9 @@
   "version": "2.0.0-beta",
   "license": "UNLICENSED",
   "main": "js/index.js",
+  "bin": {
+    "fix-tesla-tpl": "bin/fix-tesla-tpl.js"
+  },
   "devDependencies": {
     "browserify": "^14.4.0",
     "browserify-banner": "^1.0.6",

@@ -8,7 +8,18 @@ module.exports = function ($, resp) {
   fix_enrollment_start_page($);
 
   fix_pilot_fallback_link($, resp);
-  fix_voice_enrollment_controls($, resp);
+  fix_voice_enrollment_controls($);
+
+  $(window.document).ajaxSuccess(function (ev, xhr, settings) {
+    if (settings.url.match(/enrollment_ajax.php/)) {
+      console.warn('> enrollment_ajax:', xhr.responseText, xhr.status, ev.namespace);
+    }
+
+    // console.warn('> ajax:', settings.url, ev, xhr, settings);
+  })
+  .ajaxError(function (ev, xhr, settings) {
+    console.error('Ajax error:', ev, xhr, settings);
+  });
 
   console.warn('ouop: tesla-local-fixes');
 };
@@ -22,7 +33,7 @@ var tesla_inst_names = {
 };
 var tesla_inst_url_regex = /&target=(ks|tpt|fa|fr|vr)/;
 
-function fix_voice_enrollment_controls($, resp) {
+function fix_voice_enrollment_controls($) {
   var $voxcounter = $('.ouop-enroll-vr button#counter');
   var $startbutton = $('.ouop-enroll-vr button#start_recording');
 
@@ -34,6 +45,8 @@ function fix_voice_enrollment_controls($, resp) {
     // $voxcounter.text('02:00').addClass('ouop-vr-counter-fix').attr({ title: 'Countdown timer' });
     $voxcounter.attr({ title: 'Voice recording timer' });
     $startbutton.attr({ title: 'Start voice recording' });
+
+    $startbutton.closest('.row-fluid, .row-floid').addClass('ouop-recorder-row');
 
     console.warn('ouop. fix-voice-enrollment-controls: ', $voxcounter.text());
   }, 2000);

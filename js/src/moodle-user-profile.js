@@ -25,14 +25,19 @@ function complete_user_profile_form ($, resp) {
   var $inp_email = $form.find('[ name = email ]');
   var prof = resp.profile;
   var isteam = prof.ouop_is_team;
+  var brand = resp.config.email_rand;
+  var email_wrand;
 
   if ($form.length && !$inp_fname.val()) {
+    // TeSLA plugin uses the email as an ID, so to achieve a "clean-break" add a random number ;).
+    email_wrand = util.str('testmail', prof.ouop_oucu + ( brand ? '-r' + util.rand() : '' ));
+
     $inp_fname.val(isteam ? prof.ouop_firstname : prof.ouop_oucu);
     $inp_lname.val(isteam ? prof.ouop_lastname : 'test');
-    $inp_email.val(isteam ? prof.ouop_email : util.str('testmail', prof.ouop_oucu));
+    $inp_email.val(isteam ? prof.ouop_email : email_wrand);
   }
 
-  C.debug('ouop: complete-user-profile-form');
+  C.debug('ouop: complete-user-profile-form:', $inp_email.val());
 }
 
 function user_profile_form_redirect ($, resp) {

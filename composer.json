@@ -1,6 +1,6 @@
 {
   "name": "iet-ou/moodle-auth-ouopenid",
-  "description": "This plugin is a wrapper around the OpenID authentication plugin for Moodle. ©The Open University.",
+  "description": "This plugin is a wrapper around the OpenID authentication plugin for Moodle. © The Open University.",
   "homepage": "https://github.com/IET-OU",
   "type": "moodle-auth",
   "license": "proprietary",
@@ -27,7 +27,8 @@
   "bin": [
     "bin/ouop-query.php",
     "bin/csv-example.php",
-    "bin/csv-import.php"
+    "bin/csv-import.php",
+    "bin/tesla-db.php"
   ],
   "scripts": {
     "write-ignore-xml": [

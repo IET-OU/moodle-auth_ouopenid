@@ -39,7 +39,7 @@ if ( ! $oucu ) {
 $user = $DB->get_record( 'user', [ 'username' => UNAME_PREFIX . $oucu ]);
 
 if ( ! $user ) {
-    cli_error( 'Error. Invalid <OUCU> parameter', 1 );
+    cli_error( 'Warning. User not found or Invalid <OUCU> argument: ' . $oucu, 1 );
 }
 
 print_r([ $user->id, $user->username, FLAG_DELETE ]);
@@ -48,7 +48,8 @@ foreach ( $tables as $table ) {
     $tesla_data = $DB->get_records( DB_PREFIX . $table, [ 'userid' => $user->id ]);
 
     cli_writeln( 'Table: ' . DB_PREFIX . $table );
-    print_r( $tesla_data );
+
+    echo process_tesla_data( $tesla_data );
 }
 
 if ( ! FLAG_DELETE ) {
@@ -72,6 +73,18 @@ if ( $inp_delete === 'Y' ) {
     cli_writeln( 'Moodle-TeSLA data deleted for user: '. $oucu );
 } else {
     cli_error( 'Cancel delete.', 1 );
+}
+
+function process_tesla_data( $tesla_data ) {
+
+    foreach ( $tesla_data as $row ) {
+        if ( isset( $row->timecreated ) ) {
+            $row->timecreated_iso = date( 'c', $row->timecreated );
+        }
+    }
+    $output = print_r( $tesla_data, $return = true );
+
+    return preg_replace('/;base64,[^=]+/', ';base64, [...] ', $output);
 }
 
 // End.
