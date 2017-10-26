@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../../config.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 define('DEBUG', filter_input(INPUT_GET, 'debug', FILTER_VALIDATE_BOOLEAN));
-define('POEMS', filter_input(INPUT_GET, 'poems', FILTER_VALIDATE_BOOLEAN));
+define('LONG_TXT', filter_input(INPUT_GET, 'longtexts', FILTER_VALIDATE_BOOLEAN));
 define('USER_LOGGED_IN', isloggedin());  // Was: ( 0 !== $USER->id )
 
 if (DEBUG) {
@@ -52,7 +52,7 @@ echo json_encode([
     'survey_urls'=> $prof->survey_urls,
     'user_roles' => OuUser::getRoles(),
     'redirect_url' => USER_LOGGED_IN ? $prof->redirect_url : null,
-    'strings' => USER_LOGGED_IN ? OuUser::getStringsAjax(POEMS) : [],
+    'strings' => USER_LOGGED_IN ? OuUser::getStringsAjax(LONG_TXT) : [],
     'config' => USER_LOGGED_IN && $config ? $config : [ 'ga' => $config[ 'ga' ] ],
 ], DEBUG ? JSON_PRETTY_PRINT : null);
 
