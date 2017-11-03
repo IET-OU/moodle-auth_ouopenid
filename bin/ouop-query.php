@@ -29,6 +29,7 @@ $counts = [
     'Keystroke preset' => OuUser::count([ 'teslainstrument' => 'kd' ]),
     'Plagiarism preset' => OuUser::count([ 'teslainstrument' => 'tpt' ]),
     'No preset' => OuUser::count([ 'teslainstrument' => null ]),  // Should always be '0'!
+    'Is team' => OuUser::count([ 'is_team' => 1 ]),
 ];
 
 cli_write('Counts: ');

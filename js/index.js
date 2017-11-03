@@ -27,8 +27,11 @@ require('./src/when-call')(
     }
 
     var $body = $('body');
+    var is_enrollment_page = $('#page-local-tesla-views-enrollment').length;
 
     $body.addClass(L.href.match(/debug=1/) ? 'debug-param' : '');
+
+    userJsonUrl += ( is_enrollment_page ? '&longtexts=true' : '' );
 
     console.warn('ouopenid $:', $.fn.jquery, BUILD_TIME, W.M.cfg); // W.Y.version
 

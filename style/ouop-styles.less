@@ -231,6 +231,21 @@ iframe.ouop-consent-doc {
       display: none;
     }
   }
+
+  div.editor_atto_toolbar {
+
+    .atto_count_button[ data-greater ] {
+      background: #fdd;
+      border: 1px solid red;
+      font-size: .9em;
+      padding: 4px 3px;
+    }
+
+    .atto_count_button[ data-greater = true ] {
+      background: #dfd;
+      border-color: green;
+    }
+  }
 }
 
 
@@ -254,6 +269,24 @@ iframe.ouop-consent-doc {
   }
 } */
 
+.ouop-longtext {
+  line-height: 1.4rem;
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  p {
+    margin-bottom: .8rem;
+  }
+}
+
+.ouop-enroll-ks {
+  textarea {
+    height: 33em;
+    padding: 6px;
+  }
+}
 
 .performanceinfo {
   display: none;
@@ -263,6 +296,5 @@ iframe.ouop-consent-doc {
     display: block;
   }
 }
-
 
 // End.

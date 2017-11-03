@@ -81,6 +81,9 @@ function process_tesla_data( $tesla_data ) {
         if ( isset( $row->timecreated ) ) {
             $row->timecreated_iso = date( 'c', $row->timecreated );
         }
+        if ( isset( $row->timesubmitted ) ) {
+            $row->timesubmitted_iso = date( 'c', $row->timesubmitted );
+        }
     }
     $output = print_r( $tesla_data, $return = true );
 

@@ -4,11 +4,14 @@
 module.exports = function ($, resp) {
 
   fix_enrollment_calibrate_page($);
-  fix_typing_enrollment_page($);
+  fix_typing_enrollment_page($, resp);
   fix_enrollment_start_page($);
 
   fix_pilot_fallback_link($, resp);
   fix_voice_enrollment_controls($);
+
+  inject_long_texts($, resp);
+  quiz_word_count($, resp);
 
   $(window.document).ajaxSuccess(function (ev, xhr, settings) {
     if (settings.url.match(/enrollment_ajax.php/)) {
@@ -33,6 +36,44 @@ var tesla_inst_names = {
 };
 var tesla_inst_url_regex = /&target=(ks|tpt|fa|fr|vr)/;
 
+function quiz_word_count($, resp) {
+  if (!$('#page-mod-quiz-attempt').length || !$('.icon_tesla[ data-instrument = ks ]').length) {
+    return;
+  }
+
+  window.setInterval(function () {
+    var $editor = $('.editor_atto_content');
+    var $countbtn = $('.atto_count_button');
+    var hastext = $editor.text().match(/\w+/);
+    var count = hastext ? $editor.text().split(' ').length : 0;
+
+    $countbtn.html('Words: ' + count).attr({
+      'aria-label': 'Word count',
+      'data-count': count,
+      'data-min_count': resp.config.ks_min_count,
+      'data-greater': (count > resp.config.ks_min_count)
+    });
+    // console.warn('ouop. Word count:', count, $editor);
+  }, 1500);
+
+  console.warn('ouop: quiz-word-count');
+}
+
+function inject_long_texts($, resp) {
+  var $mainbox = $('.ouop-enroll-ks #region-main-box.col-xs-12');
+  var qn = $('body').attr('data-ouop-qn-x');
+
+  if (qn) {
+    var longtext = resp.strings[ 'lngtxt_' + qn ];
+
+    $mainbox.removeClass('col-xs-12').addClass('col-xs-6');
+
+    $mainbox.after('<div class="col-xs-6 ouop-longtext">%s</div>'.replace('%s', longtext));
+
+    console.warn('ouop. Longtext:', qn, $('.ouop-longtext') );
+  }
+}
+
 function fix_voice_enrollment_controls($) {
   var $voxcounter = $('.ouop-enroll-vr button#counter');
   var $startbutton = $('.ouop-enroll-vr button#start_recording');
@@ -52,7 +93,7 @@ function fix_voice_enrollment_controls($) {
   }, 2000);
 }
 
-function fix_typing_enrollment_page($) {
+function fix_typing_enrollment_page($, resp) {
   var $wordcount = $('.path-local-tesla-views .btn #word_counter');
   var $btn = $wordcount.closest('button');
   var $form = $wordcount.closest('form');
@@ -73,6 +114,10 @@ function fix_typing_enrollment_page($) {
         .replace(/%1/, qm[ 1 ]).replace(/%2/, qm[ 1 ]).replace(/%3/, qm[ 2 ]);
 
     $question.html($question.text().replace(qm[ 0 ], qn_text));
+
+    $('body').attr('data-ouop-qn-x', qm[ 1 ]);
+
+    resp.question_number = qm[ 1 ];
   }
 }
 
@@ -112,7 +157,7 @@ function fix_enrollment_calibrate_page($) {
 // Pilot alternative or fallback.
 function fix_pilot_fallback_link($, resp) {
   var $msg = $('.ouop-pilot-fallback-msg');
-  var $link = $('.path-course-view p a[ href *= "#!-pilot-fallback-" ]');
+  var $link = $('.path-course-view a[ href *= "#!-pilot-fallback-" ]');
 
   var url = $link.attr('href');
   var m_inst = url ? url.match(/-pilot-fallback-for-(\w+)/) : null;
