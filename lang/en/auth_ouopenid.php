@@ -52,9 +52,17 @@ $string[ 'login_field_help' ] = 'Your OUCU — 2 to 4 letters, followed by 1 to 
 $string[ 'login_submit' ] = 'Sign in';
 $string[ 'login_footer' ] = '© 2017 The Open University';
 $string[ 'login_footer_link' ] = 'https://www.open.ac.uk/';
-$string[ 'survey_end_title' ] = 'Redirecting ';
+
+$string[ 'survey_end_title' ] =
+$string[ 'survey_end_title_pre' ] = 'Redirecting to activity &hellip;';
+$string[ 'survey_end_title_post' ] = 'The end';
 $string[ 'survey_end_msg' ] =
-'<p>Thank you for completing the survey.
-<p> Redirecting ...';
+$string[ 'survey_end_msg_pre' ] =
+  '<p> Thank you for completing the survey.
+<p> Redirecting to activity &hellip;';
+$string[ 'survey_end_msg_post' ] =
+  '<p> Thank you for completing the survey.
+<p> The end.
+<p> You can close your browser window or tab.';
 
 // End.

@@ -35,7 +35,7 @@ module.exports = {
   },
 
   set_course_name: function ($, resp) {
-    var $course_name = $('.path-course-view, .path-mod-page').find('.breadcrumb-item a[ href *= "course/view.php" ]').first(); // .find('a[ data-key = coursehome ]');
+    var $course_name = $('.path-course-view, .path-mod').find('.breadcrumb-item a[ href *= "course/view.php" ]').first(); // .XX-path-mod-page,
     var course_code = $course_name.text();
 
     resp.course_code = course_code || null;

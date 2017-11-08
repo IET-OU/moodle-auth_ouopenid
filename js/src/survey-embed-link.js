@@ -84,13 +84,13 @@ function fix_pilot_survey_links ($, resp) {
 }
 
 function inject_post_activity_survey_link ($, resp) {
-    var $container_quiz_rev = $('#page-mod-quiz-review #user-notifications');
+    // var $container_quiz_rev = $('#page-mod-quiz-review #user-notifications');
     var $container_quiz = $('#page-mod-quiz-view');
     var $container_assign = $('#page-mod-assign-view');
-    var survey_url = resp.survey_urls.post.replace('{OUCU}', resp.profile.ouop_oucu);
+    var survey_url = resp.survey_urls[ resp.course_code ].post.replace('{OUCU}', resp.profile.ouop_oucu);
     var util = resp.util;
 
-    $container_quiz_rev.append(util.alert(util.str('post_survey_msg', survey_url)));
+    // $container_quiz_rev.append(util.alert(util.str('post_survey_msg', survey_url)));
 
     if ($container_assign.find('.submissionstatussubmitted').length) {
       $container_assign.find('#user-notifications').append(util.alert(util.str('post_survey_msg', survey_url)));
@@ -98,7 +98,8 @@ function inject_post_activity_survey_link ($, resp) {
 
       C.warn('ouop: post-activity-survey-link - assign');
     } else if ($container_quiz.find('.quizattemptsummary').length) {
-      $container_quiz.find('#user-notifications').append(util.alert(util.str('post_survey_msg', survey_url)));
+
+      $container_quiz.find('.box.quizattempt').after(util.alert(util.str('post_survey_msg', survey_url)));
       $container_quiz.addClass('ouop-submitted');
 
       C.warn('ouop: post-activity-survey-link - quiz-view');

@@ -44,7 +44,7 @@ header('X-UA-Compatible: IE=edge');
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title><?php // print_string( 'survey_end_title', OUOP_STRING ) ?> (survey-end)</title>
+<title><?php print_string( 'survey_end_title', OUOP_STRING ) ?> (survey-end)</title>
 
 <link rel="X-stylesheet" href="/auth/ouopenid/style/login.css" />
 <style>
@@ -54,22 +54,33 @@ body {
     font: 1.1em sans-serif;
     line-height: 1.4em;
     margin: 2em auto;
-    max-width: 40em;
+    max-width: 33em;
     X-min-width: 26em;
 }
+.footer { margin-top: 2em; }
 .X-is-embed { margin: 2px; }
-.is_embed .footer { display: none; }
+.X-is-embed .footer { display: none; }
+.from-pre-survey .post-survey-msg,
+.from-post-survey .pre-survey-msg { display: none; }
 </style>
 
 <body class="survey-end-page">
 
 <div>
 
-  <div class="survey-end-msg">
-    <?php // print_string( 'survey_end_msg', OUOP_STRING ) ?>
+  <div class="survey-end-msg pre-survey-msg">
+    <?php print_string( 'survey_end_msg', OUOP_STRING ) ?>
 
+    <!--
     <p> Thank you for completing the survey.
-    <p> Redirecting ...
+    <p> Redirecting to activity &hellip;
+    -->
+  </div>
+
+  <div class="survey-end-msg post-survey-msg">
+    <p> Thank you for completing the survey.
+    <p> The end.
+    <p> You can close your browser window or tab.
   </div>
 
 
@@ -85,6 +96,7 @@ body {
 <?php
   echo json_encode([
     'redirects' => $CFG->auth_ouopenid_redirects,
+    'hash' => '#section-3',
     'timeout' => 3000,
     'other' => 1,
   ]);
