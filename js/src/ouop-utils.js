@@ -78,5 +78,6 @@ function replace_object (str, mapObj) {
 
 function alert (msg, id, cls) {
   return '<div id="' + (id || 'oua') + '" class="ouop alert ' +
-     (cls || 'alert-info') + '" role="alert">' + msg + '</div>';
+     (cls || 'alert-warning') + '" role="alert">' +
+     msg.replace(/href=/g, 'class="alert-link" href=') + '</div>';
 }

@@ -28,7 +28,7 @@ function generic_embeds ($, resp) {
     var $link = $(el);
     var url = util.replace($link.attr('href'), { '{oucu}': resp.profile.ouop_oucu });
     var m_height = url.match(/height=(\d+\w+);?/);
-    var height = 'height: ' + (m_height ? m_height[ 1 ] : '1000px;');
+    var height = 'height: ' + (m_height ? m_height[ 1 ] : '1050px;');
 
     $link.replaceWith(util.replace('<iframe src="{u}" style="{h}" class="ouop-generic-ifr" id="ifr-{i}"></iframe>', {
       '{u}': url, '{h}': height, '{i}': idx
@@ -48,7 +48,7 @@ function embed_pilot_surveys ($, resp) {
       var survey_urls = resp.survey_urls;
       var survey_url = url.match(/-pre-survey-/) ? survey_urls.pre : survey_urls.post;
       var m_height = url.match(/height=(\d+\w+);?/);
-      var height = 'height: ' + (m_height ? m_height[ 1 ] : '1000px;');
+      var height = 'height: ' + (m_height ? m_height[ 1 ] : '1050px;');
 
       survey_url = survey_url.replace(/\{?OUCU\}?/, resp.profile.ouop_oucu).replace(/\{COURSE\}/gi, resp.course_code);
 
