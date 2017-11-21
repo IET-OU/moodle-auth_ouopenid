@@ -1,5 +1,5 @@
 <?php
-/** Long texts, or POEMs! Language strings.
+/** Long texts (or poems) to be read aloud or typed! Language strings, for research studies.
  *
  * @package auth_ouopenid
  * @author  Nick Freear, 16-August-, 26-October-2017.
@@ -220,7 +220,7 @@ given to write down the answers !
 the very least for Jennie Lee and all the many people who created the
 Open University. Time was (I still recall) when some would say (and did !)
 'of course you can have a real degree - or try somewhing with the OU' -
-those remarks have long been silenced ....
+those remarks have long been silenced ...
 
 EOT;
 

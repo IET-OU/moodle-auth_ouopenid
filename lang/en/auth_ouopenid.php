@@ -10,7 +10,7 @@
  */
 
 $string[ 'pluginname' ] = 'OU-OpenID';
-$string[ 'auth_ouopeniddescription' ] = 'This plugin is a wrapper around the OpenID authentication plugin';
+$string[ 'auth_ouopeniddescription' ] = 'This plugin is a wrapper around the OpenID authentication plugin.';
 
 // A hack!
 require_once __DIR__ . '/local_oupilot_poem.php';
@@ -27,24 +27,26 @@ $string[ 'wordcount_title' ] = 'Word count';
 $string[ 'continuebutton' ] = 'Continue';
 $string[ 'question_progress' ] = 'Question <i>{$a}</i><span> of {$a2}</span>';
 $string[ 'post_survey_msg' ] =
-  '<p> Thank you for completing the pilot activity.
-<p> Please <a href="{$a}">complete the short and important post-activity questionnaire</a>.
-<p> Thank you! Your participation is very much appreciated.';
+  '<p>Thank you for completing the pilot activity.</p>
+<p>Please <a href="{$a}">complete the short and important post-activity questionnaire</a>.</p>
+<p>Thank you! Your participation is very much appreciated.</p>';
 
 // Used in the login form (index.php)
-$string[ 'login_title' ] = 'Sign in — TeSLA Pilot 2 (The Open University)'; // Page <title> element.
-$string[ 'login_heading' ] = 'TeSLA pilot';
-$string[ 'login_intro' ] =
-  'Thank you for agreeing to participate in The Open University’s TeSLA pilot.
-<p> The OU takes your Internet security very seriously. This means, to get started, there are three steps.';
-$string[ 'login_steps' ] =
-'<li> Please sign in below with your Open University username (OUCU).
-  This will redirect you to the standard Open University login page.
+$string[ 'login_title' ] = 'Sign in — TeSLA study (The Open University)'; // Page <title> element.
+$string[ 'login_heading' ] = 'TeSLA study';
+$string[ 'login_intro' ] = <<<EOT
+<p>Thank you for agreeing to participate in The Open University’s TeSLA study.</p>
+<p>The OU takes your Internet security very seriously. This means, to get started, there are three steps.</p>
+EOT;
+$string[ 'login_steps' ] = <<<EOT
+<li> Please sign in below with your Open University username (OUCU).
+  This will redirect you to the standard Open University login page.</li>
 <li> Please sign in to the Open University as usual.
   No personal details are shared with TeSLA.
-  This will redirect you to the OU OpenID page.
+  This will redirect you to the OU OpenID page.</li>
 <li> Please complete the OU OpenID page.
-  This will redirect you to the TeSLA pilot.';
+  This will redirect you to the TeSLA pilot.</li>
+EOT;
 $string[ 'login_label' ] = 'Open University username (<abbr title="{$a}">OUCU</abbr>)';
 $string[ 'login_label_abbr' ] = 'Open University computer username';
 // Form validation - title attribute - 'login_field_help'.
@@ -54,15 +56,15 @@ $string[ 'login_footer' ] = '© 2017 The Open University';
 $string[ 'login_footer_link' ] = 'https://www.open.ac.uk/';
 
 $string[ 'survey_end_title' ] =
-$string[ 'survey_end_title_pre' ] = 'Redirecting to activity &hellip;';
+$string[ 'survey_end_title_pre' ] = 'Redirecting to activity …';
 $string[ 'survey_end_title_post' ] = 'The end';
 $string[ 'survey_end_msg' ] =
 $string[ 'survey_end_msg_pre' ] =
-  '<p> Thank you for completing the survey.
-<p> Redirecting to activity &hellip;';
+  '<p>Thank you for completing the questionnaire.</p>
+<p>Redirecting to activity …</p>';
 $string[ 'survey_end_msg_post' ] =
-  '<p> Thank you for completing the survey.
-<p> The end.
-<p> You can close your browser window or tab.';
+  '<p>Thank you for completing the questionnaire.</p>
+<p>The end.</p>
+<p>You can close your browser window or tab.</p>';
 
 // End.

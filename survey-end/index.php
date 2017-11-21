@@ -69,18 +69,22 @@ body {
 <div>
 
   <div class="survey-end-msg pre-survey-msg">
-    <?php print_string( 'survey_end_msg', OUOP_STRING ) ?>
+    <?php print_string( 'survey_end_msg_pre', OUOP_STRING ) ?>
 
     <!--
-    <p> Thank you for completing the survey.
+    <p> Thank you for completing the questionnaire.
     <p> Redirecting to activity &hellip;
     -->
   </div>
 
   <div class="survey-end-msg post-survey-msg">
-    <p> Thank you for completing the survey.
+    <?php print_string( 'survey_end_msg_post', OUOP_STRING ) ?>
+
+    <!--
+    <p> Thank you for completing the questionnaire.
     <p> The end.
     <p> You can close your browser window or tab.
+    -->
   </div>
 
 

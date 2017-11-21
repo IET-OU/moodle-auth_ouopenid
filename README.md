@@ -109,7 +109,7 @@ Developed for the [TeSLA project][].
 [gh]: https://github.com/IET-OU/moodle-auth_ouopenid
 [composer]: https://getcomposer.org/
 [npm]: https://npmjs.com/
-[iet]: http://iet.open.ac.uk/
+[iet]: https://iet.open.ac.uk/
 [ou]: http://www.open.ac.uk/
 [travis]:  https://travis-ci.org/IET-OU/moodle-auth_ouopenid
 [travis-icon]: https://api.travis-ci.org/IET-OU/moodle-auth_ouopenid.svg
