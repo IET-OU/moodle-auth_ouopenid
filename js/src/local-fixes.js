@@ -124,18 +124,18 @@ function fix_typing_enrollment_page($, resp) {
 // 14-August-2017.
 function fix_enrollment_start_page($) {
   var $alert = $('#page-local-tesla-views-enrollment #user-notifications .alert');
-  var message = $alert.text();
-  var m_enroll = message ? message.match(/The required enrollments are: ([\w ]+)/) : null;
+  var msg = $alert.text();
+  var m_enroll = msg ? msg.match(/(:?missing training act\w+ is|required enrol\w+ are): ([\w ]+)/) : null;  //<i class="oup-req"><\/i>
   var inst = m_enroll ? m_enroll[ 1 ] : null;
   var inst_code = inst in tesla_inst_names ? tesla_inst_names[ inst ] : null;
+
+  $alert.removeClass('alert-danger').addClass('alert-warning').addClass('alert-info');
 
   if (inst) {
     $('body')
       .addClass('ouop-enroll-page')
       .addClass('ouop-enroll-' + inst.replace(' ', '-'))
       .addClass('ouop-enroll-' + inst_code);
-
-    $alert.removeClass('alert-danger').addClass('alert-warning');
 
     console.warn('ouop. Enroll instrument:', inst_code, inst);
   }
