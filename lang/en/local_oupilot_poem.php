@@ -180,8 +180,8 @@ $string[ 'lngtxt_4' ] = <<<EOT
     <h1> Ten cheers for Jennie Lee </h1>
     <p> John Cowin
     <p> Briefly - born in London but lived formative years in Salford - left
-school with a gret big zero - returned to higher education at the tender
-age of 30 - at the Co-operative college - then based near Nottigham.
+school with a great big zero - returned to higher education at the tender
+age of 30 - at the Co-operative college - then based near Nottingham.
 Discovered the true delights of study in a very encouraging environment.
 My then tutor suggested that the Open University was being established
 and that it might well be an ideal next stage for me.
@@ -191,8 +191,8 @@ boys - complete with canings/strappings for pupils who achieved four out
 of ten or less with their homework).
     <p> After leaving school I served some years as a bookbinder in Salford -
 then London - moved some time later to the International Telephone
-Exhange - near St Pauls - finally gave up work, as they say and started
-teaching at Hornchurch technical collge - at the same time undertaking OU
+Exchange - near St Pauls - finally gave up work, as they say and started
+teaching at Hornchurch technical college - at the same time undertaking OU
 studies - social sciences - arts (loved the music and history) - then a
 couple of education slots. Doubtless the aforementioned years influenced
 my approach to teaching (further education and from 1981 with the OU).
