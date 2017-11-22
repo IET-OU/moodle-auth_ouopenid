@@ -28,6 +28,7 @@ $counts = [
     'Tranche 5' => OuUser::count([ 'batch' => 5 ]),
     'Keystroke preset' => OuUser::count([ 'teslainstrument' => 'kd' ]),
     'Plagiarism preset' => OuUser::count([ 'teslainstrument' => 'tpt' ]),
+    'Voice recog preset' => OuUser::count([ 'teslainstrument' => 'vr' ]),
     'No preset' => OuUser::count([ 'teslainstrument' => null ]),  // Should always be '0'!
     'Is team' => OuUser::count([ 'is_team' => 1 ]),
 ];
