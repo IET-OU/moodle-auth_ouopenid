@@ -38,7 +38,7 @@ if ($argc > 1 && $argv[ $argc - 1 ] === '--delete') {
 }
 
 if ($argc > 1) {
-    $csvfile = CSV_DIR . '/' . clean_param($argv[ $argc - 1 ], PARAM_FILE);
+    $csvfile = CSV_DIR . '/' . clean_param($argv[ $argc - 1 ], PARAM_PATH);
 } else {
     $csvfile = CSV_DIR . CSV_FILENAME;
 }
