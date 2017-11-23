@@ -84,6 +84,8 @@ function fix_pilot_survey_links ($, resp) {
 }
 
 function inject_post_activity_survey_link ($, resp) {
+    if (! $('.path-mod').length) { return; }
+
     // var $container_quiz_rev = $('#page-mod-quiz-review #user-notifications');
     var $container_quiz = $('#page-mod-quiz-view');
     var $container_assign = $('#page-mod-assign-view');

@@ -129,7 +129,7 @@ function fix_enrollment_start_page($) {
   var inst = m_enroll ? m_enroll[ 1 ] : null;
   var inst_code = inst in tesla_inst_names ? tesla_inst_names[ inst ] : null;
 
-  $alert.removeClass('alert-danger').addClass('alert-warning').addClass('alert-info');
+  $alert.removeClass('alert-danger').removeClass('alert-warning').addClass('alert-info');
 
   if (inst) {
     $('body')
