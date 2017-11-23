@@ -25,16 +25,16 @@ class User
 
     const CSV_OUCU = 0;  // CSV file column offsets.
     const CSV_TEAM = 4;
-    const CSV_BATCH = 8; // TODO: bug #5.
+    const CSV_BATCH = 8; // Bug #5.
 
     const PREFIX = 'ouop_';
-    const UNDEF_INSTRUMENT = 'tpt';  //'kd';
-    const INSTRUMENT_REGEX = '@^(kd|tpt)@';
+    const UNDEF_INSTRUMENT = 'kd';  // 'tpt';
+    const INSTRUMENT_REGEX = '/^(kd|tpt|fa|vr|fr)/';
 
     const OUCU_REGEX = '@^[a-z]{2,4}\d{1,7}$@';
-    const OPENID_URL_REGEX = '@^http:\/\/openid\.open\.ac\.uk\/oucu\/(?P<oucu>\w+)$@';
-    const USERNAME_REGEX = '@^httpopenidopenacukoucu(?P<oucu>\w+)$@';
-    const USERNAME_REPLACE = '@^(httpopenidopenacukoucu)?@';
+    const OPENID_URL_REGEX = '@^https?:\/\/openid\.open\.ac\.uk\/oucu\/(?P<oucu>\w+)$@';
+    const USERNAME_REGEX = '@^https?openidopenacukoucu(?P<oucu>\w+)$@';
+    const USERNAME_REPLACE = '@^(https?openidopenacukoucu)?@';
 
     protected static $warnings = [];
 
