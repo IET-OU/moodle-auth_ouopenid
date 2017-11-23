@@ -2,7 +2,7 @@
 if ( php_sapi_name() === 'cli' ) die('Direct access not allowed. Exiting');
 
 /**
- * A quick & dirty "poem server".
+ * A quick & dirty "long-text / poem server".
  *
  *     php -S localhost:8000 bin/www-poem.php
  *
@@ -17,15 +17,15 @@ require_once __DIR__ . '/../lang/en/local_oupilot_poem.php';
 define( 'STRING_ID', filter_input( INPUT_GET, 'id', FILTER_SANITIZE_STRING ));
 define( 'SERIF', filter_input( INPUT_GET, 'serif', FILTER_VALIDATE_BOOLEAN ));
 
-$poem = STRING_ID && isset($string[ STRING_ID ]) ? $string[ STRING_ID ] : null;
+$longtext = STRING_ID && isset($string[ STRING_ID ]) ? $string[ STRING_ID ] : null;
 
-if (! $poem) {
+if (! $longtext) {
     header( 'HTTP/1.1 404 Not Found', 404 );
-    ?> Poem / text not found. <?php
+    ?> Long-text / poem not found. <?php
     exit;
 }
 
-?><!doctype html> <meta charset="utf-8"> <title> Poem (<?php echo STRING_ID ?>) </title>
+?><!doctype html> <meta charset="utf-8"> <title> Long-text (<?php echo STRING_ID ?>) </title>
 
 <style>
   body { margin: 4px; color: #333; font: 1.1em <?php echo SERIF ? 'Georgia,' : 'sans-' ?>serif; }
@@ -36,4 +36,4 @@ if (! $poem) {
   h1  { font: 1.5em sans-serif; margin: .5em 0; }
 </style>
 
-<?php echo $poem ?>
+<?php echo $longtext ?>

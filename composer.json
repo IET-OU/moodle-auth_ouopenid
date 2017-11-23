@@ -60,10 +60,10 @@
       "npm i -g csslint@^1 && npm i -g jshint@^2"
     ],
     "phantom-clone": "git clone --depth=5 https://github.com/ariya/phantomjs.git && ln -s phantomjs/examples/rasterize.js",
-    "poem-srv": "php -S localhost:8000 bin/www-poem.php",
-    "poem-images": [
-      "phantomjs rasterize.js 'http://localhost:8000?id=poem_1&serif=1' pix/poem_1.png  # '600px*716px'",
-      "phantomjs rasterize.js 'http://localhost:8000?id=poem_2&serif=1' pix/poem_2.png"
+    "text-srv": "php -S localhost:8000 bin/www-poem.php",
+    "text-images": [
+      "phantomjs rasterize.js 'http://localhost:8000?id=lngtxt_1&serif=1' pix/lngtxt_1.png  # '600px*716px'",
+      "phantomjs rasterize.js 'http://localhost:8000?id=lngtxt_2&serif=1' pix/lngtxt_2.png"
     ],
     "build": [
       "npm run browserify",

@@ -17,7 +17,7 @@ Available via IET-OU Satis:
 
 To facilitate pilot research studies using Moodle (e.g. for TeSLA) by:
 
-1. Enabling OpenID login using just a username, not a full URL (e.g. https://openid.example.org/{username})
+1. Enabling OpenID login using just a username, not a full URL (e.g. <https://example.org/openid/{username}>)
 2. Simple login page with custom instructions (edit via Moodle language customisations), `/index.php`,
 3. Importing pilot-related data into a separate DB table, `mdl_auth_ouopenid_users`,
 4. Making the pilot-related data available via `/user/ajax.php`,
@@ -56,13 +56,13 @@ composer eslint
 
 ## Generate text-images
 
-Re-create images of poetry / other text, to prevent copy-paste
+Re-create images of long-texts / poetry, to prevent copy-paste
 (e.g. for TeSLA keystroke dynamics pilot):
 
 ```sh
 composer phantom-clone
-composer poem-srv
-composer poem-images
+composer text-srv
+composer text-images
 ```
 
 ## Site-wide Javascript and styles
@@ -97,9 +97,9 @@ Developed for the [TeSLA project][].
 © 2017 [The Open University][ou]. ([Institute of Educational Technology][iet])
 
 
-[auth]: http://your-moodle.example.com/admin/settings.php?section=manageauths
+[auth]: https://example.edu/your-moodle/admin/settings.php?section=manageauths
     "Your Moodle > Site administration > Plugins > Authentication > Manage Authentication"
-[addhtml]: http://your-moodle.example.com/admin/settings.php?section=additionalhtml#admin-additionalhtmlfooter
+[addhtml]: https://example.edu/your-moodle/admin/settings.php?section=additionalhtml#admin-additionalhtmlfooter
     "Your Moodle > Site administration > Appearance > Additional HTML"
 
 [TeSLA project]: http://tesla-project.eu/

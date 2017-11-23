@@ -17,6 +17,7 @@ require_once __DIR__ . '/local_oupilot_poem.php';
 
 // Used via Javascript / Ajax.
 $string[ 'testmail' ] = 'tesla.ouuk+{$a}@gmail.com';
+// Warning: no block-elements (e.g. <P>) in 'continuelink';
 $string[ 'continuelink' ] = 'Continue to your pilot course &rarr;';
 $string[ 'form_warning' ] = 'Please don\'t edit your user profile!';
 $string[ 'form_redirect_msg' ] = 'Redirecting ... <p> If nothing happens just click "Continue" below.';
