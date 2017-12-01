@@ -31,6 +31,10 @@ $string[ 'post_survey_msg' ] =
   '<p>Thank you for completing the pilot activity.</p>
 <p>Please <a href="{$a}">complete the short and important post-activity questionnaire</a>.</p>
 <p>Thank you! Your participation is very much appreciated.</p>';
+$string[ 'no_ua_compat_msg' ] =
+  'Sorry! This browser isn\'t supported by this TeSLA study.
+Would you like to try <a href="%s">a different browser</a>?';
+$string[ 'no_ua_compat_url' ] = 'https://browsehappy.com/';
 
 // Used in the login form (index.php)
 $string[ 'login_title' ] = 'Sign in — TeSLA study (The Open University)'; // Page <title> element.

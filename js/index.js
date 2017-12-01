@@ -53,6 +53,8 @@ require('./src/when-call')(
 
       console.warn('ouopenid JSON: ', data, jqXHR);
 
+      require('./src/browser-compat')($, data);
+
       require('./src/analytics').run($, data);
       // ga.analytics($, data);
       // ga.handle_moodle_events($);

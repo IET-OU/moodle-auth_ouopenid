@@ -321,7 +321,7 @@ class User
     public static function getStringsAjax($longTexts = false)
     {
         $string_ids = [ 'continuelink', 'form_warning', 'form_redirect_msg', 'wordcount', 'wordcount_title',
-            'continuebutton', 'question_progress', 'return_msg', 'newenrol_msg', 'testmail', 'post_survey_msg' ];
+            'continuebutton', 'question_progress', 'return_msg', 'newenrol_msg', 'testmail', 'post_survey_msg', 'no_ua_compat_msg', 'no_ua_compat_url' ];
 
         $string_ids = $longTexts ? array_merge($string_ids, [ 'lngtxt_1', 'lngtxt_2', 'lngtxt_3', 'lngtxt_4', ]) : $string_ids;
 

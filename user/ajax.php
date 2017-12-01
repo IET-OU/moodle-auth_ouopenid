@@ -52,7 +52,7 @@ echo json_encode([
     'survey_urls'=> $prof->survey_urls,
     'user_roles' => OuUser::getRoles(),
     'redirect_url' => USER_LOGGED_IN ? $prof->redirect_url : null,
-    'strings' => USER_LOGGED_IN ? OuUser::getStringsAjax(LONG_TXT) : [],
+    'strings' => OuUser::getStringsAjax(LONG_TXT), // USER_LOGGED_IN ? OuUser::getStringsAjax(LONG_TXT) : [],
     'config' => USER_LOGGED_IN && $config ? $config : [ 'ga' => $config[ 'ga' ] ],
 ], DEBUG ? JSON_PRETTY_PRINT : null);
 
