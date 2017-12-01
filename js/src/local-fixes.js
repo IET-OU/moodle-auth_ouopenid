@@ -162,7 +162,7 @@ function fix_pilot_fallback_link($, resp) {
   var url = $link.attr('href');
   var m_inst = url ? url.match(/-pilot-fallback-for-(\w+)/) : null;
   var inst_code = m_inst ? m_inst[ 1 ] : null;
-  var fallback = resp.config.fallback_for;
+  var fallback = resp.config.fallback_for || {};
   var fallback_url = fallback[ inst_code ] || null;
 
   $msg.addClass('alert alert-info');
