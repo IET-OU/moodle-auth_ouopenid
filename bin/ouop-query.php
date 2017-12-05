@@ -21,14 +21,13 @@ cli_heading('OU-OpenID DB queries');
 
 $counts = [
     'Total users' => OuUser::count(),
-    'Tranche 1' => OuUser::count([ 'batch' => 0 ]),
+    'Tranche 1' => OuUser::count([ 'batch' => 0 ]), // Deliberately '0'!
     'Tranche 2' => OuUser::count([ 'batch' => 2 ]),
-    'Tranche 3' => OuUser::count([ 'batch' => 3 ]),
-    'Tranche 4' => OuUser::count([ 'batch' => 4 ]),
-    'Tranche 5' => OuUser::count([ 'batch' => 5 ]),
     'Keystroke preset' => OuUser::count([ 'teslainstrument' => 'kd' ]),
     'Plagiarism preset' => OuUser::count([ 'teslainstrument' => 'tpt' ]),
+    'Forensic preset'   => OuUser::count([ 'teslainstrument' => 'fa' ]),
     'Voice recog preset' => OuUser::count([ 'teslainstrument' => 'vr' ]),
+    'Face recog preset' => OuUser::count([ 'teslainstrument' => 'fa' ]),
     'No preset' => OuUser::count([ 'teslainstrument' => null ]),  // Should always be '0'!
     'Is team' => OuUser::count([ 'is_team' => 1 ]),
 ];
