@@ -48,7 +48,7 @@ function embed_pilot_surveys ($, resp) {
       var survey_urls = resp.survey_urls;
       var survey_url = url.match(/-pre-survey-/) ? survey_urls.pre : survey_urls.post;
       var m_height = url.match(/height=(\d+\w+);?/);
-      var height = 'height: ' + (m_height ? m_height[ 1 ] : '1050px;');
+      var height = m_height ? ('height: '+ m_height[ 1 ]) : '';
 
       survey_url = survey_url.replace(/\{?OUCU\}?/, resp.profile.ouop_oucu).replace(/\{COURSE\}/gi, resp.course_code);
 
@@ -57,6 +57,7 @@ function embed_pilot_surveys ($, resp) {
       })); // .replace(/%s/, survey_url).replace(/%h/, height).replace(/%d/, idx)
 
       var $iframe = $('#ifr-' + idx).addClass('ouop-pilot-survey-ifr');
+      $('body').addClass('ouop-has-pilot-survey-ifr');
 
       C.warn('ouop: pilot-survey-embeds', idx, survey_url, $iframe);
     });

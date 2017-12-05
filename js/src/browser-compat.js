@@ -10,12 +10,11 @@ module.exports = function ($, resp) {
   var no_compat_regex = resp.config.no_compat_regex || / (MSIE |Trident\/|Edge\/)\d+/;
   var $notify = $('#user-notifications');
   var str = resp.strings;
-  var url = str.no_ua_compat_url || 'https://browsehappy.com/';
-  var no_compat_msg = str.no_ua_compat_msg || 'Sorry! This browser isn\'t supported by this TeSLA study. Would you like to try <a href="%s">a different browser</a>?';
+  var no_compat_msg = str.no_ua_compat_msg || 'Sorry! Your browser isn\'t supported by this TeSLA study. Would you like to try <a href="%s">a different browser</a>?';
   var m_agent = agent.match(no_compat_regex);
 
   if (m_agent) {
-    no_compat_msg = no_compat_msg.replace(/%s/, url);
+    no_compat_msg = no_compat_msg.replace(/%s/, str.no_ua_compat_url);
 
     $notify.prepend('<div class="alert alert-danger ouop-no-ua-compat-msg">%s</div>'.replace(/%s/, no_compat_msg));
   }

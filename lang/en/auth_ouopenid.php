@@ -32,7 +32,7 @@ $string[ 'post_survey_msg' ] =
 <p>Please <a href="{$a}">complete the short and important post-activity questionnaire</a>.</p>
 <p>Thank you! Your participation is very much appreciated.</p>';
 $string[ 'no_ua_compat_msg' ] =
-  'Sorry! This browser isn\'t supported by this TeSLA study.
+  'Sorry! Your browser isn\'t supported by this TeSLA study.
 Would you like to try <a href="%s">a different browser</a>?';
 $string[ 'no_ua_compat_url' ] = 'https://browsehappy.com/';
 

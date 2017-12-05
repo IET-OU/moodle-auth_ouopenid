@@ -113,12 +113,29 @@ div[ data-region = drawer ] {
 // }
 
 .ouop-pilot-survey-ifr {
+  min-height: 1600px; // Was: 1050px;
   min-width: 560px;
   max-width: 820px;
 }
 
+.ouop-has-pilot-survey-ifr {
+
+  #region-main .generalbox.p-y-1 {
+    margin-bottom: 0;
+    padding-bottom: 0 !important;
+  }
+
+  #page-footer {
+    display: none;
+  }
+}
+
 iframe.ouop-consent-doc {
   height: 52em;
+}
+
+#rogion-main .modified {
+  font-size: small;
 }
 
 @media (max-width: 767px) {
