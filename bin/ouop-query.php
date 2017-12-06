@@ -1,4 +1,6 @@
+#!/usr/bin/env php
 <?php
+
 /**
  * CLI. Run database queries to check data integrity.
  *

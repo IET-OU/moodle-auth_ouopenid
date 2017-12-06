@@ -14,8 +14,8 @@ const os = require('os');
 // const INDEX_JS = path('/../js/index.js');
 const DIST_JS = path('/../dist.js');
 const DIST_CSS = path('/../style/ouop-styles.css');
-const TS = (new Date()).toISOString().replace(/\.\d+Z/, 'Z')
-    + ' (%s)'.replace(/%s/, os.hostname()); // Strip milli-seconds!
+const TS = (new Date()).toISOString()
+    .replace(/\.\d+Z/, 'Z') + ' (%s)'.replace(/%s/, os.hostname()); // Strip milli-seconds!
 
 console.warn('BUILD_TIME :', TS);
 
