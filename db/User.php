@@ -146,6 +146,22 @@ class User
         return $count;
     }
 
+    /** Return the number of new-lines in a text file (including CSV files).
+     * @return int Line count.
+     * @link https://stackoverflow.com/questions/2162497/efficiently-counting-the-number-of-lines-of-a-text-file-200mb
+     */
+    public static function countFileLines($filename = '../example.csv')
+    {
+        $linecount = 0;
+        $handle = fopen($filename, 'r');
+        while (! feof($handle)) {
+            $line = fgets($handle);
+            $linecount++;
+        }
+        fclose($handle);
+        return $linecount;
+    }
+
     protected static function validateOucu($oucu, $row)
     {
         if (!preg_match(self::OUCU_REGEX, $oucu)) {

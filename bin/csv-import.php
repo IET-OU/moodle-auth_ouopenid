@@ -1,9 +1,11 @@
+#!/usr/bin/env php
 <?php
+
 /**
  * CLI. Simple CSV to database import commandline script.
  *
  * @package auth_ouopenid
- * @author  Nick Freear, 13-March-2017.
+ * @author  Nick Freear, 13-March-2017, 06-Dec-2017.
  * @copyright (c) 2017 The Open University.
  */
 define( 'CLI_SCRIPT', true );
@@ -20,9 +22,10 @@ define( 'CSV_DIR', getenv( 'OUOP_DATA_DIR' ));
 define( 'CSV_FILENAME', '/example.csv' );
 define( 'CSV_HEADING', true );
 define( 'CSV_UNSTRICT', true );
+define( 'PROGRESS_COLOR', 'magenta' );
 
 use IET_OU\Moodle\Auth\Ouopenid\Db\User as OuUser;
-
+use Dariuszp\CliProgressBar;
 
 cli_heading('OU-OpenID CSV importer');
 
@@ -43,17 +46,23 @@ if ($argc > 1) {
     $csvfile = CSV_DIR . CSV_FILENAME;
 }
 
+$lineCount = OuUser::countFileLines($csvfile);
+
 cli_writeln("Filename:  $csvfile");
+cli_writeln("Records:   $lineCount");
+
+$bar = new CliProgressBar( $lineCount );
+$bar->{ 'setColorTo' . ucfirst(PROGRESS_COLOR) }();  // E.g. ->setColorToMagenta();
+$bar->display();
 
 $count = OuUser::insertFromCsv($csvfile, CSV_HEADING, CSV_UNSTRICT, function ($idx, $userid) {
-    cli_write('.');
+    $bar->progress();  // Was. cli_write('.');
 });
-
+$bar->end();
 
 cli_write(sprintf( "\nWarnings (%d): ", count(OuUser::getWarnings()) ));
 cli_writeln(json_encode( OuUser::getWarnings(), JSON_PRETTY_PRINT ));
 
 cli_writeln("\nUsers inserted:  $count");
-
 
 // End.
