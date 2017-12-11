@@ -22,12 +22,14 @@ define( 'CSV_DIR', getenv( 'OUOP_DATA_DIR' ));
 define( 'CSV_FILENAME', '/example.csv' );
 define( 'CSV_HEADING', true );
 define( 'CSV_UNSTRICT', true );
+define( 'FANCY_PROGRESS', $argc > 1 && $argv[ $argc - 1 ] === '--fancy' );
 define( 'PROGRESS_COLOR', 'magenta' );
 
 use IET_OU\Moodle\Auth\Ouopenid\Db\User as OuUser;
-use Dariuszp\CliProgressBar;
+// Was: use Dariuszp\CliProgressBar;
 
 cli_heading('OU-OpenID CSV importer');
+cli_writeln(date('c') . ' --> Start csv import');
 
 if ($argc > 1 && $argv[ $argc - 1 ] === '--delete') {
     $input = cli_input('Do you really want to delete? Type Y to delete or n to exit', 'n', [ 'n', 'Y' ], $case = true);
@@ -51,18 +53,27 @@ $lineCount = OuUser::countFileLines($csvfile);
 cli_writeln("Filename:  $csvfile");
 cli_writeln("Records:   $lineCount");
 
-$bar = new CliProgressBar( $lineCount );
-$bar->{ 'setColorTo' . ucfirst(PROGRESS_COLOR) }();  // E.g. ->setColorToMagenta();
-$bar->display();
+if (FANCY_PROGRESS) {
+    $bar = new \Dariuszp\CliProgressBar( $lineCount );
+    $bar->{ 'setColorTo' . ucfirst(PROGRESS_COLOR) }();  // E.g. ->setColorToMagenta();
+    $bar->display();
+}
 
 $count = OuUser::insertFromCsv($csvfile, CSV_HEADING, CSV_UNSTRICT, function ($idx, $userid) {
-    $bar->progress();  // Was. cli_write('.');
+    if (FANCY_PROGRESS) {
+        $bar->progress();
+    } else {
+        cli_write('.');
+    }
 });
-$bar->end();
+if (FANCY_PROGRESS) {
+    $bar->end();
+}
 
 cli_write(sprintf( "\nWarnings (%d): ", count(OuUser::getWarnings()) ));
 cli_writeln(json_encode( OuUser::getWarnings(), JSON_PRETTY_PRINT ));
 
 cli_writeln("\nUsers inserted:  $count");
+cli_writeln(date('c') . ' --> End csv import');
 
 // End.
