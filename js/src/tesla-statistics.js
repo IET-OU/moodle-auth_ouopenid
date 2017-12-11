@@ -7,7 +7,10 @@ module.exports = function ($) {
 
   var $page = $('#page-local-tesla-views-tesla_results');
   var $rows = $page.find('#page-content table tbody tr');
+  var $heading = $page.find('#page-content table thead').find('th:nth-child( 2 )');
   var counts = {
+    instrument: $heading.text(),
+    date: (new Date()).toISOString().replace(/\.\d{3}/, ''),
     total_rows: $rows.length,
     with_number: 0,
     just_zero: 0,
@@ -38,5 +41,35 @@ module.exports = function ($) {
 };
 
 function objToCsv (obj) {
-  return JSON.stringify(obj, null, 2).replace(/:/g, ',').replace(/_/g, ' ');
+  var res = iterateObject(obj);
+  return "\n" + JSON.stringify(res.header) + "\n" + JSON.stringify(res.value);
+  // Was: return JSON.stringify(obj, null, 2).replace(/:/g, ',').replace(/_/g, ' ');
+}
+
+// https://stackoverflow.com/questions/11257062/converting-json-object-to-csv-format-in-javascript
+// https://jsfiddle.net/dhou6y3o/
+function iterateObject(obj) {
+  var value = '', header = '';
+          for (name in obj) {
+            if (obj.hasOwnProperty(name)) {
+              if (isObject(obj[name])) {
+                var out = iterateObject(obj[name]);
+                value += out.value;
+                header += out.header;
+              } else {
+                value += removeNewLine(obj[name]) + '; ';
+                header += name + '; ';
+              }
+            }
+          }
+  return {
+    "value":value,
+    "header":header
+  };
+}
+function isObject(obj) {
+  return (typeof obj === 'object');
+}
+function removeNewLine(item) {
+  return item.toString().replace(/(\r\n|\n|\r)/gm,"");
 }
