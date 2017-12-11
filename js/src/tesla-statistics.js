@@ -30,7 +30,7 @@ module.exports = function ($) {
   });
 
   if ($page.length) {
-    var summary = '<pre id="ouop-stats">Summary: %s</pre>'.replace(/%s/, objToCsv(counts));
+    var summary = '<div id="ouop-stats"><h3>Summary</h3> <pre>%s</pre></div>'.replace(/%s/, objToCsv(counts));
 
     $page.find('table').before(summary);
 
@@ -42,34 +42,39 @@ module.exports = function ($) {
 
 function objToCsv (obj) {
   var res = iterateObject(obj);
-  return "\n" + JSON.stringify(res.header) + "\n" + JSON.stringify(res.value);
+  return res.header.replace(/_/g, ' ') + "\n" + res.value;
   // Was: return JSON.stringify(obj, null, 2).replace(/:/g, ',').replace(/_/g, ' ');
 }
 
 // https://stackoverflow.com/questions/11257062/converting-json-object-to-csv-format-in-javascript
 // https://jsfiddle.net/dhou6y3o/
-function iterateObject(obj) {
-  var value = '', header = '';
-          for (name in obj) {
-            if (obj.hasOwnProperty(name)) {
-              if (isObject(obj[name])) {
-                var out = iterateObject(obj[name]);
-                value += out.value;
-                header += out.header;
-              } else {
-                value += removeNewLine(obj[name]) + '; ';
-                header += name + '; ';
-              }
-            }
-          }
+function iterateObject(obj, delimiter) {
+  delimiter = delimiter || ', ';  // Was: '; '
+  var value = '';
+  var header = '';
+  var name;
+    for (name in obj) {
+      if (obj.hasOwnProperty(name)) {
+        if (isObject(obj[ name ])) {
+          var out = iterateObject(obj[ name ]);
+          value += out.value;
+          header += out.header;
+        } else {
+          value += removeNewLine(obj[ name ]) + delimiter;
+          header += name + delimiter;
+        }
+      }
+    }
   return {
-    "value":value,
-    "header":header
+    header: header,
+    value: value
   };
 }
+
 function isObject(obj) {
   return (typeof obj === 'object');
 }
+
 function removeNewLine(item) {
-  return item.toString().replace(/(\r\n|\n|\r)/gm,"");
+  return item.toString().replace(/(\r\n|\n|\r)/gm, '');
 }
