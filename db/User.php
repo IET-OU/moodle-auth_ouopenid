@@ -166,8 +166,8 @@ class User
     {
         if (!preg_match(self::OUCU_REGEX, $oucu)) {
             self::$warnings[] = [ 'row' => $row, 'msg' => 'Unexpected OUCU', 'oucu' => $oucu ];
-            echo 'W';
-            //throw new Exception('Unexpected OUCU format: ' . $oucu);
+            fwrite(STDERR, 'W');  // Was: echo 'W';
+            // Was: throw new Exception('Unexpected OUCU format: ' . $oucu);
         }
         return $oucu;
     }

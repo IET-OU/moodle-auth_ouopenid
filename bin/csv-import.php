@@ -63,9 +63,10 @@ $count = OuUser::insertFromCsv($csvfile, CSV_HEADING, CSV_UNSTRICT, function ($i
     if (FANCY_PROGRESS) {
         $bar->progress();
     } else {
-        cli_write('.');
+        fwrite(STDERR, '.');  // Was: cli_write('.');
     }
 });
+fwrite(STDERR, "\n");
 if (FANCY_PROGRESS) {
     $bar->end();
 }
