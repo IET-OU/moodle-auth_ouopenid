@@ -9,6 +9,9 @@
 
 // For 'print_string()' language support!
 require_once __DIR__ . '/../../../config.php';
+require_once __DIR__ . '/../classes/local/conditional_embedded_survey.php';
+
+use auth_ouopenid\local\conditional_embedded_survey;
 
 define( 'OUOP_STRING', 'auth_ouopenid' );
 
@@ -30,9 +33,27 @@ class Ou_Open_Id_Survey_End {
             header('Location: '. $CFG->wwwroot, true, 302);
         }
     }
+
+    public static function get_return_code() {
+      $code = preg_replace_callback(
+          '/(?:return-code-)?(?:\d-)?(?P<code>\w+)/',
+          function ($matches) { return $matches[ 'code' ]; },
+          // filter_input( INPUT_GET, 'return-code' ) );
+          required_param( 'return-code', PARAM_ALPHANUMEXT ) );
+
+      header( 'X-getreturncode: ' . $code );
+
+      return $code;
+    }
+
+    public static function complete_conditional() {
+      $conditional = new conditional_embedded_survey( self::get_return_code() );
+      return $conditional->make_complete();
+    }
 }
 Ou_Open_Id_Survey_End::checkMaintenanceMode();
 
+$conditional_completed = Ou_Open_Id_Survey_End::complete_conditional();
 
 header('Content-Language: en');
 header('X-Frame-Options: sameorigin');
@@ -99,11 +120,13 @@ body {
 <script id="survey-end-config" type="application/json">
 <?php
   echo json_encode([
+    'course_code' => Ou_Open_Id_Survey_End::getReturnCode(),
+    'cond_completed' => $conditional_completed,
     'redirects' => $CFG->auth_ouopenid_redirects,
     'hash' => '#section-3',
     'timeout' => 3000,
     'other' => 1,
-  ]);
+  ], JSON_PRETTY_PRINT);
 ?>
 </script>
 

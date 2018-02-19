@@ -57,7 +57,7 @@ $string[ 'login_label_abbr' ] = 'Open University computer username';
 // Form validation - title attribute - 'login_field_help'.
 $string[ 'login_field_help' ] = 'Your OUCU — 2 to 4 letters, followed by 1 to 7 numbers.';
 $string[ 'login_submit' ] = 'Sign in';
-$string[ 'login_footer' ] = '© 2017 The Open University';
+$string[ 'login_footer' ] = '© 2018 The Open University';
 $string[ 'login_footer_link' ] = 'https://www.open.ac.uk/';
 
 $string[ 'survey_end_title' ] =
