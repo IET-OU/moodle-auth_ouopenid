@@ -18,8 +18,10 @@ module.exports = function ($) {
     no_consent: 0,
     no_results: 0
   };
+  var has_consented = [];
 
   $rows.each(function () {
+    var cell_1 = $(this).find('td:nth-child( 1 )').text();
     var cell_2 = $(this).find('td:nth-child( 2 )').text();
 
     counts.with_number += /[\d.]+/.test(cell_2);
@@ -27,22 +29,30 @@ module.exports = function ($) {
     counts.no_enroll += /Enrollment not passed/.test(cell_2);
     counts.no_consent += /The user has not accepted the informed consent/.test(cell_2);
     counts.no_results += /No results/.test(cell_2);
+
+    if (! /The user has not accepted the informed consent/.test(cell_2)) {
+      has_consented.push(cell_1.replace(/test, /, '').replace(/,/, ';'));
+    }
   });
 
   if ($page.length) {
     var summary = '<div id="ouop-stats"><h3>Summary</h3> <pre>%s</pre></div>'.replace(/%s/, objToCsv(counts));
 
+    summary += '<div id="ouop-has-consented"><h3>Has consented</h3> <pre>%s</pre></div>'.replace(/%s/, objToCsv(has_consented, false));
+
     $page.find('table').before(summary);
 
     C.warn('ouop: TeSLA results stats:', counts);
+    C.warn('ouop: Has consented:', has_consented);
   }
 
   return counts;
 };
 
-function objToCsv (obj) {
+function objToCsv (obj, with_header) {
+  with_header = arguments.length > 1 ? with_header : true;
   var res = iterateObject(obj);
-  return res.header.replace(/_/g, ' ') + "\n" + res.value;
+  return (with_header ? res.header.replace(/_/g, ' ') + "\n" : '') + res.value;
   // Was: return JSON.stringify(obj, null, 2).replace(/:/g, ',').replace(/_/g, ' ');
 }
 
