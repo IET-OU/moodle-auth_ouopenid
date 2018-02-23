@@ -28,6 +28,8 @@ To facilitate pilot research studies using Moodle (e.g. for TeSLA) by:
 
 Note: this plugin probably needs splitting into two or more plugins!
 
+See: [CHANGELOG][]
+
 ## Install
 
 1. To integrate within Moodle, either use the composer-based method described below, or unzip the code at:
@@ -111,6 +113,7 @@ Developed for the [TeSLA project][].
 [npm]: https://npmjs.com/
 [iet]: https://iet.open.ac.uk/
 [ou]: http://www.open.ac.uk/
+[CHANGELOG]: https://github.com/IET-OU/moodle-auth_ouopenid/blob/master/CHANGELOG.md
 [travis]:  https://travis-ci.org/IET-OU/moodle-auth_ouopenid
 [travis-icon]: https://api.travis-ci.org/IET-OU/moodle-auth_ouopenid.svg
     "Build status – Travis-CI (PHP + NPM/eslint)"
@@ -120,3 +123,5 @@ Developed for the [TeSLA project][].
 [browse]: https://npmjs.com/package/browserify
 [browse-icon]: https://img.shields.io/badge/built_with-browserify-blue.svg
     "Built with browserify"
+
+[End]: //.

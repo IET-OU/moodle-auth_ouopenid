@@ -30,5 +30,7 @@ script:
 after_script:
   - ls -al
   - npm run pa11y
+  - npm run pa11y-2
+  - npm run pa11y-3
 
 # End.
