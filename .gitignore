@@ -17,7 +17,7 @@ composer.lock
 vendor
 *BAK*
 
-#package.json
+# package.json
 package-lock.json
 npm-debug.log
 node_modules
@@ -29,5 +29,6 @@ node_modules
 
 phantomjs
 rasterize.js
+.pa11yci.json
 
-#End.
+# End.

@@ -94,7 +94,7 @@ To embed the plugin's Javascript and stylesheet on every page:
 Developed for the [TeSLA project][].
 
 ---
-© 2017 [The Open University][ou]. ([Institute of Educational Technology][iet])
+© 2017-2018 [The Open University][ou]. ([Institute of Educational Technology][iet])
 
 
 [auth]: https://example.edu/your-moodle/admin/settings.php?section=manageauths

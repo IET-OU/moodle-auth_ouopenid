@@ -13,6 +13,7 @@
     "browserify-banner": "^1.0.6",
     "derequire": "^2.0.6",
     "less": "^2.7.2",
+    "pa11y-ci": "^1.3.1",
     "replace": "^0.3.0",
     "semistandard": "^11.0.0",
     "uglify-js": "^3.0.27",
@@ -29,6 +30,9 @@
     "uglify": "uglifyjs user/*.js --comments='/^!/' -bo ouop.min.js",
     "less": "lessc style/*.less style/ouop-styles.css",
     "eslint": "eslint js/ js/src/ user/*.js && echo eslint OK!",
+    "export-env": "export MDL_SRV=https://example.edu/moodle",
+    "pa11y": "pa11y -s WCAG2AA ${MDL_SRV}/course/?_ua=pa11y; pa11y ${MDL_SRV}/auth/ouopenid/?_ua=pa11y",
+    "pa11y-ci": "pa11y-ci --config .pa11yci.json # Not in use.",
     "semi": "semistandard"
   },
   "eslintConfig": {
@@ -37,11 +41,7 @@
     "rules": {
       "no-console": "off"
     },
-    "globals": {
-      "window": false,
-      "console": false,
-      "ga": false
-    }
+    "globals": { "window": false, "console": false, "ga": false }
   },
   "jshintConfig": {
     "esversion": 6,

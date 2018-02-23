@@ -1,8 +1,9 @@
 # Dual-language: PHP & Node.JS.
 # https://github.com/travis-ci/travis-ci/issues/4090#issuecomment-184811689
+
 language: php
-php:
-  - 7
+
+php: 7
 
 git:
   depth: 8
@@ -28,5 +29,6 @@ script:
 
 after_script:
   - ls -al
+  - npm run pa11y
 
 # End.
