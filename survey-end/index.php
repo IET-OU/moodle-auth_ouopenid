@@ -10,8 +10,9 @@
 // For 'print_string()' language support!
 require_once __DIR__ . '/../../../config.php';
 require_once __DIR__ . '/../classes/local/conditional_embedded_survey.php';
+require_once __DIR__ . '/../classes/local/tesla_consent.php';
 
-use auth_ouopenid\local\conditional_embedded_survey;
+use auth_ouopenid\local\tesla_consent;
 
 define( 'OUOP_STRING', 'auth_ouopenid' );
 
@@ -54,6 +55,7 @@ class Ou_Open_Id_Survey_End {
 Ou_Open_Id_Survey_End::checkMaintenanceMode();
 
 $conditional_completed = Ou_Open_Id_Survey_End::complete_conditional();
+$agreement_id = tesla_consent::agree();
 
 header('Content-Language: en');
 header('X-Frame-Options: sameorigin');
@@ -122,6 +124,7 @@ body {
   echo json_encode([
     'course_code' => Ou_Open_Id_Survey_End::getReturnCode(),
     'cond_completed' => $conditional_completed,
+    'agreement_id' => $agreement_id,
     'redirects' => $CFG->auth_ouopenid_redirects,
     'hash' => '#section-3',
     'timeout' => 3000,

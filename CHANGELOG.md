@@ -7,9 +7,11 @@
 
  * _Date:  ~ 19 February ~ March 2018_
  * _Tag:  v1.5.0-beta_
- * Add functionality to reveal a TeSLA activity after the pre-activity survey is completed — `conditional_embedded_survey` PHP class.
+ * Add functionality to reveal a TeSLA activity after the pre-activity
+   survey is completed — `conditional_embedded_survey` PHP class (Bug #8)
    (That is, to "Complete" a survey embedded via `<IFRAME>` in a Moodle `mod/assign` conditional activity.)
- * Add functionality to "consent" to the TeSLA student-agreement in a survey embedded in an `<IFRAME>`. `tesla_consent` PHP class;
+ * Add functionality to "consent" to the TeSLA student-agreement in a
+   survey embedded in an `<IFRAME>`. `tesla_consent` PHP class (Bug #8)
  * Automated accessibility testing — [pa11y-ci][];
 
 ## Version 1.4.2 (Beta) - Pilot 3-A
@@ -26,7 +28,7 @@
  * _Date:  ~ 22 August - 6 December 2017_ (Deployed at start of TeSLA pilot 3-A)
  * _Tag:  v1.4.0-beta_
  * _Build:  "2017-12-05T13:25:56Z (MCD267768)"_
- * Javascript now built using Browserify,
+ * Javascript now built using Browserify (Bug #7)
  * Add 'poem server' — convert long texts (poems), into images of text, (Bug #6)
  * Add `fix_enrollment_callibrate_page()` Javascript,
  * Add long texts, with Chris E.
