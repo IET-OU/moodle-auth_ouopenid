@@ -112,7 +112,7 @@ Developed for the [TeSLA project][].
 [composer]: https://getcomposer.org/
 [npm]: https://npmjs.com/
 [iet]: https://iet.open.ac.uk/
-[ou]: http://www.open.ac.uk/
+[ou]: http://www.open.ac.uk/ "Copyright © 2017-2018 The Open Univensity (IET)."
 [CHANGELOG]: https://github.com/IET-OU/moodle-auth_ouopenid/blob/master/CHANGELOG.md
 [travis]:  https://travis-ci.org/IET-OU/moodle-auth_ouopenid
 [travis-icon]: https://api.travis-ci.org/IET-OU/moodle-auth_ouopenid.svg
