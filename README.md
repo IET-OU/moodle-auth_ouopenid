@@ -2,6 +2,7 @@
 [![Build status — Travis-CI][travis-icon]][travis]
 [![js-semistandard-style][semi-icon]][semi]
 [![OU-OpenID moodle plugin][browse-icon]][gh]
+[![Accessibility testing][pa11y-icon]][pa11y-ci]
 
 
 # moodle-auth_ouopenid
@@ -123,5 +124,8 @@ Developed for the [TeSLA project][].
 [browse]: https://npmjs.com/package/browserify
 [browse-icon]: https://img.shields.io/badge/built_with-browserify-blue.svg
     "Built with browserify"
+[pa11y-ci]: https://github.com/pa11y/pa11y-ci
+    "Automated accessibility testing - via 'pa11y-ci'"
+[pa11y-icon]: https://img.shields.io/badge/accessibility-pa11y--ci-blue.svg
 
 [End]: //.
