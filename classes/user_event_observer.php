@@ -42,15 +42,20 @@ class user_event_observer {
     protected static function redirect($user_created, $fn) {
         global $CFG, $USER;  // Moodle globals.
 
-        $redirects  = $CFG->auth_ouopenid_redirects;
+        $enabled = isset($CFG->auth_ouopenid_redirect_enable) ? $CFG->auth_ouopenid_redirect_enable : null;
+        $redirects  = isset($CFG->auth_ouopenid_redirects) ? $CFG->auth_ouopenid_redirects : null;
 
         if (! isset($USER->username)) {
-            return self::debug([ __FUNCTION__, 'Warning, nno username.', $USER ]);
+            return OuUser::debug([ __FUNCTION__, 'Warning, no username.', $USER ]);
         }
 
         $ou_profile = OuUser::getUser($USER->username);
 
         OuUser::debug([ __FUNCTION__, $fn, $redirects, $ou_profile ]);
+
+        if (! $redirects || ! $enabled) {
+            return OuUser::debug([ __FUNCTION__, 'Warning, redirect is disabled (or missing).', $redirects ]);
+        }
 
         $url = OuUser::getRedirectUrl($ou_profile, $user_created ? 'newenrol' : 'return');
 
