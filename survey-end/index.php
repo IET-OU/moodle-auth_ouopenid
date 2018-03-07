@@ -9,9 +9,11 @@
 
 // For 'print_string()' language support!
 require_once __DIR__ . '/../../../config.php';
+require_once __DIR__ . '/../classes/local/base.php';
 require_once __DIR__ . '/../classes/local/conditional_embedded_survey.php';
 require_once __DIR__ . '/../classes/local/tesla_consent.php';
 
+use auth_ouopenid\local\conditional_embedded_survey;
 use auth_ouopenid\local\tesla_consent;
 
 define( 'OUOP_STRING', 'auth_ouopenid' );

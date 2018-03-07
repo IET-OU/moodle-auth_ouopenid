@@ -11,7 +11,9 @@
 
 namespace auth_ouopenid\local;
 
-class conditional_embedded_survey {
+use auth_ouopenid\local\base;
+
+class conditional_embedded_survey extends base {
 
   const CONFIG_KEY = 'auth_ouopenid_conditional_survey_activity';
   const MOD_TYPE_NAME = 'assign';   // 'mod/assign'
@@ -129,14 +131,5 @@ class conditional_embedded_survey {
     ], false);
 
     self::_debug([ __METHOD__, $lastinsertid ]);
-  }
-
-  /** Output arbitrary data, eg. to HTTP header.
-  */
-  protected static function _debug($obj)
-  {
-      static $count = 0;
-      header(sprintf('X-auth-ou-cond-%02d: %s', $count, json_encode($obj)));
-      $count++;
   }
 }

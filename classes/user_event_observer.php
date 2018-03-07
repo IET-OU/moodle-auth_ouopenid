@@ -10,10 +10,12 @@
 namespace auth_ouopenid;
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/local/base.php';
 
 use IET_OU\Moodle\Auth\Ouopenid\Db\User as OuUser;
+use auth_ouopenid\local\base;
 
-class user_event_observer {
+class user_event_observer extends base {
 
     public static function core_user_created($event) {
 
@@ -22,7 +24,7 @@ class user_event_observer {
 
         // Was: self::redirect($user_created = true, __FUNCTION__);
 
-        OuUser::debug(__FUNCTION__);
+        self::debug(__FUNCTION__);
     }
 
     public static function core_user_loggedin($event) {
@@ -35,7 +37,7 @@ class user_event_observer {
                 json_encode( $event->get_data() ) .
                 "</script>\n";
         } else {
-            OuUser::debug([ __FUNCTION__, $event->get_data() ]);
+            self::debug([ __FUNCTION__, $event->get_data() ]);
         }
     }
 
@@ -46,15 +48,15 @@ class user_event_observer {
         $redirects  = isset($CFG->auth_ouopenid_redirects) ? $CFG->auth_ouopenid_redirects : null;
 
         if (! isset($USER->username)) {
-            return OuUser::debug([ __FUNCTION__, 'Warning, no username.', $USER ]);
+            return self::debug([ __FUNCTION__, 'Warning, no username.', $USER ]);
         }
 
         $ou_profile = OuUser::getUser($USER->username);
 
-        OuUser::debug([ __FUNCTION__, $fn, $redirects, $ou_profile ]);
+        self::debug([ __FUNCTION__, $fn, $redirects, $ou_profile ]);
 
         if (! $redirects || ! $enabled) {
-            return OuUser::debug([ __FUNCTION__, 'Warning, redirect is disabled (or missing).', $redirects ]);
+            return self::debug([ __FUNCTION__, 'Warning, redirect is disabled (or missing).' ]);
         }
 
         $url = OuUser::getRedirectUrl($ou_profile, $user_created ? 'newenrol' : 'return');

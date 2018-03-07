@@ -11,7 +11,9 @@
 
 namespace auth_ouopenid\local;
 
-class tesla_consent {
+use auth_ouopenid\local\base;
+
+class tesla_consent extends base {
 
   const DB_TABLE = 'local_tesla_agreement';
   const AGREE_VERSION = '2.0';
@@ -46,7 +48,8 @@ class tesla_consent {
       'accepted' => true,
     ], false);
 
-    // self::_debug([ __METHOD__, $lastinsertid ]);
+    self::_debug([ __METHOD__, $lastinsertid ]);
+
     return $lastinsertid;
   }
 
