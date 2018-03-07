@@ -9,13 +9,22 @@
 body {
   background-color: #f9f9f9;
 
-  // Accessibility: colour contrast [a11y].
+  // Accessibility: colour contrast fixes (via: pa11y-ci) [a11y].
+  .usermenu .login a,
   a {
     color: #0080a7; // #00acdf;
   }
 
+  .navbar-light .navbar-brand {
+    background: #0080a7;
+  }
+
   .sr-only {
     background: #fff;
+  }
+
+  #page-footer a {
+    background: #343739;
   }
 }
 
