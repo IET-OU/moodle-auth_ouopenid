@@ -13,6 +13,8 @@ namespace auth_ouopenid\local;
 
 class base {
 
+  const BASE_KEY = 'auth_ouopenid';
+
   /** Output arbitrary data, eg. to HTTP header.
   */
   public static function debug($obj) {

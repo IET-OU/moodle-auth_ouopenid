@@ -15,7 +15,7 @@ use auth_ouopenid\local\base;
 
 class conditional_embedded_survey extends base {
 
-  const CONFIG_KEY = 'auth_ouopenid_conditional_survey_activity';
+  const CONFIG_KEY = self::BASE_KEY . '_conditional_survey_activity';
   const MOD_TYPE_NAME = 'assign';   // 'mod/assign'
   const MOD_TYPE_ID = 1;            // ID in 'mdl_modules' table.
   const EMBED_LIKE = '%</iframe>%'; // MySQL 'LIKE'
@@ -28,6 +28,10 @@ class conditional_embedded_survey extends base {
   protected $userid;
   protected $config;
 
+  /**
+   * @param string $course_code Course shortname, example, 'FR' or 'TPT'.
+   * @param int    $userid  Moodle user ID (or username).
+   */
   public function __construct( $course_code, $userid = null ) {
     $this->set_config( $course_code, $userid );
   }
@@ -49,17 +53,27 @@ class conditional_embedded_survey extends base {
 
       $this->userid = $userid ? $userid : $USER->id;
 
-      self::_debug([ __METHOD__, $config, $this->userid ]);
+      self::debug([ __METHOD__, $config, $this->userid ]);
+    } else {
+      throw new \Exception(sprintf( 'Missing course code in configuration:  \$CFG->%s, %s', self::CONFIG_KEY, $course_code ));
     }
   }
 
   public function make_complete() {
     if ($this->is_valid_module() && $this->activity_has_embed()) {
-      // return false;
 
       $this->assign_grades();
       $this->assign_submission();
-      return $this->course_module_completion();
+      return $this->course_module_complete();
+    }
+    return false;
+  }
+
+  public function un_complete() {
+    if ($this->is_valid_module() && $this->activity_has_embed()) {
+      $this->un_assign_grades();
+      $this->un_assign_submission();
+      return $this->course_module_un_complete();
     }
     return false;
   }
@@ -70,8 +84,7 @@ class conditional_embedded_survey extends base {
     $count = $DB->count_records( 'course_modules', [ 'id' => $this->cmid, 'module' => self::MOD_TYPE_ID,
         'course' => $this->course_id, 'instance' => $this->activity_id ]);
 
-    self::_debug([ __METHOD__, $count ]); // '1' ??
-
+    self::debug([ __METHOD__, $count ]); // '1' ??
     return 1 === $count;
   }
 
@@ -81,8 +94,7 @@ class conditional_embedded_survey extends base {
     $result = $DB->get_record_sql( 'SELECT * FROM {assign} WHERE ' . $DB->sql_like( 'intro', ':intro' ) . ' AND id = :id ',
         [ 'intro' => self::EMBED_LIKE, 'id' => $this->activity_id ]);
 
-    self::_debug([ __METHOD__, $result ]);
-
+    self::debug([ __METHOD__, $result ]);
     return $result;
   }
 
@@ -99,7 +111,15 @@ class conditional_embedded_survey extends base {
       'attemptnumber' => 0,
     ], false);
 
-    self::_debug([ __METHOD__, $lastinsertid ]);
+    self::debug([ __METHOD__, $lastinsertid ]);
+  }
+
+  protected function un_assign_grades() {
+    global $DB;
+    return $DB->delete_records('assign_grades', [
+      'assignment' => $this->activity_id,
+      'userid' => $this->userid,
+    ]);
   }
 
   protected function assign_submission() {
@@ -116,10 +136,18 @@ class conditional_embedded_survey extends base {
       'latest' => 1, // 'true'
     ], false);
 
-    self::_debug([ __METHOD__, $lastinsertid ]);
+    self::debug([ __METHOD__, $lastinsertid ]);
   }
 
-  protected function course_module_completion() {
+  protected function un_assign_submission() {
+    global $DB;
+    return $DB->delete_records('assign_submission', [
+      'assignment' => $this->activity_id,
+      'userid' => $this->userid,
+    ]);
+  }
+
+  protected function course_module_complete() {
     global $DB; // Moodle global.
 
     $lastinsertid = $DB->insert_record('course_module_completion', (object) [
@@ -130,6 +158,22 @@ class conditional_embedded_survey extends base {
       'timemodified' => time(), // UNIX_TIMESTAMP()
     ], false);
 
-    self::_debug([ __METHOD__, $lastinsertid ]);
+    self::debug([ __METHOD__, $lastinsertid ]);
+  }
+
+  protected function course_module_un_complete() {
+    global $DB;
+    return $DB->delete_records('course_module_completion', [
+      'coursemoduleid' => $this->cmid,
+      'userid' => $this->userid,
+    ]);
+  }
+
+  public function get_course_module_completion() {
+    global $DB;
+    return $DB->get_records('course_module_completion', [
+      'coursemoduleid' => $this->cmid,
+      'userid' => $this->userid,
+    ]);
   }
 }

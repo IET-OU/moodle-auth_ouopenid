@@ -41,6 +41,11 @@ class tesla_consent extends base {
 
     $userid = $userid ? $userid : $USER->id;
 
+    if (self::has_agreed( $userid )) {
+      self::debug([ __METHOD__, 'Already agreed.', $userid ]);
+      return false;
+    }
+
     $lastinsertid = $DB->insert_record(self::DB_TABLE, (object) [
       'userid' => $userid,
       'timesubmitted' => time(), // UNIX_TIMESTAMP()
@@ -48,9 +53,20 @@ class tesla_consent extends base {
       'accepted' => true,
     ], false);
 
-    self::_debug([ __METHOD__, $lastinsertid ]);
+    self::debug([ __METHOD__, $lastinsertid ]);
 
     return $lastinsertid;
+  }
+
+  /** Delete the consent / agreement.
+   * @param int $userid
+   */
+  public static function un_consent( $userid = null ) {
+    global $DB, $USER; // Moodle global.
+
+    $userid = $userid ? $userid : $USER->id;
+
+    return $DB->delete_records(self::DB_TABLE, [ 'userid' => $userid ]);
   }
 
   /* [1241] => stdClass Object (
