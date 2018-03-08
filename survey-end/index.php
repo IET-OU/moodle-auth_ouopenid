@@ -124,7 +124,7 @@ body {
 <script id="survey-end-config" type="application/json">
 <?php
   echo json_encode([
-    'course_code' => Ou_Open_Id_Survey_End::getReturnCode(),
+    'course_code' => Ou_Open_Id_Survey_End::get_return_code(),
     'cond_completed' => $conditional_completed,
     'agreement_id' => $agreement_id,
     'redirects' => $CFG->auth_ouopenid_redirects,

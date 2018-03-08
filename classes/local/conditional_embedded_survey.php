@@ -18,7 +18,8 @@ class conditional_embedded_survey extends base {
   const CONFIG_KEY = self::BASE_KEY . '_conditional_survey_activity';
   const MOD_TYPE_NAME = 'assign';   // 'mod/assign'
   const MOD_TYPE_ID = 1;            // ID in 'mdl_modules' table.
-  const EMBED_LIKE = '%</iframe>%'; // MySQL 'LIKE'
+  // const EMBED_LIKE = '%</iframe>%'; // MySQL 'LIKE'
+  const EMBED_REGEXP = '(<\/iframe>|[?#!]-pre-survey-embed)'; // MySQL 'REGEXP'
 
   protected $course_id;   // 4,
   protected $course_code; // 'FR',
@@ -60,11 +61,20 @@ class conditional_embedded_survey extends base {
   }
 
   public function make_complete() {
+    $b_ok = false;
     if ($this->is_valid_module() && $this->activity_has_embed()) {
+      try {
+        $this->assign_grades();
+        $this->assign_submission();
+        $b_ok = $this->course_module_complete();
+      } catch (\dml_write_exception $ex) {
+        self::debug([ __FUNCTION__, 'dml_write_exception', $ex->getMessage(), $ex->debuginfo ]);
 
-      $this->assign_grades();
-      $this->assign_submission();
-      return $this->course_module_complete();
+        if (! preg_match('/Duplicate entry .+/', $ex->debuginfo)) {
+          throw $ex;
+        }
+      }
+      return $b_ok;
     }
     return false;
   }
@@ -91,8 +101,11 @@ class conditional_embedded_survey extends base {
   protected function activity_has_embed() {
     global $DB; // Moodle global.
 
-    $result = $DB->get_record_sql( 'SELECT * FROM {assign} WHERE ' . $DB->sql_like( 'intro', ':intro' ) . ' AND id = :id ',
-        [ 'intro' => self::EMBED_LIKE, 'id' => $this->activity_id ]);
+    $result = $DB->get_record_sql( 'SELECT * FROM {assign} WHERE intro REGEXP :intro_re AND id = :id ',
+        [ 'intro_re' => self::EMBED_REGEXP, 'id' => $this->activity_id ]);
+
+    // Was: $result = $DB->get_record_sql( 'SELECT * FROM {assign} WHERE ' . $DB->sql_like( 'intro', ':intro' ) . ' AND id = :id ',
+    //    [ 'intro' => self::EMBED_LIKE, 'id' => $this->activity_id ]);
 
     self::debug([ __METHOD__, $result ]);
     return $result;
