@@ -15,10 +15,12 @@
 var config = {
   defaults: {
     screenCapture: './_pa11y-screen-capture.png',
-    standard: 'WCAG2AA',
+    standard: 'WCAG2AA', // Or, 'WCAG2AAA'
+    hideElements: '.coursesearchbox', // 'Fieldset does not contain a legend element.' GitHub:squizlabs/HTML_CodeSniffer--Standards/WCAG2AAA/Sniffs/Principle1/Guideline1_3/1_3_1.js#L644
     ignore: [ 'notice' ],
-    timeout: 5000,
-    wait: 1500
+    timeout: 8000,
+    wait: 1500, // 2000,
+    'X-verifyPage': null
   },
   urls: [
     '${TEST_SRV}/course/?_ua=pa11y',
@@ -29,7 +31,8 @@ var config = {
 
 function myPa11yCiConfiguration (urls, defaults) {
 
-  console.error('Env:', process.env.TEST_SRV);
+  console.error('Standard:', defaults.standard);
+  // console.error('Env:', process.env.TEST_SRV);
 
   for (var idx = 0; idx < urls.length; idx++) {
     urls[ idx ] = urls[ idx ].replace('${TEST_SRV}', process.env.TEST_SRV);  // substitute(urls[ idx ]);

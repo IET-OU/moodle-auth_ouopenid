@@ -1,6 +1,6 @@
 {
   "name": "iet-ou/moodle-auth-ouopenid",
-  "description": "This plugin is a wrapper around the OpenID authentication plugin for Moodle. © The Open University.",
+  "description": "This plugin is a wrapper around the OpenID authentication plugin for Moodle. © The Open University (IET)",
   "homepage": "https://github.com/IET-OU",
   "type": "moodle-auth",
   "license": "proprietary",
@@ -10,6 +10,7 @@
   },
   "authors": [ { "name": "Nick Freear" } ],
   "autoload": {
+    "classmap": [ "classes/local/" ],
     "psr-4": {
       "IET_OU\\Moodle\\Auth\\Ouopenid\\Db\\": "db/"
     }
@@ -85,6 +86,7 @@
       "composer cn",
       "# npm run semi",
       "npm run eslint",
+      "# npm run pa11y-ci",
       "php -r 'simplexml_load_file(\"db/install.xml\");' && echo install.xml OK!"
     ],
     "mcs": "phpcs --standard=./moodle-core.xml --ignore=vendor --ignore=.git --extensions=php .",

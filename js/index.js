@@ -14,24 +14,20 @@ var userJsonUrl = '/auth/ouopenid/user/ajax.php?r=' + util.rand();
 require('./src/when-call')(
   function () {
     console.debug('>> when');
-    return window.jQuery;
+    return util.set_jQuery();
   },
-  function ($) {
-    var W = window;
-    var L = W.location;
-
+  function ($, W) {
     console.debug('>> call');
 
-    if (L.pathname.match(/^\/admin\//)) {
+    if (util.is_admin_page()) {
       return console.warn('ouopenid: admin page, exiting.');
     }
 
     var $body = $('body');
-    var is_enrollment_page = $('#page-local-tesla-views-enrollment').length;
 
-    $body.addClass(L.href.match(/debug=1/) ? 'debug-param' : '');
+    $body.addClass(util.is_debug_param() ? 'debug-param' : '');
 
-    userJsonUrl += ( is_enrollment_page ? '&longtexts=true' : '' );
+    userJsonUrl += ( util.is_tesla_enrol_page() ? '&longtexts=true' : '' );
 
     console.warn('ouopenid $:', $.fn.jquery, BUILD_TIME, W.M.cfg); // W.Y.version
 
@@ -41,6 +37,7 @@ require('./src/when-call')(
       util.set_strings(data);
       util.set_course_name($, data);
       util.site_message($, data);
+      util.accessibility_fixes();
 
       data.util = util;
       data.$ = $;

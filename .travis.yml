@@ -24,10 +24,10 @@ script:
   - composer build
   - composer test
   - composer ci-test
+  - npm run pa11y-ci
   - composer validate
 
 after_script:
   - ls -al
-  - npm run pa11y-ci
 
 # End.

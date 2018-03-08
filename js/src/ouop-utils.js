@@ -3,7 +3,27 @@
 // Javascript translation/localisation [i18n].
 var trans = {};
 
+var L = window.location;
+var $;
+
 module.exports = {
+
+  set_jQuery: function () {
+    $ = window.jQuery;
+    return $;
+  },
+
+  is_debug_param: function () {
+    return L.href.match(/debug=1/);
+  },
+
+  is_admin_page: function () {
+    return L.pathname.match(/^\/admin\//);
+  },
+
+  is_tesla_enrol_page: function () {
+    return $('#page-local-tesla-views-enrollment').length;
+  },
 
   rand: function () {
     var min = 11;
@@ -43,6 +63,21 @@ module.exports = {
     if (course_code) {
       $('body').addClass('ouop-course-code-' + course_code).attr('data-course-code', course_code);
     }
+  },
+
+  accessibility_fixes: function () {
+    var a11y_fixes = {
+      'fieldset.coursesearchbox': {
+        title: 'Search courses',
+        'aria-label': 'Search'
+      }
+    };
+
+    $.each(a11y_fixes, function (sel, attrs) {
+      $(sel).attr(attrs);
+    });
+
+    console.warn('A11y fixes:', a11y_fixes);
   },
 
   replace: replace_object,

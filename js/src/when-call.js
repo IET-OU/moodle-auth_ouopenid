@@ -3,11 +3,13 @@
 module.exports = function (whenTrueFN, callbackFN, interval) {
   'use strict';
 
-  var intId = window.setInterval(function () {
+  var WIN = window;
+
+  var intId = WIN.setInterval(function () {
     var result = whenTrueFN();
     if (result) {
-      window.clearInterval(intId);
-      callbackFN(result);
+      WIN.clearInterval(intId);
+      callbackFN(result, WIN);
     }
   }, interval || 300); // Milliseconds.
 };
