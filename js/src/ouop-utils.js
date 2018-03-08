@@ -65,6 +65,26 @@ module.exports = {
     }
   },
 
+  console_mod_edit: function () {
+    var $form = $('form[ action = "modedit.php" ]');
+
+    if (!$form.length) { return; }
+
+    var mod_info = {
+      course_id: form_val('course'),
+      cmid: form_val('coursemodule'),
+      module: form_val('modulename'),
+      instance: form_val('instance'),
+      activity_id: form_val('instance')
+    };
+
+    console.warn('Modedit:', mod_info);
+
+    function form_val (key) {
+      return $form.find('[ name = %s ]'.replace(/%s/, key)).val();
+    }
+  },
+
   accessibility_fixes: function () {
     var a11y_fixes = {
       'fieldset.coursesearchbox': {

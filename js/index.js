@@ -31,13 +31,15 @@ require('./src/when-call')(
 
     console.warn('ouopenid $:', $.fn.jquery, BUILD_TIME, W.M.cfg); // W.Y.version
 
+    util.accessibility_fixes();
+    util.console_mod_edit();
+
     $.getJSON(userJsonUrl).done(function (data, textStat, jqXHR) { // W.M.cfg.wwwroot + ..
       console.debug('>> getJSON..');
 
       util.set_strings(data);
       util.set_course_name($, data);
       util.site_message($, data);
-      util.accessibility_fixes();
 
       data.util = util;
       data.$ = $;
