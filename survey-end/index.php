@@ -15,6 +15,7 @@ require_once __DIR__ . '/../classes/local/tesla_consent.php';
 
 require_once($CFG->dirroot . '/lib/completionlib.php');
 require_once($CFG->dirroot . '/lib/modinfolib.php');
+require_once($CFG->dirroot . '/lib/gradelib.php');
 
 use auth_ouopenid\local\conditional_embedded_survey;
 use auth_ouopenid\local\tesla_consent;

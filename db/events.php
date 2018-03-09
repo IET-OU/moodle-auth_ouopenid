@@ -33,6 +33,10 @@ $observers = [
     'eventname' => '\mod_quiz\event\attempt_submitted',
     'callback'  => '\auth_ouopenid\user_event_observer::embed_event_data',
   ],
+  [
+    'eventname' => '\core\event\course_module_completion_updated',
+    'callback'  => '\auth_ouopenid\user_event_observer::core_module_completed',
+  ],
 ];
 
 //End.

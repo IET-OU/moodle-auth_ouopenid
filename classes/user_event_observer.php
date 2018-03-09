@@ -17,6 +17,10 @@ use auth_ouopenid\local\base;
 
 class user_event_observer extends base {
 
+    public static function core_module_completed($event) {
+        self::debug(__METHOD__);
+    }
+
     public static function core_user_created($event) {
 
         // TODO: Enroll the user on course!

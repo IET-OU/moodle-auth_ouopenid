@@ -78,7 +78,7 @@ class conditional_embedded_survey extends base {
       }
       $b_ok = $this->course_modules_complete();
 
-      $this->set_grade_grades();
+      $this->_grade_update();
 
       return $b_ok;
     }
@@ -182,10 +182,10 @@ class conditional_embedded_survey extends base {
     $data->overrideby = $this->userid;
     $completion->internal_set_data($cminfo, $data);
 
-    self::debug([ __FUNCTION__, 'completion->internal_set_data() (update_state)', $result ]);
+    self::debug([ __FUNCTION__, 'completion->internal_set_data() (update_state)' ]);
   }
 
-  protected function course_modules_complete_OLD() {
+  protected function _X_OLD_course_modules_complete() {
     global $DB; // Moodle global.
 
     $lastinsertid = $DB->insert_record('course_modules_completion', (object) [
@@ -207,7 +207,7 @@ class conditional_embedded_survey extends base {
     ]);
   }
 
-  protected function set_grade_grades() {
+  protected function _X_OLD_set_grade_grades() {
     global $DB;
     $grade = $DB->get_record('grade_grades', [
       'itemid' => $this->grade_items_id,
@@ -223,6 +223,22 @@ class conditional_embedded_survey extends base {
 
       self::debug([ __METHOD__, 'update', $grade ]);
     }
+  }
+
+  // https://github.com/moodle/moodle/blob/master/lib/gradelib.php#L61
+  protected function _grade_update() {
+    $gradestructure = [
+      'userid' => $this->userid,
+      'rawgrade' => 100.00,
+      'finalgrade' => 100.00,
+      'feedback' => '[auto-submit]' . __CLASS__,
+      'feedbackformat' => FORMAT_MOODLE,   // '1'.
+      'datesubmitted' => time(),
+      'dategraded' => time(),
+    ];
+    $result = \grade_update('mod/assign', $this->course_id, 'mod', 'assign', $this->activity_id, 0, $gradestructure, null); // Not: 'grade_items_id'
+
+    self::debug([ __FUNCTION__, 'mod/assign', $this->activity_id, $result, GRADE_UPDATE_OK == $result ? 'OK' : 'FAIL' ]);
   }
 
   public function get_course_modules_completion() {
