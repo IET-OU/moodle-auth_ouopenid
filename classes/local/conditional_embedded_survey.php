@@ -18,6 +18,7 @@ class conditional_embedded_survey extends base {
   const CONFIG_KEY = self::BASE_KEY . '_conditional_survey_activity';
   const MOD_TYPE_NAME = 'assign';   // 'mod/assign'
   const MOD_TYPE_ID = 1;            // ID in 'mdl_modules' table.
+  const GRADER_USER_ID = 2;         // User ID, not '0' !!
   // const EMBED_LIKE = '%</iframe>%'; // MySQL 'LIKE'
   const EMBED_REGEXP = '(<\/iframe>|[?#!]-pre-survey-embed)'; // MySQL 'REGEXP'
 
@@ -25,6 +26,7 @@ class conditional_embedded_survey extends base {
   protected $course_code; // 'FR',
   protected $cmid;        // 72,
   protected $activity_id; // 'assign.id' = 13,
+  protected $grade_items_id; // 47,
 
   protected $userid;
   protected $config;
@@ -51,6 +53,7 @@ class conditional_embedded_survey extends base {
       $this->course_code = $course_code;
       $this->cmid = $config->cmid;
       $this->activity_id = $config->activity_id;
+      $this->grade_items_id = $config->grade_items_id;
 
       $this->userid = $userid ? $userid : $USER->id;
 
@@ -66,7 +69,6 @@ class conditional_embedded_survey extends base {
       try {
         $this->assign_grades();
         $this->assign_submission();
-        $b_ok = $this->course_module_complete();
       } catch (\dml_write_exception $ex) {
         self::debug([ __FUNCTION__, 'dml_write_exception', $ex->getMessage(), $ex->debuginfo ]);
 
@@ -74,6 +76,10 @@ class conditional_embedded_survey extends base {
           throw $ex;
         }
       }
+      $b_ok = $this->course_modules_complete();
+
+      $this->set_grade_grades();
+
       return $b_ok;
     }
     return false;
@@ -83,7 +89,7 @@ class conditional_embedded_survey extends base {
     if ($this->is_valid_module() && $this->activity_has_embed()) {
       $this->un_assign_grades();
       $this->un_assign_submission();
-      return $this->course_module_un_complete();
+      return $this->course_modules_un_complete();
     }
     return false;
   }
@@ -119,7 +125,7 @@ class conditional_embedded_survey extends base {
       'userid' => $this->userid,
       'timecreated'  => time(), // UNIX_TIMESTAMP()
       'timemodified' => time(),
-      'grader' => 0,
+      'grader' => self::GRADER_USER_ID,
       'grade' => 100.00,
       'attemptnumber' => 0,
     ], false);
@@ -160,13 +166,32 @@ class conditional_embedded_survey extends base {
     ]);
   }
 
-  protected function course_module_complete() {
+  protected function course_modules_complete() {
+    // https://docs.moodle.org/dev/Activity_completion_API#Notifying_the_completion_system
+    // https://github.com/moodle/moodle/blob/master/lib/completionlib.php#L532-L565
+    // https://github.com/moodle/moodle/blob/master/lib/modinfolib.php#L1835
+
+    $cminfo = \cm_info::create( (object) [ 'id' => $this->cmid, 'course' => $this->course_id ], $this->userid );
+
+    $completion = new \completion_info(\get_course($this->course_id));
+    // $result = $completion->update_state($cminfo, COMPLETION_COMPLETE, $this->userid);  // , $override = true);
+
+    $data = $completion->get_data($cminfo, false, $this->userid);
+    $data->completionstate = COMPLETION_COMPLETE;
+    $data->timemodified = time();
+    $data->overrideby = $this->userid;
+    $completion->internal_set_data($cminfo, $data);
+
+    self::debug([ __FUNCTION__, 'completion->internal_set_data() (update_state)', $result ]);
+  }
+
+  protected function course_modules_complete_OLD() {
     global $DB; // Moodle global.
 
-    $lastinsertid = $DB->insert_record('course_module_completion', (object) [
+    $lastinsertid = $DB->insert_record('course_modules_completion', (object) [
       'coursemoduleid' => $this->cmid,
       'userid' => $this->userid,
-      'compeletionstate' => 1, // 'true'
+      'completionstate' => 1, // 'true'
       'viewed' => 0, // 'false'
       'timemodified' => time(), // UNIX_TIMESTAMP()
     ], false);
@@ -174,17 +199,35 @@ class conditional_embedded_survey extends base {
     self::debug([ __METHOD__, $lastinsertid ]);
   }
 
-  protected function course_module_un_complete() {
+  protected function course_modules_un_complete() {
     global $DB;
-    return $DB->delete_records('course_module_completion', [
+    return $DB->delete_records('course_modules_completion', [
       'coursemoduleid' => $this->cmid,
       'userid' => $this->userid,
     ]);
   }
 
-  public function get_course_module_completion() {
+  protected function set_grade_grades() {
     global $DB;
-    return $DB->get_records('course_module_completion', [
+    $grade = $DB->get_record('grade_grades', [
+      'itemid' => $this->grade_items_id,
+      'userid' => $this->userid,
+    ]);
+    self::debug([ __METHOD__, 'get', $grade ]);
+    if ($grade) {
+      $grade->rawgrade = 100.00;
+      $grade->finalgrade = 100.00;
+      $grade->timemodified = time();
+
+      $DB->update_record('grade_grades', $grade);
+
+      self::debug([ __METHOD__, 'update', $grade ]);
+    }
+  }
+
+  public function get_course_modules_completion() {
+    global $DB;
+    return $DB->get_record('course_modules_completion', [
       'coursemoduleid' => $this->cmid,
       'userid' => $this->userid,
     ]);

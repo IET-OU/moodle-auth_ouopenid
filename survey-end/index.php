@@ -13,14 +13,18 @@ require_once __DIR__ . '/../classes/local/base.php';
 require_once __DIR__ . '/../classes/local/conditional_embedded_survey.php';
 require_once __DIR__ . '/../classes/local/tesla_consent.php';
 
+require_once($CFG->dirroot . '/lib/completionlib.php');
+require_once($CFG->dirroot . '/lib/modinfolib.php');
+
 use auth_ouopenid\local\conditional_embedded_survey;
 use auth_ouopenid\local\tesla_consent;
+use auth_ouopenid\local\base;
 
 define( 'OUOP_STRING', 'auth_ouopenid' );
 
 // TODO: check if plugin is enabled or not !!
 
-class Ou_Open_Id_Survey_End {
+class Ou_Open_Id_Survey_End extends base {
 
     const JQUERY_URL  = 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js';
 
@@ -127,7 +131,7 @@ body {
     'course_code' => Ou_Open_Id_Survey_End::get_return_code(),
     'cond_completed' => $conditional_completed,
     'agreement_id' => $agreement_id,
-    'redirects' => $CFG->auth_ouopenid_redirects,
+    'redirects' => Ou_Open_Id_Survey_End::config('redirects'),
     'hash' => '#section-3',
     'timeout' => 3000,
     'other' => 1,
@@ -140,7 +144,7 @@ body {
 <script src="/auth/ouopenid/user/ouop-analytics.js<?php Ou_Open_Id_Survey_End::versionParam() ?>"></script>
 <script src="/auth/ouopenid/js/survey-end.js<?php Ou_Open_Id_Survey_End::versionParam() ?>"></script>
 <script>
-  OUOP.analytics($, { config: { ga: <?php echo json_encode($CFG->auth_ouopenid_js_config[ 'ga' ]) ?> } });
+  OUOP.analytics($, { config: { ga: <?php echo json_encode(Ou_Open_Id_Survey_End::config('js_config')[ 'ga' ]) ?> } });
 </script>
 </body>
 </html>

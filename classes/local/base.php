@@ -21,6 +21,7 @@ class base {
    * @return mixed Configuration item (object, array, string...)
    */
   public static function config($key, $default = null) {
+    global $CFG; // Moodle global.
     if (isset($CFG->{ 'auth_ouopenid_' . $key })) {
       return $CFG->{ 'auth_ouopenid_' . $key };
     }
