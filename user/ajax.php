@@ -9,6 +9,7 @@
 
 require_once __DIR__ . '/../../../config.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../classes/local/base.php';
 
 define('DEBUG', filter_input(INPUT_GET, 'debug', FILTER_VALIDATE_BOOLEAN));
 define('LONG_TXT', filter_input(INPUT_GET, 'longtexts', FILTER_VALIDATE_BOOLEAN));

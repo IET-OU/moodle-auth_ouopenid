@@ -14,12 +14,13 @@
  * @link http://csv.thephpleague.com/8.0/examples/#importing-a-csv-into-a-database-table
  */
 
+use auth_ouopenid\local\base;
 use Goodby\CSV\Import\Standard\Lexer;
 use Goodby\CSV\Import\Standard\Interpreter;
 use Goodby\CSV\Import\Standard\LexerConfig;
 use Exception;
 
-class User
+class User extends base
 {
     const USER_TABLE = 'auth_ouopenid_users';
 
@@ -307,12 +308,13 @@ class User
     {
         global $CFG;  // Moodle global.
 
-        $redirects = $CFG->auth_ouopenid_redirects;
+        $redirects = self::config('redirects');
         $instrument = isset($profile->teslainstrument) ? $profile->teslainstrument : self::UNDEF_INSTRUMENT;
 
         if (! isset($profile->teslainstrument)) {
             self::debug([ __FUNCTION__, 'Undefined instrument', $profile ]);
         }
+        if (! $redirects) { return null; }
 
         $url = $redirects[ $instrument ]->url;
 
