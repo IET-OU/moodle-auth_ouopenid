@@ -13,6 +13,8 @@ module.exports = function ($, resp) {
   inject_long_texts($, resp);
   quiz_word_count($, resp);
 
+  course_add_tesla_result_links($, resp);
+
   $(window.document).ajaxSuccess(function (ev, xhr, settings) {
     if (settings.url.match(/enrollment_ajax.php/)) {
       console.warn('> enrollment_ajax:', xhr.responseText, xhr.status, ev.namespace);
@@ -179,4 +181,19 @@ function fix_pilot_fallback_link($, resp) {
   }
 
   // console.warn('>> ouop-pilot-fallback-link: ', $link, m_inst);
+}
+
+function course_add_tesla_result_links($, resp) {
+  var $cm_edit_menus = $('.path-course-view .section-cm-edit-actions[ data-owner ]');
+  var use_lti = resp.config.lti_results;
+
+  $cm_edit_menus.each(function (idx, el) {
+    var cmid = $(this).data('owner').replace(/#module-/, '');
+    var $link = $(this).find('a.editing_update.cm-edit-action');
+    var url = '/local/tesla/views/tesla_results.php?cmid=' + cmid + (use_lti ? '' : '&noredirect=1');
+
+    $link.after('<a href="%s" class="dropdown-item tesla-r">TeSLA results</a>'.replace(/%s/, url));
+
+    console.warn('course-add-tesla-result-links, cmid:', cmid, url, resp.config.lti_results);
+  });
 }
