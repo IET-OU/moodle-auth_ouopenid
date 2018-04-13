@@ -31,4 +31,7 @@ phantomjs
 rasterize.js
 /*.png
 
+.DS_Store
+*.docx
+
 # End.

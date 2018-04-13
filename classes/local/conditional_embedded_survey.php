@@ -22,11 +22,11 @@ class conditional_embedded_survey extends base {
   // const EMBED_LIKE = '%</iframe>%'; // MySQL 'LIKE'
   const EMBED_REGEXP = '(<\/iframe>|[?#!]-pre-survey-embed)'; // MySQL 'REGEXP'
 
-  protected $course_id;   // 4,
-  protected $course_code; // 'FR',
-  protected $cmid;        // 72,
-  protected $activity_id; // 'assign.id' = 13,
-  protected $grade_items_id; // 47,
+  protected $course_id;    // 4,
+  protected $course_code;  // 'FR',
+  protected $cmid;         // `mdl_course_modules`.`id`; 72,
+  protected $activity_id;  // `mdl_course_modules`.`instance`; 'assign.id' = 13;
+  protected $grade_items_id; // NOT used. 47,
 
   protected $userid;
   protected $config;
@@ -53,7 +53,7 @@ class conditional_embedded_survey extends base {
       $this->course_code = $course_code;
       $this->cmid = $config->cmid;
       $this->activity_id = $config->activity_id;
-      $this->grade_items_id = $config->grade_items_id;
+      $this->grade_items_id = isset( $config->grade_items_id ) ? $config->grade_items_id : null; // NOT used.
 
       $this->userid = $userid ? $userid : $USER->id;
 

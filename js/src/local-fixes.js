@@ -15,6 +15,8 @@ module.exports = function ($, resp) {
 
   course_add_tesla_result_links($, resp);
 
+  admin_add_course_category_link($);
+
   $(window.document).ajaxSuccess(function (ev, xhr, settings) {
     if (settings.url.match(/enrollment_ajax.php/)) {
       console.warn('> enrollment_ajax:', xhr.responseText, xhr.status, ev.namespace);
@@ -185,15 +187,22 @@ function fix_pilot_fallback_link($, resp) {
 
 function course_add_tesla_result_links($, resp) {
   var $cm_edit_menus = $('.path-course-view .section-cm-edit-actions[ data-owner ]');
-  var use_lti = resp.config.lti_results;
+  var lti_res = resp.config.lti_results;
 
   $cm_edit_menus.each(function (idx, el) {
     var cmid = $(this).data('owner').replace(/#module-/, '');
     var $link = $(this).find('a.editing_update.cm-edit-action');
-    var url = '/local/tesla/views/tesla_results.php?cmid=' + cmid + (use_lti ? '' : '&noredirect=1');
+    var url = '/local/tesla/views/tesla_results.php?cmid=' + cmid + (lti_res ? '' : '&noredirect=1');
 
     $link.after('<a href="%s" class="dropdown-item tesla-r">TeSLA results</a>'.replace(/%s/, url));
 
-    console.warn('course-add-tesla-result-links, cmid:', cmid, url, resp.config.lti_results);
+    console.warn('course-add-tesla-result-links, cmid:', cmid, url, lti_res);
   });
+}
+
+function admin_add_course_category_link($) {
+  var $admin_menu = $('#nav-drawer nav a[ data-key = sitesettings ]').closest('nav');
+  var url = '/course/';
+
+  $admin_menu.append('<a href="%s" class="list-group-item">All courses</a>'.replace(/%s/, url));
 }
