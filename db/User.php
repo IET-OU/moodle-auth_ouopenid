@@ -148,13 +148,20 @@ class User extends base
     }
 
     /** Return the number of new-lines in a text file (including CSV files).
+     * @param string $filename (Was default: '../example.csv')
      * @return int Line count.
      * @link https://stackoverflow.com/questions/2162497/efficiently-counting-the-number-of-lines-of-a-text-file-200mb
      */
-    public static function countFileLines($filename = '../example.csv')
+    public static function countFileLines($filename = null)
     {
         $linecount = 0;
         $handle = fopen($filename, 'r');
+
+        if (! $handle) {
+            echo "Error, missing file: $filename\n";
+            exit(1);
+        }
+
         while (! feof($handle)) {
             $line = fgets($handle);
             $linecount++;
@@ -314,7 +321,9 @@ class User extends base
         if (! isset($profile->teslainstrument)) {
             self::debug([ __FUNCTION__, 'Undefined instrument', $profile ]);
         }
-        if (! $redirects) { return null; }
+        if (! $redirects) {
+            return null;
+        }
 
         $url = $redirects[ $instrument ]->url;
 

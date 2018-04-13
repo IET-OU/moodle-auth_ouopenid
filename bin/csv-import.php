@@ -45,7 +45,9 @@ if ($argc > 1 && $argv[ $argc - 1 ] === '--delete') {
 if ($argc > 1) {
     $csvfile = CSV_DIR . '/' . clean_param($argv[ $argc - 1 ], PARAM_PATH);
 } else {
-    $csvfile = CSV_DIR . CSV_FILENAME;
+  cli_writeln('Error. Missing CSV file.');
+  exit( 1 );
+  // Was: $csvfile = CSV_DIR . CSV_FILENAME;
 }
 
 $lineCount = OuUser::countFileLines($csvfile);
