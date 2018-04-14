@@ -1,4 +1,4 @@
-# Dual-language: PHP & Node.JS.
+# Dual-language ~ PHP & Node.JS.
 # https://github.com/travis-ci/travis-ci/issues/4090#issuecomment-184811689
 
 language: php
@@ -29,5 +29,14 @@ script:
 
 after_script:
   - ls -al
+
+notifications:
+  email:
+    recipients:
+      - tesla-techsupport@open.ac.uk
+      # - iet-ltt-support@open.ac.uk
+    on_failure: always # default: always
+  # slack: https://docs.travis-ci.com/user/notifications/#Configuring-Slack-notifications
+  # webhooks:
 
 # End.
