@@ -7,7 +7,7 @@
  *
  * @package auth_ouopenid
  * @author  Nick Freear, 13-March-2017.
- * @copyright (c) 2017 The Open University.
+ * @copyright © 2017 The Open University.
  *
  * @link https://docs.moodle.org/dev/Data_manipulation_API
  * @link https://github.com/goodby/csv#import-to-database-via-pdo
@@ -29,7 +29,7 @@ class User extends base
     const CSV_BATCH = 8; // Bug #5.
 
     const PREFIX = 'ouop_';
-    const UNDEF_INSTRUMENT = 'kd';  // 'tpt';
+    const UNDEF_INSTRUMENT = 'fr';  // Was: 'kd', 'tpt';
     const INSTRUMENT_REGEX = '/^(kd|tpt|fa|vr|fr)/';
 
     const OUCU_REGEX = '@^[a-z]{2,4}\d{1,7}$@';
