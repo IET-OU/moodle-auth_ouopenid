@@ -189,16 +189,19 @@ function course_add_tesla_result_links($, resp) {
   var $cm_edit_menus = $('.path-course-view .section-cm-edit-actions[ data-owner ]');
   var lti_res = resp.config.lti_results;
 
-  $cm_edit_menus.each(function () { // Was: (idx, el)
-    var cmid = $(this).data('owner').replace(/#module-/, '');
-    var $link = $(this).find('a.editing_update.cm-edit-action');
+  $cm_edit_menus.each(function (idx, el) {
+    var cmid = $(el).data('owner').replace(/#module-/, '');
+    var $link = $(el).find('a.editing_update.cm-edit-action');
+    var $listitem = $(el).closest('li.activity');
     var url = '/local/tesla/views/tesla_results.php?cmid=%s'.replace(/%s/, cmid);
 
-    $link
-      .after('<a href="%s%f" class="dropdown-item tesla-r">TeSLA results</a>'.replace(/%s/, url).replace(/%f/, '&noredirect=1'))
-      .after('<a href="%s" class="dropdown-item tesla-r">TeSLA results (LTI)</a>'.replace(/%s/, url));
+    if ($listitem.hasClass('modtype_assign') || $listitem.hasClass('modtype_quiz')) {
+      $link
+        .after('<a href="%s%f" class="dropdown-item tesla-r">TeSLA results</a>'.replace(/%s/, url).replace(/%f/, '&noredirect=1'))
+        .after('<a href="%s" class="dropdown-item tesla-r">TeSLA results (LTI)</a>'.replace(/%s/, url));
 
-    console.warn('course-add-tesla-result-links, cmid:', cmid, url, lti_res);
+      console.warn('tesla-result-links, cmid:', cmid, idx, url, $listitem);
+    }
   });
 }
 
