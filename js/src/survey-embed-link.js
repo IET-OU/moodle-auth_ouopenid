@@ -90,7 +90,8 @@ function inject_post_activity_survey_link ($, resp) {
     // var $container_quiz_rev = $('#page-mod-quiz-review #user-notifications');
     var $container_quiz = $('#page-mod-quiz-view');
     var $container_assign = $('#page-mod-assign-view');
-    var survey_url = resp.survey_urls[ resp.course_code ].post.replace('{OUCU}', resp.profile.ouop_oucu);
+    var survey_url = resp.survey_urls.post.replace('{OUCU}', resp.profile.ouop_oucu).replace('{COURSE}', resp.course_code);
+    // WAS: var survey_url = resp.survey_urls[ resp.course_code ].post.replace('{OUCU}', resp.profile.ouop_oucu);
     var util = resp.util;
 
     // $container_quiz_rev.append(util.alert(util.str('post_survey_msg', survey_url)));

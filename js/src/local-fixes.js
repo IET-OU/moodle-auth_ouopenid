@@ -13,8 +13,7 @@ module.exports = function ($, resp) {
   inject_long_texts($, resp);
   quiz_word_count($, resp);
 
-  course_add_tesla_result_links($, resp);
-
+  course_add_tesla_result_links($);
   admin_add_course_category_link($);
 
   $(window.document).ajaxSuccess(function (ev, xhr, settings) {
@@ -185,9 +184,9 @@ function fix_pilot_fallback_link($, resp) {
   // console.warn('>> ouop-pilot-fallback-link: ', $link, m_inst);
 }
 
-function course_add_tesla_result_links($, resp) {
+function course_add_tesla_result_links($) {
   var $cm_edit_menus = $('.path-course-view .section-cm-edit-actions[ data-owner ]');
-  var lti_res = resp.config.lti_results;
+  // var lti_res = resp.config.lti_results;
 
   $cm_edit_menus.each(function (idx, el) {
     var cmid = $(el).data('owner').replace(/#module-/, '');
