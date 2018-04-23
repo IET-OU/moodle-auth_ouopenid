@@ -88,7 +88,7 @@ function inject_post_activity_survey_link ($, resp) {
     if (! $('.path-mod').length) { return; }
 
     // var $container_quiz_rev = $('#page-mod-quiz-review #user-notifications');
-    var $container_quiz = $('#page-mod-quiz-view');
+    var $container_quiz = $('.path-mod-quiz'); // Was: $('#page-mod-quiz-view');
     var $container_assign = $('#page-mod-assign-view');
     var survey_url = resp.survey_urls.post.replace('{OUCU}', resp.profile.ouop_oucu).replace('{COURSE}', resp.course_code);
     // WAS: var survey_url = resp.survey_urls[ resp.course_code ].post.replace('{OUCU}', resp.profile.ouop_oucu);
@@ -101,9 +101,12 @@ function inject_post_activity_survey_link ($, resp) {
       $container_assign.addClass('ouop-submitted');
 
       C.warn('ouop: post-activity-survey-link - assign');
-    } else if ($container_quiz.find('.quizattemptsummary').length) {
+    } else if ($container_quiz.find('.quizattemptsummary').length
+      || $container_quiz.find('.quizsummaryofattempt').length) {
 
       $container_quiz.find('.box.quizattempt').after(util.alert(util.str('post_survey_msg', survey_url)));
+      $container_quiz.find('.quizsummaryofattempt').after(util.alert(util.str('post_survey_msg', survey_url)));
+
       $container_quiz.addClass('ouop-submitted');
 
       C.warn('ouop: post-activity-survey-link - quiz-view');
