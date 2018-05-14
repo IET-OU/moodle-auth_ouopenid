@@ -3,11 +3,25 @@ module.exports = function ($, resp) {
   ouop_course_welcome_alert ($, resp);
   consent_document_embed($, resp);
   fix_mod_assign_redirect($);
+
+  add_course_code_to_urls ($, resp);
 };
 
 var W = window;
 var L = W.location;
 var C = W.console;
+
+function add_course_code_to_urls ($, resp) {
+  var $links = $('a').filter('[ href *= "/mod/" ], [ href *= "/course/" ]');
+
+  $links.each(function (idx, el) {
+    var url = $(el).attr('href');
+
+    url = /#/.test(url) ? url.replace(/#/, '&_code=' + resp.course_code + '#') : (url + '&_code=' + resp.course_code);
+
+    $(el).attr('href', url);
+  });
+}
 
 function consent_document_embed ($, resp) {
   var $container = $('#page-local-tesla-views-agreement #consent_doc');
