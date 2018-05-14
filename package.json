@@ -33,6 +33,7 @@
     "less": "lessc style/*.less style/ouop-styles.css",
     "pa11y-ci-demo": "source .env; pa11y-ci -c .pa11yci.conf.js # envify pa11yci.DIST.json",
     "pa11y-ci": "pa11y-ci -c .pa11yci.conf.js",
+    "pa11y-ci-2": "PA11YCI_2=true pa11y-ci -c .pa11yci.conf.js",
     "eslint": "eslint js/ js/src/ user/*.js && echo eslint OK!",
     "semi": "semistandard"
   },

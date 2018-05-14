@@ -101,8 +101,7 @@ function inject_post_activity_survey_link ($, resp) {
       $container_assign.addClass('ouop-submitted');
 
       C.warn('ouop: post-activity-survey-link - assign');
-    } else if ($container_quiz.find('.quizattemptsummary').length
-      || $container_quiz.find('.quizsummaryofattempt').length) {
+    } else if ($container_quiz.find('.quizattemptsummary').length || $container_quiz.find('.quizsummaryofattempt').length) {
 
       $container_quiz.find('.box.quizattempt').after(util.alert(util.str('post_survey_msg', survey_url)));
       $container_quiz.find('.quizsummaryofattempt').after(util.alert(util.str('post_survey_msg', survey_url)));

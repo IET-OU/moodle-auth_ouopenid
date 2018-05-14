@@ -12,6 +12,7 @@
     pa11y-ci -c .pa11yci.conf.js
 */
 
+var default_url = 'https://moodle.ouuk.tesla-project.eu';
 var config = {
   defaults: {
     screenCapture: './_pa11y-screen-capture.png',
@@ -26,25 +27,31 @@ var config = {
     '${TEST_SRV}/course/?_ua=pa11y',
     '${TEST_SRV}/auth/ouopenid/?_ua=pa11y',
     '${TEST_SRV}/survey-end/?_ua=pa11y#!-Missing-param-error'
+  ],
+  urls_2: [
+    'https://portal.tesla-project.eu/',
+    'https://lti.ouuk.tesla-project.eu/',
+    'https://tep.ouuk.tesla-project.eu/',
+    'http://tesla-project.eu/'
   ]
 };
 
-function myPa11yCiConfiguration (urls, defaults) {
+function myPa11yCiConfiguration (urls, urls_2, defaults) {
 
   console.error('Standard:', defaults.standard);
   // console.error('Env:', process.env.TEST_SRV);
 
   for (var idx = 0; idx < urls.length; idx++) {
-    urls[ idx ] = urls[ idx ].replace('${TEST_SRV}', process.env.TEST_SRV);  // substitute(urls[ idx ]);
+    urls[ idx ] = urls[ idx ].replace('${TEST_SRV}', process.env.TEST_SRV || default_url);  // substitute(urls[ idx ]);
   }
 
   return {
     defaults: defaults,
-    urls: urls
+    urls: process.env.PA11YCI_2 ? urls_2 : urls
   }
 };
 
 // Important ~ call the function, don't return a reference to it!
-module.exports = myPa11yCiConfiguration (config.urls, config.defaults);
+module.exports = myPa11yCiConfiguration (config.urls, config.urls_2, config.defaults);
 
 // End config.

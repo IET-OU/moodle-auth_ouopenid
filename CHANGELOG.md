@@ -3,22 +3,26 @@
 
 ← [README][]
 
-## Version 1.5.0 (Beta) - Pilot 3-B
+## Version 1.5.0 — Pilot 3-B
 
- * _Date:  ~ 19 February ~ March 2018_
- * _Tag:  v1.5.0-beta_
+ * _Date:  ~ 19 February ~ 23 April 2018_
+ * _Tag:  v1.5.0_
  * Add functionality to reveal a TeSLA activity after the pre-activity
    survey is completed — `conditional_embedded_survey` PHP class (Bug #8)
    (That is, to "Complete" a survey embedded via `<IFRAME>` in a Moodle `mod/assign` conditional activity.)
- * Add functionality to "consent" to the TeSLA student-agreement in a
+ * Add functionality to "_consent_" to the TeSLA student-agreement in a
    survey embedded in an `<IFRAME>`. `tesla_consent` PHP class (Bug #8)
+ * Add Javascript — `course_add_tesla_result_links()`;
+ * Add Javascript — `admin_add_course_category_link()`;
+ * Add Javascript — `accessibility_fixes()`;
  * Automated accessibility testing — [pa11y-ci][];
+ * Many more fixes ...
 
 ## Version 1.4.2 (Beta) - Pilot 3-A
 
  * _Date:  ~ 6 - 20 December 2017_
  * _Tag:  v1.4.2-beta_
- * Analysis - get list of OUCUs for students who have consented (Chris E.)
+ * Analysis — get list of OUCUs for students who have consented (Chris E.)
  * Fixes to `bin/csv-import` and `bin/ouop-query` commandline scripts (PHP);
  * Re-implement `objToCsv()` Javascript — for TeSLA-plugin results page;
  * Add browser no-compatibility Javascript/message — (ua-compat): MSIE/ Trident/ Edge;
