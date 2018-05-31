@@ -3,20 +3,29 @@
 
 ← [README][]
 
+## Version 1.5.2 — Pilot 3-B
+
+ * _Date: 24 April ~ June 2018_
+ * Extend Javascript-based pa11y-ci configuration — `.pa11yci.conf.js`;
+ * Add Javascript — `add_course_code_to_urls()`;
+ * Fix Javascript — `survey_embed_link()`;
+ * Fix Javascript — `generic_embeds()` (_BRASIL_ course);
+
 ## Version 1.5.0 — Pilot 3-B
 
  * _Date:  ~ 19 February ~ 23 April 2018_
  * _Tag:  v1.5.0_
  * Add functionality to reveal a TeSLA activity after the pre-activity
    survey is completed — `conditional_embedded_survey` PHP class (Bug #8)
-   (That is, to "Complete" a survey embedded via `<IFRAME>` in a Moodle `mod/assign` conditional activity.)
+   _(That is, to "Complete" a survey embedded via `<IFRAME>` in a Moodle `mod/assign` conditional activity.)_
  * Add functionality to "_consent_" to the TeSLA student-agreement in a
    survey embedded in an `<IFRAME>`. `tesla_consent` PHP class (Bug #8)
  * Add Javascript — `course_add_tesla_result_links()`;
  * Add Javascript — `admin_add_course_category_link()`;
+ * Add Javascript — `inject_post_activity_survey_link()`;
  * Add Javascript — `accessibility_fixes()`;
  * Automated accessibility testing — [pa11y-ci][];
- * Many more fixes ...
+ * _Many more fixes ..._
 
 ## Version 1.4.2 (Beta) - Pilot 3-A
 
