@@ -12,7 +12,7 @@ var L = W.location;
 var C = W.console;
 
 function add_course_code_to_urls ($, resp) {
-  var $links = $('a').filter('[ href *= "/mod/" ], [ href *= "/course/" ]');
+  var $links = $('a').filter('[href *= "/mod/"], [href *= "/course/"]');
 
   $links.each(function (idx, el) {
     var url = $(el).attr('href');

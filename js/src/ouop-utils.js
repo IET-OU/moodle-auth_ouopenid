@@ -123,8 +123,8 @@ function ouop_less_test ($) {
 }
 
 // https://github.com/nfreear/gaad-widget/blob/3.x/src/methods.js#L79-L85
-function replace_object (str, mapObj) {
-  var re = new RegExp(Object.keys(mapObj).join('|'), 'g'); // Was: "gi".
+function replace_object (str, mapObj, reFlags) {
+  var re = new RegExp(Object.keys(mapObj).join('|'), reFlags || 'g'); // Was: "gi".
 
   return str.replace(re, function (matched) {
     return mapObj[ matched ]; // Was: matched.toLowerCase().

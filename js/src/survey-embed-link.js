@@ -22,15 +22,15 @@ function generic_embeds ($, resp) {
   }
 
   var $links = $('a[ href *= _EMBED_ME_ ]');
-  var util = resp.util;
+  var replaceObj = resp.util.replace;  // Was: var util = resp.util;
 
   $links.each(function (idx, el) {
     var $link = $(el);
-    var url = util.replace($link.attr('href'), { '{oucu}': resp.profile.ouop_oucu });
+    var url = create_survey_url($link.attr('href'), resp);
     var m_height = url.match(/height=(\d+\w+);?/);
     var height = 'height: ' + (m_height ? m_height[ 1 ] : '1050px;');
 
-    $link.replaceWith(util.replace('<iframe src="{u}" style="{h}" class="ouop-generic-ifr" id="ifr-{i}"></iframe>', {
+    $link.replaceWith(replaceObj('<iframe src="{u}" style="{h}" class="ouop-generic-ifr" id="ifr-{i}"></iframe>', {
       '{u}': url, '{h}': height, '{i}': idx
     })); // .replace(/%s/, url).replace(/%h/, height).replace(/%d/, idx)
     var $iframe = $('#s' + idx);
@@ -40,7 +40,9 @@ function generic_embeds ($, resp) {
 }
 
 function embed_pilot_surveys ($, resp) {
-    var $links = $('a[ href *= -pre-survey-embed ], a[ href *= -post-survey-embed ]');
+    var $links = $('a').filter('[ href *= -pre-survey-embed ], [ href *= -post-survey-embed ]');
+    // Was: var $links = $('a[ href *= -pre-survey-embed ], a[ href *= -post-survey-embed ]');
+    var replaceObj = resp.util.replace;
 
     $links.each(function (idx, el) {
       var $link = $(el);
@@ -50,9 +52,10 @@ function embed_pilot_surveys ($, resp) {
       var m_height = url.match(/height=(\d+\w+);?/);
       var height = m_height ? ('height: '+ m_height[ 1 ]) : '';
 
-      survey_url = survey_url.replace(/\{?OUCU\}?/, resp.profile.ouop_oucu).replace(/\{COURSE\}/gi, resp.course_code);
+      survey_url = create_survey_url(survey_url, resp);
+      // Was: survey_url = survey_url.replace(/\{?OUCU\}?/, resp.profile.ouop_oucu).replace(/\{COURSE\}/gi, resp.course_code);
 
-      $link.replaceWith(resp.util.replace('<iframe src="{u}" style="{h}" id="ifr-{i}"></iframe>', {
+      $link.replaceWith(replaceObj('<iframe src="{u}" style="{h}" class="ouop-survey-ifr" id="ifr-{i}"></iframe>', {
         '{u}': survey_url, '{h}': height, '{i}': idx
       })); // .replace(/%s/, survey_url).replace(/%h/, height).replace(/%d/, idx)
 
@@ -90,7 +93,8 @@ function inject_post_activity_survey_link ($, resp) {
     // var $container_quiz_rev = $('#page-mod-quiz-review #user-notifications');
     var $container_quiz = $('.path-mod-quiz'); // Was: $('#page-mod-quiz-view');
     var $container_assign = $('#page-mod-assign-view');
-    var survey_url = resp.survey_urls.post.replace('{OUCU}', resp.profile.ouop_oucu).replace('{COURSE}', resp.course_code);
+    var survey_url = create_survey_url(resp.survey_urls.post, resp);
+    // Was: resp.survey_urls.post.replace('{OUCU}', resp.profile.ouop_oucu).replace('{COURSE}', resp.course_code);
     // WAS: var survey_url = resp.survey_urls[ resp.course_code ].post.replace('{OUCU}', resp.profile.ouop_oucu);
     var util = resp.util;
 
@@ -129,4 +133,8 @@ function survey_return_redirect ($, resp) {
 
       W.location = resp.redirect_url;
     }
+}
+
+function create_survey_url(url, resp) {
+    return resp.util.replace(url, { '{oucu}': resp.profile.ouop_oucu, '{course}': resp.course_code },  'gi');
 }
