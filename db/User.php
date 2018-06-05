@@ -29,8 +29,8 @@ class User extends base
     const CSV_BATCH = 8; // Bug #5.
 
     const PREFIX = 'ouop_';
-    const UNDEF_INSTRUMENT = 'fr';  // Was: 'kd', 'tpt';
-    const INSTRUMENT_REGEX = '/^(kd|tpt|fa|vr|fr)/';
+    const UNDEF_INSTRUMENT = 'tpt'; // Pilot 3-B tpt; (Was: 'fr', 'kd', 'tpt')
+    const INSTRUMENT_REGEX = '/^(kd|tpt|fa|vr|fr|brasil)/'; // Added: 'brasil'.
 
     const OUCU_REGEX = '@^[a-z]{2,4}\d{1,7}$@';
     const OPENID_URL_REGEX = '@^https?:\/\/openid\.open\.ac\.uk\/oucu\/(?P<oucu>\w+)$@';
