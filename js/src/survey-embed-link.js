@@ -136,5 +136,7 @@ function survey_return_redirect ($, resp) {
 }
 
 function create_survey_url(url, resp) {
-    return resp.util.replace(url, { '{oucu}': resp.profile.ouop_oucu, '{course}': resp.course_code },  'gi');
+    var result_url = resp.util.replace(url, { '{OUCU}': resp.profile.ouop_oucu, '{COURSE}': resp.course_code }); // Was: 'gi' (doesn't work!!)
+    C.warn('create_survey_url:', url, result_url, resp.course_code, resp);
+    return result_url;
 }

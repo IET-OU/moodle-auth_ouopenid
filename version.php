@@ -15,5 +15,5 @@ $plugin->requires = 2015101600;  // Requires this Moodle version
 $plugin->component = 'auth_ouopenid';
 
 $plugin->dependencies = [
-    'auth_openid' => '2017030600'  // TODO: check!
+    // Was: 'auth_openid' => '2017030600'  // TODO: check!
 ];

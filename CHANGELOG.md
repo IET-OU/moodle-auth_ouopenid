@@ -9,7 +9,9 @@
  * Extend Javascript-based pa11y-ci configuration — `.pa11yci.conf.js`;
  * Add Javascript — `add_course_code_to_urls()`;
  * Fix Javascript — `survey_embed_link()`;
- * Fix Javascript — `generic_embeds()` (_BRASIL_ course);
+ * Fix Javascript — `generic_embeds()` (_BRASIL_ course)
+ * Add & fix Javascript — `create_survey_url()` (_BRASIL_ course)
+ * Alter `UNDEF_INSTRUMENT` from `fr` to `tpt` (_BRASIL_ course etc.)
 
 ## Version 1.5.0 — Pilot 3-B
 

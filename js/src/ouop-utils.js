@@ -127,6 +127,7 @@ function replace_object (str, mapObj, reFlags) {
   var re = new RegExp(Object.keys(mapObj).join('|'), reFlags || 'g'); // Was: "gi".
 
   return str.replace(re, function (matched) {
+    // console.warn('replace_obj:', re, matched, mapObj);
     return mapObj[ matched ]; // Was: matched.toLowerCase().
   });
 }
