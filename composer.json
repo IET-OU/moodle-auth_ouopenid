@@ -1,7 +1,8 @@
 {
   "name": "iet-ou/moodle-auth-ouopenid",
-  "description": "This plugin is a wrapper around the OpenID authentication plugin for Moodle. © The Open University (IET)",
-  "homepage": "https://github.com/IET-OU",
+  "description": "Moodle plugins to authenticate users via OpenID
+  and facilitate student participatory research. For TeSLA | © The Open University (IET)",
+  "homepage": "https://tesla-project.eu/",
   "type": "moodle-auth",
   "license": "proprietary",
   "time": "2017-03-06",

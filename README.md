@@ -4,32 +4,39 @@
 [![OU-OpenID moodle plugin][browse-icon]][gh]
 [![Accessibility testing][pa11y-icon]][pa11y-ci]
 
+# OU-TeSLA-Moodle
 
-# moodle-auth_ouopenid
+## moodle-auth_ouopenid
 
-This plugin is a wrapper around the [OpenID authentication plugin][openid] for [Moodle][],
-plus other research-related functionality.
+Part of a [Moodle][]-based system, used by [The Open University][ou]
+to run pilot studies for the [TeSLA project][].
 
-Available via IET-OU Satis:
+This project is a suite of Moodle plugins, to authenticate users via OpenID,
+and to facilitate student participatory research.
 
-* <https://embed.open.ac.uk/iet-satis/#!/moo>
+[![TeSLA project][tesla-logo]][tesla project]
 
 ## Purpose
 
 To facilitate pilot research studies using Moodle (e.g. for TeSLA) by:
 
-1. Enabling OpenID login using just a username, not a full URL (e.g. <https://example.org/openid/{username}>)
+1. Enabling OpenID login using just a username, not a full URL (e.g. <https://example.org/openid/{username}>) (Extends [OpenID][] plugin.)
 2. Simple login page with custom instructions (edit via Moodle language customisations), `/index.php`,
 3. Importing pilot-related data into a separate DB table, `mdl_auth_ouopenid_users`,
 4. Making the pilot-related data available via `/user/ajax.php`,
 5. Tries to redirect the participant to a bespoke URL (a work-in-progress),
 6. LESS styles to hide parts of the Moodle user-interface to simplify the experience,
 7. Javascript & LESS fixes relating to the pilot study,
-8. ...?
+8. _And more_.
+
+See: [CHANGELOG][]
 
 Note: this plugin probably needs splitting into two or more plugins!
 
-See: [CHANGELOG][]
+Available via IET-OU Satis:
+
+* <https://embed.open.ac.uk/iet-satis/#!/moo>
+
 
 ## Install
 
@@ -105,7 +112,8 @@ Developed for the [TeSLA project][].
 [addhtml]: https://example.edu/your-moodle/admin/settings.php?section=additionalhtml#admin-additionalhtmlfooter
     "Your Moodle > Site administration > Appearance > Additional HTML"
 
-[TeSLA project]: http://tesla-project.eu/
+[TeSLA project]: http://tesla-project.eu/ "Adaptive Trust-based e-Assessment"
+[tesla-logo]: https://tesla-project.eu/wp-content/uploads/2018/07/logo-tesla-header.png
 [Moodle]: https://moodle.org/
 [openid]: https://github.com/remotelearner/moodle-auth_openid
 [ouopenid]: https://github.com/IET-OU/moodle-auth_ouopenid
