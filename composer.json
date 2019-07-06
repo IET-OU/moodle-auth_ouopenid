@@ -1,7 +1,6 @@
 {
   "name": "iet-ou/moodle-auth-ouopenid",
-  "description": "Moodle plugins to authenticate users via OpenID
-  and facilitate student participatory research. For TeSLA | © The Open University (IET)",
+  "description": "Plugins and software to facilitate student participatory research on a Moodle-based system, for the TeSLA project. | © The Open University (IET)",
   "homepage": "https://tesla-project.eu/",
   "type": "moodle-auth",
   "license": "proprietary",

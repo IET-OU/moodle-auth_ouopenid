@@ -8,26 +8,25 @@
 
 ## moodle-auth_ouopenid
 
-Part of a [Moodle][]-based system, used by [The Open University][ou]
-to run pilot studies for the [TeSLA project][].
+This project is a suite of Moodle plugins and software to facilitate student participatory research on a [Moodle][]-based system, for the [TeSLA project][].
 
-This project is a suite of Moodle plugins, to authenticate users via OpenID,
-and to facilitate student participatory research.
+It was used by [The Open University][ou] to run pilot studies with students in 2017-2018.
 
 [![TeSLA project][tesla-logo]][tesla project]
 
 ## Purpose
 
-To facilitate pilot research studies using Moodle (e.g. for TeSLA) by:
+To facilitate pilot research studies using Moodle (_e.g. for TeSLA_) by:
 
 1. Enabling OpenID login using just a username, not a full URL (e.g. <https://example.org/openid/{username}>) (Extends [OpenID][] plugin.)
-2. Simple login page with custom instructions (edit via Moodle language customisations), `/index.php`,
+2. Simple login page with custom instructions (edit via Moodle language customisations) (`/index.php`),
 3. Importing pilot-related data into a separate DB table, `mdl_auth_ouopenid_users`,
 4. Making the pilot-related data available via `/user/ajax.php`,
-5. Tries to redirect the participant to a bespoke URL (a work-in-progress),
+5. Redirects the participant to a custom URL ,
 6. LESS styles to hide parts of the Moodle user-interface to simplify the experience,
 7. Javascript & LESS fixes relating to the pilot study,
-8. _And more_.
+8. Accessibility fixes for the pilot study,
+9. _And more_.
 
 See: [CHANGELOG][]
 
@@ -115,7 +114,7 @@ Developed for the [TeSLA project][].
 [TeSLA project]: http://tesla-project.eu/ "Adaptive Trust-based e-Assessment"
 [tesla-logo]: https://tesla-project.eu/wp-content/uploads/2018/07/logo-tesla-header.png
 [Moodle]: https://moodle.org/
-[openid]: https://github.com/remotelearner/moodle-auth_openid
+[openid]: https://github.com/remotelearner/moodle-auth_openid "3rd-party Moodle OpenID plugin"
 [ouopenid]: https://github.com/IET-OU/moodle-auth_ouopenid
 [gh]: https://github.com/IET-OU/moodle-auth_ouopenid
 [composer]: https://getcomposer.org/
