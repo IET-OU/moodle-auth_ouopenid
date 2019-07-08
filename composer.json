@@ -1,9 +1,9 @@
 {
   "name": "iet-ou/moodle-auth-ouopenid",
-  "description": "Plugins and software to facilitate student participatory research on a Moodle-based system, for the TeSLA project. | © The Open University (IET)",
+  "description": "Plugins and software to facilitate student participatory research on a Moodle-based VLE, for the TeSLA project. | © The Open University (IET)",
   "homepage": "https://tesla-project.eu/",
   "type": "moodle-auth",
-  "license": "proprietary",
+  "license": "GPL-3.0-only",
   "time": "2017-03-06",
   "support": {
     "source": "https://github.com/IET-OU/moodle-auth_ouopenid"
@@ -28,7 +28,8 @@
     "squizlabs/php_codesniffer": "2.9.1"
   },
   "suggest": {
-    "guiguiboy/php-cli-progress-bar": "^0.0.4"
+    "guiguiboy/php-cli-progress-bar": "^0.0.4",
+    "moodle/moodle": "^3.2.0-0-gb182239"
   },
   "bin": [
     "bin/ouop-query.php",
